@@ -1,5 +1,7 @@
 package com.bartlomiejpluta.demo.runner;
 
+import lombok.*;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,6 +17,8 @@ public class DemoRunner implements GameRunner {
    private static final Logger log = LoggerFactory.getLogger(DemoRunner.class);
    private Screen screen;
    private Context context;
+
+   @Getter
    private Player player;
 
    @Override
