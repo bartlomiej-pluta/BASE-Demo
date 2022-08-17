@@ -3,13 +3,14 @@ package com.bartlomiejpluta.demo.world.weapon;
 import java.util.Random;
 
 import lombok.*;
+import org.joml.Vector2i;
 import com.bartlomiejpluta.base.api.context.Context;
 import com.bartlomiejpluta.base.lib.animation.*;
 import com.bartlomiejpluta.demo.database.model.MeleeWeaponModel;
 import com.bartlomiejpluta.demo.entity.Character;
 import com.bartlomiejpluta.demo.util.DiceRoller;
 
-public class MeleeWeapon {
+public class MeleeWeapon implements Weapon {
 	private final Random random = new Random();
 	private final Context context;
 	private final DiceRoller roller;
@@ -37,9 +38,18 @@ public class MeleeWeapon {
 		this.sound = template.getSound();
 	}
 
-	public void attack(Character character) {
-		character.hit(roller.roll());
-		character.runAnimation(animation);
-		context.playSound(sound);
+	@Override
+	public boolean attack(Character attacker) {
+		var facingNeighbour = attacker.getCoordinates().add(attacker.getFaceDirection().vector, new Vector2i());
+		for(var entity : attacker.getLayer().getEntities()) {
+			if(entity.getCoordinates().equals(facingNeighbour) && entity.isBlocking() && entity instanceof Character) {
+				((Character) entity).hit(roller.roll());
+				animation.run(context, entity.getLayer(), entity);
+				context.playSound(sound);
+				return true;
+			}
+		}
+
+		return false;
 	}
 }

@@ -9,7 +9,7 @@ import com.bartlomiejpluta.base.lib.entity.EntityDelegate;
 import com.bartlomiejpluta.base.lib.animation.AnimationRunner;
 
 import com.bartlomiejpluta.demo.runner.DemoRunner;
-import com.bartlomiejpluta.demo.world.weapon.MeleeWeapon;
+import com.bartlomiejpluta.demo.world.weapon.Weapon;
 
 public class Character extends EntityDelegate {
 	private static final Logger log = LoggerFactory.getLogger(Character.class);
@@ -28,7 +28,7 @@ public class Character extends EntityDelegate {
 	protected int hp;
 
 	@Setter
-	private MeleeWeapon weapon;
+	private Weapon weapon;
 
 	public Character(@NonNull Context context, @NonNull Entity entity) {
 		super(entity);
@@ -42,12 +42,8 @@ public class Character extends EntityDelegate {
 		}
 
 		if(attackCooldown >= weapon.getCooldown()) {
-			var facingNeighbour = getCoordinates().add(getFaceDirection().vector, new Vector2i());
-			for(var entity : getLayer().getEntities()) {
-				if(entity.getCoordinates().equals(facingNeighbour) && entity.isBlocking() && entity instanceof Character) {
-					weapon.attack((Character) entity);
-					attackCooldown = 0;
-				}
+			if(weapon.attack(this)) {
+				attackCooldown = 0;
 			}
 		}
 	}
@@ -59,10 +55,6 @@ public class Character extends EntityDelegate {
 
 		log.info(toString() + " received " + dmg + " damage");
 		hp -= dmg;
-	}
-
-	public void runAnimation(AnimationRunner animationRunner) {
-		animationRunner.run(context, getLayer(), this);
 	}
 
 	@Override

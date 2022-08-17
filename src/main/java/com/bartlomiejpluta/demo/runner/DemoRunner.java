@@ -15,7 +15,7 @@ import com.bartlomiejpluta.demo.entity.Player;
 import com.bartlomiejpluta.demo.menu.MenuManager;
 import com.bartlomiejpluta.demo.database.dao.*;
 
-import com.bartlomiejpluta.demo.world.weapon.MeleeWeapon;
+import com.bartlomiejpluta.demo.world.weapon.*;
 
 public class DemoRunner implements GameRunner {
    private static final Logger log = LoggerFactory.getLogger(DemoRunner.class);
@@ -23,17 +23,20 @@ public class DemoRunner implements GameRunner {
    private Context context;
    private MenuManager menu;
 
-   @Getter
+	@Getter
    private MeleeWeaponDAO meleeWeaponDAO = new MeleeWeaponDAO();
 
-   @Getter
+	@Getter
+	private RangedWeaponDAO rangedWeaponDAO = new RangedWeaponDAO();
+
+	@Getter
 	private EnemyDAO enemyDAO = new EnemyDAO();
 
-   @Getter
-   private Player player;
+	@Getter
+	private Player player;
 
-   @Override
-   public void init(Context context) {
+	@Override
+	public void init(Context context) {
    	this.context = context;
    	this.screen = context.getScreen();
 
@@ -61,6 +64,7 @@ public class DemoRunner implements GameRunner {
    private void initDAOs() {
 		meleeWeaponDAO.init(context);
 		enemyDAO.init(context);
+		rangedWeaponDAO.init(context);
    }
 
    private void initMenu() {
@@ -78,7 +82,7 @@ public class DemoRunner implements GameRunner {
 		this.player.setAnimationSpeed(0.005f);	
 		this.player.setBlocking(true);	
 		this.player.setCoordinates(0, 11);
-		this.player.setWeapon(new MeleeWeapon(context, meleeWeaponDAO.get("wooden_sword")));
+		this.player.setWeapon(new RangedWeapon(context, rangedWeaponDAO.get("wooden_bow")));
    }
 
    public void newGame() {
