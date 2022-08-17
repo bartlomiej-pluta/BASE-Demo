@@ -13,7 +13,7 @@ import com.bartlomiejpluta.base.api.runner.GameRunner;
 import com.bartlomiejpluta.demo.map.ForrestTempleHandler;
 import com.bartlomiejpluta.demo.entity.Player;
 import com.bartlomiejpluta.demo.menu.MenuManager;
-import com.bartlomiejpluta.demo.database.dao.MeleeWeaponDAO;
+import com.bartlomiejpluta.demo.database.dao.*;
 
 import com.bartlomiejpluta.demo.world.weapon.MeleeWeapon;
 
@@ -25,6 +25,9 @@ public class DemoRunner implements GameRunner {
 
    @Getter
    private MeleeWeaponDAO meleeWeaponDAO = new MeleeWeaponDAO();
+
+   @Getter
+	private EnemyDAO enemyDAO = new EnemyDAO();
 
    @Getter
    private Player player;
@@ -57,6 +60,7 @@ public class DemoRunner implements GameRunner {
 
    private void initDAOs() {
 		meleeWeaponDAO.init(context);
+		enemyDAO.init(context);
    }
 
    private void initMenu() {

@@ -1,5 +1,7 @@
 package com.bartlomiejpluta.demo.map;
 
+import lombok.*;
+
 import com.bartlomiejpluta.base.api.map.handler.MapHandler;
 import com.bartlomiejpluta.base.api.map.model.GameMap;
 import com.bartlomiejpluta.base.api.map.layer.object.ObjectLayer;
@@ -12,8 +14,7 @@ import com.bartlomiejpluta.base.api.input.*;
 import com.bartlomiejpluta.base.lib.camera.*;
 
 import com.bartlomiejpluta.demo.runner.DemoRunner;
-import com.bartlomiejpluta.demo.entity.Player;
-import com.bartlomiejpluta.demo.entity.Character;
+import com.bartlomiejpluta.demo.entity.*;
 
 public abstract class BaseMapHandler implements MapHandler {
 	protected Screen screen;
@@ -72,5 +73,11 @@ public abstract class BaseMapHandler implements MapHandler {
 	@Override
 	public void update(Context context, GameMap map, float dt) {
 		cameraController.update();
+	}
+
+	public void enemy(int x, int y, @NonNull String id) {
+		var enemy = new Enemy(context, runner.getEnemyDAO().get(id));
+		enemy.setCoordinates(x, y);
+		mainLayer.addEntity(enemy);
 	}
 }
