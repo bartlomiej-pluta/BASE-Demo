@@ -3,10 +3,9 @@ package com.bartlomiejpluta.demo.map;
 import com.bartlomiejpluta.base.api.context.Context;
 import com.bartlomiejpluta.base.api.input.Input;
 import com.bartlomiejpluta.base.api.map.model.GameMap;
-import com.bartlomiejpluta.base.api.map.handler.MapHandler;
 import com.bartlomiejpluta.base.api.screen.Screen;
 
-public class ForrestTempleHandler implements MapHandler {
+public class ForrestTempleHandler extends BaseMapHandler {
    public static final String UID = "f845355e-b9ad-4884-a217-dd3a4c18a3fa";
 
    @Override
