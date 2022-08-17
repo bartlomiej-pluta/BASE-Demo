@@ -12,11 +12,13 @@ import com.bartlomiejpluta.base.api.runner.GameRunner;
 
 import com.bartlomiejpluta.demo.map.ForrestTempleHandler;
 import com.bartlomiejpluta.demo.entity.Player;
+import com.bartlomiejpluta.demo.menu.MenuManager;
 
 public class DemoRunner implements GameRunner {
    private static final Logger log = LoggerFactory.getLogger(DemoRunner.class);
    private Screen screen;
    private Context context;
+   private MenuManager menu;
 
    @Getter
    private Player player;
@@ -28,10 +30,11 @@ public class DemoRunner implements GameRunner {
 		
 		configureScreen();
 		configureCamera();
-   	initPlayer();
-   	resetPlayer();
-   	newGame();
-   	
+		initMenu();
+		initPlayer();
+
+		menu.showStartMenu();
+
 		screen.show();
    }
    
@@ -45,8 +48,12 @@ public class DemoRunner implements GameRunner {
    	context.getCamera().setScale(2f);
    }
    
+   private void initMenu() {
+		this.menu = new MenuManager(this, context);
+   }
+
    private void initPlayer() {
-   	this.player = new Player(context, context.createEntity("815a5c5c-4979-42f5-a42a-ccbbff9a97e5"));
+		this.player = new Player(context, context.createEntity("815a5c5c-4979-42f5-a42a-ccbbff9a97e5"));
    }
    
    private void resetPlayer() {
@@ -58,11 +65,16 @@ public class DemoRunner implements GameRunner {
 		this.player.setCoordinates(0, 11);
    }
    
-   private void newGame() {
-   	resetPlayer();
-   	context.openMap(ForrestTempleHandler.UID);
-   	context.getMap().getObjectLayer(ForrestTempleHandler.MAIN_LAYER).addEntity(this.player);
-   	context.resume();
+   public void newGame() {
+		menu.closeAll();
+		resetPlayer();
+		context.openMap(ForrestTempleHandler.UID);
+		context.getMap().getObjectLayer(ForrestTempleHandler.MAIN_LAYER).addEntity(this.player);
+		context.resume();
+   }
+
+   public void exit() {
+		context.close();
    }
 
    @Override
