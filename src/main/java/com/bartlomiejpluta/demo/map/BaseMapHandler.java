@@ -13,6 +13,7 @@ import com.bartlomiejpluta.base.lib.camera.*;
 
 import com.bartlomiejpluta.demo.runner.DemoRunner;
 import com.bartlomiejpluta.demo.entity.Player;
+import com.bartlomiejpluta.demo.entity.Character;
 
 public abstract class BaseMapHandler implements MapHandler {
 	protected Screen screen;
@@ -39,6 +40,10 @@ public abstract class BaseMapHandler implements MapHandler {
 	public void input(Input input) {
 		if(context.isPaused()) {
 			return;
+		}
+
+		if(input.isKeyPressed(Key.KEY_SPACE)) {
+			player.attack();
 		}
 
 		if(input.isKeyPressed(Key.KEY_LEFT_CONTROL)) {
