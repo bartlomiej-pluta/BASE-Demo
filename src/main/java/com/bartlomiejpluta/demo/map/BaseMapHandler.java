@@ -75,9 +75,10 @@ public abstract class BaseMapHandler implements MapHandler {
 		cameraController.update();
 	}
 
-	public void enemy(int x, int y, @NonNull String id) {
+	public Enemy enemy(int x, int y, @NonNull String id) {
 		var enemy = new Enemy(context, runner.getEnemyDAO().get(id));
 		enemy.setCoordinates(x, y);
 		mainLayer.addEntity(enemy);
+		return enemy;
 	}
 }
