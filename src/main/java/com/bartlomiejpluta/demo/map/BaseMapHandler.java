@@ -41,14 +41,26 @@ public abstract class BaseMapHandler implements MapHandler {
 			return;
 		}
 
-		if(input.isKeyPressed(Key.KEY_DOWN)) {
-			mainLayer.pushMovement(player.prepareMovement(Direction.DOWN));
-		} else if(input.isKeyPressed(Key.KEY_UP)) {
-			mainLayer.pushMovement(player.prepareMovement(Direction.UP));
-		} else if(input.isKeyPressed(Key.KEY_LEFT)) {
-			mainLayer.pushMovement(player.prepareMovement(Direction.LEFT));
-		} else if(input.isKeyPressed(Key.KEY_RIGHT)) {
-			mainLayer.pushMovement(player.prepareMovement(Direction.RIGHT));
+		if(input.isKeyPressed(Key.KEY_LEFT_CONTROL)) {
+			if(input.isKeyPressed(Key.KEY_DOWN)) {
+				player.setFaceDirection(Direction.DOWN);
+			} else if(input.isKeyPressed(Key.KEY_UP)) {
+				player.setFaceDirection(Direction.UP);
+			} else if(input.isKeyPressed(Key.KEY_LEFT)) {
+				player.setFaceDirection(Direction.LEFT);
+			} else if(input.isKeyPressed(Key.KEY_RIGHT)) {
+				player.setFaceDirection(Direction.RIGHT);
+			}		
+		} else {
+			if(input.isKeyPressed(Key.KEY_DOWN)) {
+				mainLayer.pushMovement(player.prepareMovement(Direction.DOWN));
+			} else if(input.isKeyPressed(Key.KEY_UP)) {
+				mainLayer.pushMovement(player.prepareMovement(Direction.UP));
+			} else if(input.isKeyPressed(Key.KEY_LEFT)) {
+				mainLayer.pushMovement(player.prepareMovement(Direction.LEFT));
+			} else if(input.isKeyPressed(Key.KEY_RIGHT)) {
+				mainLayer.pushMovement(player.prepareMovement(Direction.RIGHT));
+			}
 		}
 	}
 
