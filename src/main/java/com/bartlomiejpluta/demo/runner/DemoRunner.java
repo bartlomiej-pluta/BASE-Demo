@@ -9,6 +9,8 @@ import com.bartlomiejpluta.base.api.context.Context;
 import com.bartlomiejpluta.base.api.input.Input;
 import com.bartlomiejpluta.base.api.screen.Screen;
 import com.bartlomiejpluta.base.api.runner.GameRunner;
+import com.bartlomiejpluta.base.api.gui.GUI;
+import com.bartlomiejpluta.base.util.profiler.FPSProfiler;
 
 import com.bartlomiejpluta.demo.map.ForrestTempleHandler;
 import com.bartlomiejpluta.demo.entity.Player;
@@ -22,6 +24,7 @@ public class DemoRunner implements GameRunner {
    private Screen screen;
    private Context context;
    private MenuManager menu;
+   private GUI hud;
 
 	@Getter
    private MeleeWeaponDAO meleeWeaponDAO = new MeleeWeaponDAO();
@@ -35,6 +38,8 @@ public class DemoRunner implements GameRunner {
 	@Getter
 	private Player player;
 
+	private final FPSProfiler fpsProfiler = FPSProfiler.create(20);
+
 	@Override
 	public void init(Context context) {
    	this.context = context;
@@ -42,9 +47,10 @@ public class DemoRunner implements GameRunner {
 
 		configureScreen();
 		configureCamera();
-		initDAOs();
-		initMenu();
 		initPlayer();
+		initDAOs();
+		initHUD();
+		initMenu();
 
 		menu.showStartMenu();
 
@@ -71,6 +77,13 @@ public class DemoRunner implements GameRunner {
 		this.menu = new MenuManager(this, context);
    }
 
+	private void initHUD() {
+		hud = context.newGUI();
+		hud.hide();
+		var hudComponent = hud.inflateComponent("00bd0625-b3b8-4abf-97b7-91f42bce28ec");
+		hud.setRoot(hudComponent);
+	}
+
    private void initPlayer() {
 		this.player = new Player(context, context.createEntity("815a5c5c-4979-42f5-a42a-ccbbff9a97e5"));
    }
@@ -92,10 +105,12 @@ public class DemoRunner implements GameRunner {
 		context.openMap(ForrestTempleHandler.UID);
 		context.getMap().getObjectLayer(ForrestTempleHandler.MAIN_LAYER).addEntity(this.player);
 		context.resume();
+		hud.show();
    }
 
    public void returnToStartMenu() {
 		menu.closeAll();
+		hud.hide();
 		context.pause();
 		context.closeMap();
 		menu.disableGameMenu();
@@ -106,9 +121,13 @@ public class DemoRunner implements GameRunner {
 		context.close();
    }
 
+   public double instantFPS() {
+		return fpsProfiler.getInstantFPS();
+   }
+
    @Override
    public void update(float dt) {
-
+		fpsProfiler.update(dt);
    }
 
    @Override
