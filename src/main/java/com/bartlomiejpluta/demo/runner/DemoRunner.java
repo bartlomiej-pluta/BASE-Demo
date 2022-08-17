@@ -27,6 +27,7 @@ public class DemoRunner implements GameRunner {
    	this.screen = context.getScreen();
 		
 		configureScreen();
+		configureCamera();
    	initPlayer();
    	resetPlayer();
    	newGame();
@@ -38,6 +39,10 @@ public class DemoRunner implements GameRunner {
 		var resolution = screen.getCurrentResolution();		
 		screen.setSize(800, 600);
 		screen.setPosition((resolution.x() - 800)/2, (resolution.y() - 600)/2);   
+   }
+   
+   private void configureCamera() {
+   	context.getCamera().setScale(2f);
    }
    
    private void initPlayer() {
