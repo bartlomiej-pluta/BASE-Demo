@@ -9,6 +9,7 @@ import com.bartlomiejpluta.base.api.ai.NPC;
 import com.bartlomiejpluta.base.api.move.MoveEvent;
 
 import com.bartlomiejpluta.base.lib.ai.NoopAI;
+import com.bartlomiejpluta.base.lib.animation.*;
 
 import com.bartlomiejpluta.demo.runner.DemoRunner;
 import com.bartlomiejpluta.demo.database.model.EnemyModel;
@@ -20,6 +21,7 @@ import com.bartlomiejpluta.demo.ai.*;
 public class Enemy extends Character implements NPC {
 	private final EnemyModel template;
 	private AI ai = NoopAI.INSTANCE;
+	private final AnimationRunner dieAnimation;
 
 	public Enemy(@NonNull Context context, @NonNull EnemyModel template) {
 		super(context, context.createEntity(template.getEntitySet()));
@@ -29,6 +31,7 @@ public class Enemy extends Character implements NPC {
 		setAnimationSpeed(template.getAnimationSpeed());
 		setBlocking(template.isBlocking());
 		setWeapon(new MeleeWeapon(context, ((DemoRunner) context.getGameRunner()).getMeleeWeaponDAO().get(template.getMeleeWeapon())));
+		this.dieAnimation = new SimpleAnimationRunner(template.getDieAnimation());
 	}
 
 	@Override
@@ -47,6 +50,8 @@ public class Enemy extends Character implements NPC {
 		ai = NoopAI.INSTANCE;
 
 		getLayer().handleEvent(new EnemyDiedEvent(this));
+		dieAnimation.run(context, getLayer(), this);
+		context.playSound(template.getDieSound());
 	}
 
 	@Override
