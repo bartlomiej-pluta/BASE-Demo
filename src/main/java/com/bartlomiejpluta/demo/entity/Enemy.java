@@ -15,10 +15,12 @@ import com.bartlomiejpluta.demo.world.weapon.MeleeWeapon;
 
 public class Enemy extends Character implements NPC {
 	private final EnemyModel template;
+	private AI ai = NoopAI.INSTANCE;
 
 	public Enemy(@NonNull Context context, @NonNull EnemyModel template) {
 		super(context, context.createEntity(template.getEntitySet()));
 		this.template = template;
+		hp = template.getHp();
 		setSpeed(template.getSpeed());
 		setAnimationSpeed(template.getAnimationSpeed());
 		setBlocking(template.isBlocking());
@@ -27,7 +29,18 @@ public class Enemy extends Character implements NPC {
 
 	@Override
 	public AI getStrategy() {
-		return NoopAI.INSTANCE;
+		return ai;
+	}
+
+	@Override
+	public void die() {
+		super.die();
+		changeEntitySet(template.getDeadEntitySet());
+		setScale(0.5f);
+		setBlocking(false);
+		setZIndex(-1);
+
+		ai = NoopAI.INSTANCE;
 	}
 
 	@Override

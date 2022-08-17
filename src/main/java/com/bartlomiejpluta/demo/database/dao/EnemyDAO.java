@@ -19,6 +19,8 @@ public class EnemyDAO {
 					.id(result.getString("id"))
 					.name(result.getString("name"))
 					.entitySet(result.getString("entset"))
+					.deadEntitySet(result.getString("dead_entset"))
+					.hp(result.getInt("hp"))
 					.speed(result.getFloat("speed"))
 					.animationSpeed(result.getFloat("animation_speed"))
 					.blocking(result.getBoolean("blocking"))
