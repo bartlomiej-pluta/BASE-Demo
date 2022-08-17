@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<demo:GameMenuWindow
+	xmlns:base="com.bartlomiejpluta.base.lib.gui"
+	xmlns:demo="com.bartlomiejpluta.demo.gui"
+	windowPosition="WindowPosition.CENTER"
+	margin="10f"
+	padding="20f">
+
+	<base:VLayout
+		width="200f"
+		widthMode="SizeMode.ABSOLUTE">
+
+		<base:Label
+			font="&quot;2261c04f-b02e-4486-b388-8a0fa41622e9&quot;"
+			widthMode="SizeMode.RELATIVE"
+			width="1f"
+			alignment="GUI.ALIGN_TOP | GUI.ALIGN_CENTER"
+			red="1f"
+			green="1f"
+			blue="1f"
+			alpha="0.5f"
+			fontSize="30f">Game Menu</base:Label>
+
+		<base:VOptionChoice
+			widthMode="SizeMode.RELATIVE"
+			width="1f">
+
+				<demo:Button
+					ref="resume_game"
+					font="&quot;2261c04f-b02e-4486-b388-8a0fa41622e9&quot;"
+					widthMode="SizeMode.RELATIVE"
+					width="1f"
+					red="1f"
+					green="1f"
+					blue="1f"
+					fontSize="17f">Resume game</demo:Button>
+
+				<demo:Button
+					ref="start_menu"
+					font="&quot;2261c04f-b02e-4486-b388-8a0fa41622e9&quot;"
+					widthMode="SizeMode.RELATIVE"
+					width="1f"
+					red="1f"
+					green="1f"
+					blue="1f"
+					fontSize="17f">Back to start menu</demo:Button>
+
+				<demo:Button
+					ref="exit"
+					font="&quot;2261c04f-b02e-4486-b388-8a0fa41622e9&quot;"
+					widthMode="SizeMode.RELATIVE"
+					width="1f"
+					red="1f"
+					green="1f"
+					blue="1f"
+					fontSize="17f">Exit</demo:Button>
+
+		</base:VOptionChoice>
+
+	</base:VLayout>
+
+</demo:GameMenuWindow>

@@ -37,6 +37,10 @@ public abstract class BaseMapHandler implements MapHandler {
 
 	@Override
 	public void input(Input input) {
+		if(context.isPaused()) {
+			return;
+		}
+
 		if(input.isKeyPressed(Key.KEY_DOWN)) {
 			mainLayer.pushMovement(player.prepareMovement(Direction.DOWN));
 		} else if(input.isKeyPressed(Key.KEY_UP)) {

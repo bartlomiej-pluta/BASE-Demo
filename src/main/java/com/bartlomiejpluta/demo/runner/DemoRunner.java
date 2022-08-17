@@ -67,10 +67,19 @@ public class DemoRunner implements GameRunner {
    
    public void newGame() {
 		menu.closeAll();
+		menu.enableGameMenu();
 		resetPlayer();
 		context.openMap(ForrestTempleHandler.UID);
 		context.getMap().getObjectLayer(ForrestTempleHandler.MAIN_LAYER).addEntity(this.player);
 		context.resume();
+   }
+
+   public void returnToStartMenu() {
+		menu.closeAll();
+		context.pause();
+		context.closeMap();
+		menu.disableGameMenu();
+		menu.showStartMenu();
    }
 
    public void exit() {
