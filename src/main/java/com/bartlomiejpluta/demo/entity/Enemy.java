@@ -28,7 +28,7 @@ public class Enemy extends Character implements NPC {
 		setSpeed(template.getSpeed());
 		setAnimationSpeed(template.getAnimationSpeed());
 		setBlocking(template.isBlocking());
-		setWeapon(new MeleeWeapon(((DemoRunner) context.getGameRunner()).getMeleeWeaponDAO().get(template.getMeleeWeapon())));
+		setWeapon(new MeleeWeapon(context, ((DemoRunner) context.getGameRunner()).getMeleeWeaponDAO().get(template.getMeleeWeapon())));
 	}
 
 	@Override

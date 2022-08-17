@@ -20,6 +20,8 @@ public class MeleeWeaponDAO {
 					.name(result.getString("name"))
 					.damage(result.getString("damage"))
 					.cooldown(result.getInt("cooldown"))
+					.animation(result.getString("animation"))
+					.sound(result.getString("sound"))
 					.build();
 				items.put(result.getString("id"), weapon);
 			}

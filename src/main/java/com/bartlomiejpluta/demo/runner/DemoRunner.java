@@ -78,7 +78,7 @@ public class DemoRunner implements GameRunner {
 		this.player.setAnimationSpeed(0.005f);	
 		this.player.setBlocking(true);	
 		this.player.setCoordinates(0, 11);
-		this.player.setWeapon(new MeleeWeapon(meleeWeaponDAO.get("wooden_sword")));
+		this.player.setWeapon(new MeleeWeapon(context, meleeWeaponDAO.get("wooden_sword")));
    }
 
    public void newGame() {
