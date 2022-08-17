@@ -14,6 +14,7 @@ public class EnemyModel {
 	private final float animationSpeed;
 	private final boolean blocking;
 	private final String meleeWeapon;
+	private final String rangedWeapon;
 	private final String dieAnimation;
 	private final String dieSound;
 }

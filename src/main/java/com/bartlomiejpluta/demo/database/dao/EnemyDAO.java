@@ -25,6 +25,7 @@ public class EnemyDAO {
 					.animationSpeed(result.getFloat("animation_speed"))
 					.blocking(result.getBoolean("blocking"))
 					.meleeWeapon(result.getString("melee_weapon"))
+					.rangedWeapon(result.getString("ranged_weapon"))
 					.dieAnimation(result.getString("die_animation"))
 					.dieSound(result.getString("die_sound"))
 					.build();

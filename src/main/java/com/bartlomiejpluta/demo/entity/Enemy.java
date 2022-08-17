@@ -13,7 +13,7 @@ import com.bartlomiejpluta.base.lib.animation.*;
 
 import com.bartlomiejpluta.demo.runner.DemoRunner;
 import com.bartlomiejpluta.demo.database.model.EnemyModel;
-import com.bartlomiejpluta.demo.world.weapon.MeleeWeapon;
+import com.bartlomiejpluta.demo.world.weapon.*;
 import com.bartlomiejpluta.demo.event.EnemyDiedEvent;
 import com.bartlomiejpluta.demo.ai.*;
 
@@ -30,7 +30,16 @@ public class Enemy extends Character implements NPC {
 		setSpeed(template.getSpeed());
 		setAnimationSpeed(template.getAnimationSpeed());
 		setBlocking(template.isBlocking());
-		setWeapon(new MeleeWeapon(context, ((DemoRunner) context.getGameRunner()).getMeleeWeaponDAO().get(template.getMeleeWeapon())));
+		var runner = (DemoRunner) context.getGameRunner();
+		var meleeWeaponTemplate = template.getMeleeWeapon();
+		var rangedWeaponTemplate = template.getRangedWeapon();
+
+		if(meleeWeaponTemplate != null) {
+			setWeapon(new MeleeWeapon(context, runner.getMeleeWeaponDAO().get(meleeWeaponTemplate)));
+		} else if(rangedWeaponTemplate != null) {
+			setWeapon(new RangedWeapon(context, runner.getRangedWeaponDAO().get(rangedWeaponTemplate)));
+		}
+
 		this.dieAnimation = new SimpleAnimationRunner(template.getDieAnimation());
 	}
 
@@ -64,6 +73,14 @@ public class Enemy extends Character implements NPC {
 
 		addEventListener(MoveEvent.TYPE, e -> ai.recomputePath());
 		addEventListener(EnemyDiedEvent.TYPE, e -> ai.recomputePath());
+
+		this.ai = ai;
+
+		return this;
+	}
+
+	public Enemy campAndHunt(Character target, int range) {
+		var ai = new SimpleSniperAI(this, target, range);
 
 		this.ai = ai;
 
