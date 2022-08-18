@@ -9,7 +9,7 @@ public class EnemyModel {
 	private final String name;
 	private final String entitySet;
 	private final String deadEntitySet;
-	private final int hp;
+	private final String hp;
 	private final float speed;
 	private final float animationSpeed;
 	private final boolean blocking;

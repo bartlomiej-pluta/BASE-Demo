@@ -10,6 +10,7 @@ import com.bartlomiejpluta.base.api.move.MoveEvent;
 
 import com.bartlomiejpluta.base.lib.ai.*;
 import com.bartlomiejpluta.base.lib.animation.*;
+import com.bartlomiejpluta.base.util.random.DiceRoller;
 
 import com.bartlomiejpluta.demo.runner.DemoRunner;
 import com.bartlomiejpluta.demo.database.model.EnemyModel;
@@ -30,8 +31,8 @@ public class Enemy extends Character implements NPC {
 		super(context, context.createEntity(template.getEntitySet()));
 		this.template = template;
 		name = template.getName();
-		hp = template.getHp();
-		maxHp = hp;
+		maxHp = DiceRoller.of(template.getHp()).roll();
+		hp = maxHp;
 		setSpeed(template.getSpeed());
 		setAnimationSpeed(template.getAnimationSpeed());
 		setBlocking(template.isBlocking());

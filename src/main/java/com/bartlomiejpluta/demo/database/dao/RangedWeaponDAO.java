@@ -22,9 +22,11 @@ public class RangedWeaponDAO {
 					.cooldown(result.getInt("cooldown"))
 					.animation(result.getString("animation"))
 					.sound(result.getString("sound"))
-					.range(result.getInt("range"))
+					.range(result.getString("range"))
 					.punchAnimation(result.getString("punch_animation"))
 					.punchSound(result.getString("punch_sound"))
+					.missAnimation(result.getString("miss_animation"))
+					.missSound(result.getString("miss_sound"))
 					.build();
 				items.put(result.getString("id"), weapon);
 			}
