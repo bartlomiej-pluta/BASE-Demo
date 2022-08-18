@@ -26,6 +26,9 @@ public class HUD extends BorderLayout {
 
 	private float logVisibilityDuration = 0f;
 
+	@Ref("hp")
+	private Bar hp;
+
 	@Ref("debug")
 	private Label debugLbl;
 
@@ -59,6 +62,8 @@ public class HUD extends BorderLayout {
 	@Override
 	public void update(float dt) {
 		super.update(dt);
+
+		hp.setValue((float) player.getHp() / (float) player.getMaxHp());
 
 		if(logVisibilityDuration > 0) {
 			logVisibilityDuration -= dt * 1000;

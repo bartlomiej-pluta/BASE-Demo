@@ -25,6 +25,9 @@ public abstract class Character extends EntityDelegate {
 	protected boolean immortal = false;
 
 	@Getter
+	protected int maxHp;
+
+	@Getter
 	protected int hp;
 
 	@Setter

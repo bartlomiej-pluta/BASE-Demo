@@ -10,6 +10,8 @@ public class Player extends Character {
 
 	public Player(@NonNull Context context, @NonNull Entity entity) {
 		super(context, entity);
+		this.hp = 100;
+		this.maxHp = 100;
 	}
 
 	@Override

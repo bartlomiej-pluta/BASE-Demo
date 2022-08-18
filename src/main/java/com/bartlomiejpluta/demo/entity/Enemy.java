@@ -31,6 +31,7 @@ public class Enemy extends Character implements NPC {
 		this.template = template;
 		name = template.getName();
 		hp = template.getHp();
+		maxHp = hp;
 		setSpeed(template.getSpeed());
 		setAnimationSpeed(template.getAnimationSpeed());
 		setBlocking(template.isBlocking());

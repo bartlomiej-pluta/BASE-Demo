@@ -8,6 +8,20 @@
 	width="1f"
 	height="1f">
 
+	<base:BorderLayout-TopLeft>
+
+		<demo:Bar
+			ref="hp"
+			strokeColor="0x111111"
+			fillColor="0xFF0000"
+			widthMode="SizeMode.ABSOLUTE"
+			heightMode="SizeMode.ABSOLUTE"
+			width="250f"
+			height="20f"
+			margin="5f" />
+
+	</base:BorderLayout-TopLeft>
+
 	<base:BorderLayout-BottomLeft>
 
 		<base:Label
