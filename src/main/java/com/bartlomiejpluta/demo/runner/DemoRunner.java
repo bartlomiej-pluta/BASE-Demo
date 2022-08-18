@@ -38,6 +38,9 @@ public class DemoRunner implements GameRunner {
 	private EnemyDAO enemyDAO;
 
 	@Getter
+	private MapObjectDAO mapObjectDAO;
+
+	@Getter
 	private Player player;
 
 	private final FPSProfiler fpsProfiler = FPSProfiler.create(20);
@@ -73,6 +76,7 @@ public class DemoRunner implements GameRunner {
 		meleeWeaponDAO = new MeleeWeaponDAO(context);
 		enemyDAO = new EnemyDAO(context);
 		rangedWeaponDAO = new RangedWeaponDAO(context);
+		mapObjectDAO = new MapObjectDAO(context);
    }
 
    private void initMenu() {

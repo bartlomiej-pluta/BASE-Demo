@@ -47,6 +47,10 @@ public abstract class BaseMapHandler implements MapHandler {
 			player.attack();
 		}
 
+		if(input.isKeyPressed(Key.KEY_ENTER)) {
+			player.interact();
+		}
+
 		if(input.isKeyPressed(Key.KEY_LEFT_CONTROL)) {
 			if(input.isKeyPressed(Key.KEY_DOWN)) {
 				player.setFaceDirection(Direction.DOWN);
@@ -80,5 +84,12 @@ public abstract class BaseMapHandler implements MapHandler {
 		enemy.setCoordinates(x, y);
 		mainLayer.addEntity(enemy);
 		return enemy;
+	}
+
+	public MapObject object(int x, int y, @NonNull String id) {
+		var object = new MapObject(context, runner.getMapObjectDAO().find(id));
+		object.setCoordinates(x, y);
+		mainLayer.addEntity(object);
+		return object;
 	}
 }
