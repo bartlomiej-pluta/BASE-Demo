@@ -17,6 +17,7 @@ import com.bartlomiejpluta.base.generated.db.model.EnemyModel;
 import com.bartlomiejpluta.demo.world.weapon.*;
 import com.bartlomiejpluta.demo.event.EnemyDiedEvent;
 import com.bartlomiejpluta.demo.ai.*;
+import com.bartlomiejpluta.demo.ai.ArcherAI;
 
 
 public class Enemy extends Character implements NPC {
@@ -72,7 +73,7 @@ public class Enemy extends Character implements NPC {
 	public Enemy followAndAttack(Character target, int range) {
 		var ai = new SimpleEnemyAI(this, target, range);
 
-		addEventListener(MoveEvent.TYPE, e -> ai.recomputePath());
+		addEventListener(MoveEvent.TYPE, ai::recomputePath);
 		addEventListener(EnemyDiedEvent.TYPE, e -> ai.recomputePath());
 
 		this.ai = ai;
@@ -88,6 +89,17 @@ public class Enemy extends Character implements NPC {
 
 	public Enemy asAnimal(Character source, int range) {
 		this.ai = new AnimalAI(this, source, range);
+
+		return this;
+	}
+
+	public Enemy archer(Character target, int minRange, int maxRange, int range) {
+		var ai = new ArcherAI(this, target, minRange, maxRange, range);
+
+		addEventListener(MoveEvent.TYPE, ai::recomputePath);
+		addEventListener(EnemyDiedEvent.TYPE, e -> ai.recomputePath());
+
+		this.ai = ai;
 
 		return this;
 	}
