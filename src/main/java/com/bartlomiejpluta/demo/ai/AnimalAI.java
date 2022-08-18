@@ -20,7 +20,7 @@ public class AnimalAI implements AI {
 		this.animal = animal;
 		this.character = character;
 		this.range = range;
-		this.idleAI = new RandomMovementAI(animal, 4);
+		this.idleAI = new RandomMovementAI<>(animal, 4);
 		this.runawayAI = new RunawayAI<>(animal, character);
 	}
 

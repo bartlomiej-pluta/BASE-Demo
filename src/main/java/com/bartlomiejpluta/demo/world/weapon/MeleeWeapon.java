@@ -6,9 +6,10 @@ import lombok.*;
 import org.joml.Vector2i;
 import com.bartlomiejpluta.base.api.context.Context;
 import com.bartlomiejpluta.base.lib.animation.*;
+import com.bartlomiejpluta.base.util.random.DiceRoller;
+
 import com.bartlomiejpluta.demo.database.model.MeleeWeaponModel;
 import com.bartlomiejpluta.demo.entity.Character;
-import com.bartlomiejpluta.demo.util.DiceRoller;
 
 import com.bartlomiejpluta.demo.event.HitEvent;
 

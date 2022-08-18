@@ -18,7 +18,7 @@ public class SimpleEnemyAI extends FollowEntityAI<Enemy, Character> {
 	public SimpleEnemyAI(Enemy enemy, Character target, int range) {
 		super(new AstarPathFinder(ASTAR_MAX_NODES), enemy, target);
 		this.range = range;
-		this.idle = new RandomMovementAI(enemy, IDLE_MOVEMENT_INTERVAL);
+		this.idle = new RandomMovementAI<>(enemy, IDLE_MOVEMENT_INTERVAL);
 	}
 
 	@Override
