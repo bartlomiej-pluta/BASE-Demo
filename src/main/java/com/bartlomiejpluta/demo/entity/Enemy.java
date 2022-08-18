@@ -8,7 +8,7 @@ import com.bartlomiejpluta.base.api.ai.AI;
 import com.bartlomiejpluta.base.api.ai.NPC;
 import com.bartlomiejpluta.base.api.move.MoveEvent;
 
-import com.bartlomiejpluta.base.lib.ai.NoopAI;
+import com.bartlomiejpluta.base.lib.ai.*;
 import com.bartlomiejpluta.base.lib.animation.*;
 
 import com.bartlomiejpluta.demo.runner.DemoRunner;
@@ -80,9 +80,13 @@ public class Enemy extends Character implements NPC {
 	}
 
 	public Enemy campAndHunt(Character target, int range) {
-		var ai = new SimpleSniperAI(this, target, range);
+		this.ai = new SimpleSniperAI(this, target, range);
 
-		this.ai = ai;
+		return this;
+	}
+
+	public Enemy asAnimal(Character source, int range) {
+		this.ai = new AnimalAI(this, source, range);
 
 		return this;
 	}
