@@ -30,6 +30,7 @@ public abstract class Character extends EntityDelegate {
 	@Getter
 	protected int hp;
 
+	@Getter
 	@Setter
 	private Weapon weapon;
 

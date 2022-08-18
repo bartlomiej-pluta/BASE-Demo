@@ -103,4 +103,15 @@ public class Enemy extends Character implements NPC {
 
 		return this;
 	}
+
+	public Enemy defaultAI() {
+		var ai = new WeaponBasedAI(this, runner.getPlayer());
+
+		addEventListener(MoveEvent.TYPE, ai::recomputePath);
+		addEventListener(EnemyDiedEvent.TYPE, e -> ai.recomputePath());
+
+		this.ai = ai;
+
+		return this;
+	}
 }
