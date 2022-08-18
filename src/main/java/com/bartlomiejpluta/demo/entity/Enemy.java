@@ -23,9 +23,13 @@ public class Enemy extends Character implements NPC {
 	private AI ai = NoopAI.INSTANCE;
 	private final AnimationRunner dieAnimation;
 
+	@Getter
+	private final String name;
+
 	public Enemy(@NonNull Context context, @NonNull EnemyModel template) {
 		super(context, context.createEntity(template.getEntitySet()));
 		this.template = template;
+		name = template.getName();
 		hp = template.getHp();
 		setSpeed(template.getSpeed());
 		setAnimationSpeed(template.getAnimationSpeed());
@@ -58,14 +62,9 @@ public class Enemy extends Character implements NPC {
 
 		ai = NoopAI.INSTANCE;
 
-		getLayer().handleEvent(new EnemyDiedEvent(this));
 		dieAnimation.run(context, getLayer(), this);
 		context.playSound(template.getDieSound());
-	}
-
-	@Override
-	public String toString() {
-		return template.getName() + "@" + hashCode();
+		context.fireEvent(new EnemyDiedEvent(this));
 	}
 
 	public Enemy followAndAttack(Character target, int range) {

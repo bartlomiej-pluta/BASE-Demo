@@ -5,11 +5,13 @@ import java.util.Random;
 import lombok.*;
 import com.bartlomiejpluta.base.api.context.Context;
 import com.bartlomiejpluta.base.api.entity.Entity;
-import com.bartlomiejpluta.base.api.move.Direction;
+import com.bartlomiejpluta.base.api.move.*;
 import com.bartlomiejpluta.base.lib.animation.*;
 import com.bartlomiejpluta.demo.database.model.RangedWeaponModel;
 import com.bartlomiejpluta.demo.entity.Character;
 import com.bartlomiejpluta.demo.util.DiceRoller;
+
+import com.bartlomiejpluta.demo.event.HitEvent;
 
 public class RangedWeapon implements Weapon {
 	private final Random random = new Random();
@@ -44,12 +46,14 @@ public class RangedWeapon implements Weapon {
 		this.punchSound = template.getPunchSound();
 	}
 
-	private void onHit(Entity entity) {
-		if(entity.isBlocking() && entity instanceof Character) {
-			var character = (Character) entity;
-			character.hit(roller.roll());
+	private void onHit(Movable attacker, Entity target) {
+		if(target.isBlocking() && target instanceof Character) {
+			var character = (Character) target;
+			var damage = roller.roll();
+			character.hit(damage);
 			punchAnimation.run(context, character.getLayer(), character);
 			context.playSound(punchSound);
+			context.fireEvent(new HitEvent((Character) attacker, character, damage));
 		}
 	}
 

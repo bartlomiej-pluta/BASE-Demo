@@ -17,4 +17,9 @@ public class Player extends Character {
 		super.die();
 		runner.returnToStartMenu();
 	}
+
+	@Override
+	public String getName() {
+		return "Player";
+	}
 }

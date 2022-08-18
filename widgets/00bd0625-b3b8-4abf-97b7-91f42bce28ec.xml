@@ -8,6 +8,21 @@
 	width="1f"
 	height="1f">
 
+	<base:BorderLayout-BottomLeft>
+
+		<base:Label
+			ref="log"
+			font="&quot;2261c04f-b02e-4486-b388-8a0fa41622e9&quot;"
+			widthMode="SizeMode.ABSOLUTE"
+			width="400f"
+			height="25f"
+			margin="10f"
+			alignment="GUI.ALIGN_BOTTOM | GUI.ALIGN_LEFT"
+			color="0xFFFFFF"
+			fontSize="15f"/>
+
+	</base:BorderLayout-BottomLeft>
+
 	<base:BorderLayout-BottomRight>
 
 		<base:Label

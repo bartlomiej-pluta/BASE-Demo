@@ -11,7 +11,7 @@ import com.bartlomiejpluta.base.lib.animation.AnimationRunner;
 import com.bartlomiejpluta.demo.runner.DemoRunner;
 import com.bartlomiejpluta.demo.world.weapon.Weapon;
 
-public class Character extends EntityDelegate {
+public abstract class Character extends EntityDelegate {
 	private static final Logger log = LoggerFactory.getLogger(Character.class);
 	protected final Context context;
 	protected final DemoRunner runner;
@@ -72,6 +72,8 @@ public class Character extends EntityDelegate {
 	}
 
 	protected void die() {
-		log.info(toString() + " died with HP = " + hp);
+		log.info(getName() + " died with HP = " + hp);
 	}
+
+	public abstract String getName();
 }
