@@ -10,7 +10,7 @@ import com.bartlomiejpluta.base.api.move.*;
 import com.bartlomiejpluta.base.lib.animation.*;
 import com.bartlomiejpluta.base.util.random.DiceRoller;
 
-import com.bartlomiejpluta.demo.database.model.RangedWeaponModel;
+import com.bartlomiejpluta.base.generated.db.model.RangedWeaponModel;
 import com.bartlomiejpluta.demo.entity.Character;
 
 import com.bartlomiejpluta.demo.event.HitEvent;

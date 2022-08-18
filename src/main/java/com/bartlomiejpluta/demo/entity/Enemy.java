@@ -13,7 +13,7 @@ import com.bartlomiejpluta.base.lib.animation.*;
 import com.bartlomiejpluta.base.util.random.DiceRoller;
 
 import com.bartlomiejpluta.demo.runner.DemoRunner;
-import com.bartlomiejpluta.demo.database.model.EnemyModel;
+import com.bartlomiejpluta.base.generated.db.model.EnemyModel;
 import com.bartlomiejpluta.demo.world.weapon.*;
 import com.bartlomiejpluta.demo.event.EnemyDiedEvent;
 import com.bartlomiejpluta.demo.ai.*;
@@ -28,7 +28,7 @@ public class Enemy extends Character implements NPC {
 	private final String name;
 
 	public Enemy(@NonNull Context context, @NonNull EnemyModel template) {
-		super(context, context.createEntity(template.getEntitySet()));
+		super(context, context.createEntity(template.getEntset()));
 		this.template = template;
 		name = template.getName();
 		maxHp = DiceRoller.of(template.getHp()).roll();
@@ -41,9 +41,9 @@ public class Enemy extends Character implements NPC {
 		var rangedWeaponTemplate = template.getRangedWeapon();
 
 		if(meleeWeaponTemplate != null) {
-			setWeapon(new MeleeWeapon(context, runner.getMeleeWeaponDAO().get(meleeWeaponTemplate)));
+			setWeapon(new MeleeWeapon(context, runner.getMeleeWeaponDAO().find(meleeWeaponTemplate)));
 		} else if(rangedWeaponTemplate != null) {
-			setWeapon(new RangedWeapon(context, runner.getRangedWeaponDAO().get(rangedWeaponTemplate)));
+			setWeapon(new RangedWeapon(context, runner.getRangedWeaponDAO().find(rangedWeaponTemplate)));
 		}
 
 		this.dieAnimation = new SimpleAnimationRunner(template.getDieAnimation());
@@ -57,7 +57,7 @@ public class Enemy extends Character implements NPC {
 	@Override
 	public void die() {
 		super.die();
-		changeEntitySet(template.getDeadEntitySet());
+		changeEntitySet(template.getDeadEntset());
 		setScale(0.5f);
 		setBlocking(false);
 		setZIndex(-1);

@@ -10,12 +10,14 @@ import com.bartlomiejpluta.base.api.input.Input;
 import com.bartlomiejpluta.base.api.screen.Screen;
 import com.bartlomiejpluta.base.api.runner.GameRunner;
 import com.bartlomiejpluta.base.api.gui.GUI;
+
 import com.bartlomiejpluta.base.util.profiler.FPSProfiler;
+
+import com.bartlomiejpluta.base.generated.db.dao.*;
 
 import com.bartlomiejpluta.demo.map.ForrestTempleHandler;
 import com.bartlomiejpluta.demo.entity.Player;
 import com.bartlomiejpluta.demo.menu.MenuManager;
-import com.bartlomiejpluta.demo.database.dao.*;
 
 import com.bartlomiejpluta.demo.world.weapon.*;
 
@@ -27,13 +29,13 @@ public class DemoRunner implements GameRunner {
    private GUI hud;
 
 	@Getter
-   private MeleeWeaponDAO meleeWeaponDAO = new MeleeWeaponDAO();
+   private MeleeWeaponDAO meleeWeaponDAO;
 
 	@Getter
-	private RangedWeaponDAO rangedWeaponDAO = new RangedWeaponDAO();
+	private RangedWeaponDAO rangedWeaponDAO;
 
 	@Getter
-	private EnemyDAO enemyDAO = new EnemyDAO();
+	private EnemyDAO enemyDAO;
 
 	@Getter
 	private Player player;
@@ -68,9 +70,9 @@ public class DemoRunner implements GameRunner {
    }
 
    private void initDAOs() {
-		meleeWeaponDAO.init(context);
-		enemyDAO.init(context);
-		rangedWeaponDAO.init(context);
+		meleeWeaponDAO = new MeleeWeaponDAO(context);
+		enemyDAO = new EnemyDAO(context);
+		rangedWeaponDAO = new RangedWeaponDAO(context);
    }
 
    private void initMenu() {
@@ -95,7 +97,7 @@ public class DemoRunner implements GameRunner {
 		this.player.setAnimationSpeed(0.005f);	
 		this.player.setBlocking(true);	
 		this.player.setCoordinates(0, 11);
-		this.player.setWeapon(new RangedWeapon(context, rangedWeaponDAO.get("wooden_bow")));
+		this.player.setWeapon(new RangedWeapon(context, rangedWeaponDAO.find("wooden_bow")));
    }
 
    public void newGame() {

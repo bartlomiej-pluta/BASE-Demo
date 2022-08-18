@@ -76,7 +76,7 @@ public abstract class BaseMapHandler implements MapHandler {
 	}
 
 	public Enemy enemy(int x, int y, @NonNull String id) {
-		var enemy = new Enemy(context, runner.getEnemyDAO().get(id));
+		var enemy = new Enemy(context, runner.getEnemyDAO().find(id));
 		enemy.setCoordinates(x, y);
 		mainLayer.addEntity(enemy);
 		return enemy;
