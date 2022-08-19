@@ -57,7 +57,6 @@ public abstract class Character extends EntityDelegate {
 			return;
 		}
 
-		log.info(toString() + " received " + dmg + " damage");
 		hp -= dmg;
 	}
 
@@ -76,7 +75,7 @@ public abstract class Character extends EntityDelegate {
 	}
 
 	protected void die() {
-		log.info(getName() + " died with HP = " + hp);
+
 	}
 
 	public abstract String getName();

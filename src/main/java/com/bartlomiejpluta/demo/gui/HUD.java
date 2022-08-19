@@ -1,5 +1,7 @@
 package com.bartlomiejpluta.demo.gui;
 
+import lombok.extern.slf4j.Slf4j;
+
 import com.bartlomiejpluta.base.api.gui.*;
 import com.bartlomiejpluta.base.lib.gui.*;
 
@@ -15,6 +17,7 @@ import com.bartlomiejpluta.demo.util.LimitedQueue;
 
 import java.util.stream.Collectors;
 
+@Slf4j
 public class HUD extends BorderLayout {
 	private static final int MAX_LOG_SIZE = 10;
 	private static final float LOG_VISIBILITY_DURATION = 8000f;
@@ -22,7 +25,7 @@ public class HUD extends BorderLayout {
 	private final DemoRunner runner;
 	private final Player player;
 	private final Runtime runtime;
-	private LimitedQueue<String> log = new LimitedQueue<>(MAX_LOG_SIZE);
+	private LimitedQueue<String> logger = new LimitedQueue<>(MAX_LOG_SIZE);
 
 	private float logVisibilityDuration = 0f;
 
@@ -45,18 +48,18 @@ public class HUD extends BorderLayout {
 	}
 
 	private void logHitEvent(HitEvent event) {
-		log.add(String.format("%s hits %s with damage = %d", event.getAttacker().getName(), event.getTarget().getName(), event.getDamage()));
-		updateLog();
+		log(String.format("%s hits %s with damage = %d", event.getAttacker().getName(), event.getTarget().getName(), event.getDamage()));
 	}
 
-	private void updateLog() {
-		logLbl.setText(log.stream().collect(Collectors.joining("\n")));
+	private void log(String message) {
+		logger.add(message);
+		log.info(message);
+		logLbl.setText(logger.stream().collect(Collectors.joining("\n")));
 		logVisibilityDuration = LOG_VISIBILITY_DURATION;
 	}
 
 	private void logEnemyDiedEvent(EnemyDiedEvent event) {
-		log.add(String.format("%s has died with HP = %d", event.getEnemy().getName(), event.getEnemy().getHp()));
-		updateLog();
+		log(String.format("%s has died with HP = %d", event.getEnemy().getName(), event.getEnemy().getHp()));
 	}
 
 	@Override
@@ -80,13 +83,15 @@ public class HUD extends BorderLayout {
 			"FPS: %.2f\n" +
 			"Mem: %.2f / %.2f [MB]\n" +
 			"Coords: %d : %d\n" +
-			"Pos: %.2f : %.2f",
+			"Pos: %.2f : %.2f\n" +
+			"Entities: %d",
 			runner.instantFPS(),
 			runtime.totalMemory() / 1024f / 1024f,
 			runtime.maxMemory() / 1024f / 1024f,
 			coords.x(), coords.y(),
-			pos.x(), pos.y())
-		);
+			pos.x(), pos.y(),
+			player.getLayer().getEntities().size()	- 1
+		));
 
 		logLbl.setAlpha(Math.min(1f, logVisibilityDuration / LOG_VISIBILITY_FADING_OUT));
 
