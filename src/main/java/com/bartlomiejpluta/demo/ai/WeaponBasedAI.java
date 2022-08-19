@@ -44,26 +44,35 @@ public class WeaponBasedAI implements AI {
 		if(lastAttacker != null && lastAttacker instanceof Character) {
 			var attacker = (Character) lastAttacker;
 			if(attacker.isAlive()) {
-				runawayAI.setCharacter(attacker);
+				runawayAI.setDanger(attacker);
 				meleeAI.setTarget(attacker);
 				archerAI.setTarget(attacker);
 			} else {
-				runawayAI.setCharacter(target);
+				runawayAI.setDanger(target);
 				meleeAI.setTarget(target);
 				archerAI.setTarget(target);
 			}
 		}
 
-		if(enemy.getWeapon() == null) {
+		var meleeWeapon = enemy.getMeleeWeapon();
+		var rangedWeapon = enemy.getRangedWeapon();
+
+		if(meleeWeapon == null && rangedWeapon == null) {
 			runawayAI.nextActivity(layer, dt);
+			return;
+		}
+
+		if(rangedWeapon == null || enemy.manhattanDistance(target) == 1) {
+			enemy.setWeapon(meleeWeapon);
+			meleeAI.nextActivity(layer, dt);
+			return;
 		}
 
 		if(enemy.getWeapon() instanceof MeleeWeapon) {
 			meleeAI.nextActivity(layer, dt);
 		}
 
-		if(enemy.getWeapon() instanceof RangedWeapon) {
-			archerAI.nextActivity(layer, dt);
-		}
+		enemy.setWeapon(rangedWeapon);
+		archerAI.nextActivity(layer, dt);
 	}
 }

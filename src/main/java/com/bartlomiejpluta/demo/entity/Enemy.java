@@ -26,6 +26,12 @@ public class Enemy extends Character implements NPC {
 	private final AnimationRunner dieAnimation;
 
 	@Getter
+	private MeleeWeapon meleeWeapon;
+
+	@Getter
+	private RangedWeapon rangedWeapon;
+
+	@Getter
 	private final String name;
 
 	public Enemy(@NonNull Context context, @NonNull EnemyModel template) {
@@ -42,9 +48,11 @@ public class Enemy extends Character implements NPC {
 		var rangedWeaponTemplate = template.getRangedWeapon();
 
 		if(meleeWeaponTemplate != null) {
-			setWeapon(new MeleeWeapon(context, runner.getMeleeWeaponDAO().find(meleeWeaponTemplate)));
-		} else if(rangedWeaponTemplate != null) {
-			setWeapon(new RangedWeapon(context, runner.getRangedWeaponDAO().find(rangedWeaponTemplate)));
+			this.meleeWeapon = new MeleeWeapon(context, runner.getMeleeWeaponDAO().find(meleeWeaponTemplate));
+		}
+
+		if(rangedWeaponTemplate != null) {
+			this.rangedWeapon = new RangedWeapon(context, runner.getRangedWeaponDAO().find(rangedWeaponTemplate));
 		}
 
 		this.dieAnimation = new SimpleAnimationRunner(template.getDieAnimation());

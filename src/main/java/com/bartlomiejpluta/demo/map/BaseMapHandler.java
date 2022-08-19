@@ -93,6 +93,10 @@ public abstract class BaseMapHandler implements MapHandler {
 		}
 	}
 
+	public Enemy enemy(@NonNull String id) {
+		return new Enemy(context, runner.getEnemyDAO().find(id));
+	}
+
 	public Enemy enemy(int x, int y, @NonNull String id) {
 		var enemy = new Enemy(context, runner.getEnemyDAO().find(id));
 		enemy.setCoordinates(x, y);
@@ -108,7 +112,7 @@ public abstract class BaseMapHandler implements MapHandler {
 	}
 
 	public EntitySpawner spawner(int x, int y, ObjectLayer layer) {
-		var spawner = new EntitySpawner(x, y, map, layer).trackEntities(EnemyDiedEvent.TYPE);
+		var spawner = new EntitySpawner(x, y, context, map, layer).trackEntities(EnemyDiedEvent.TYPE);
 		this.spawners.add(spawner);
 		return spawner;
 	}
