@@ -13,17 +13,27 @@ import com.bartlomiejpluta.base.api.input.*;
 
 import com.bartlomiejpluta.base.lib.camera.*;
 
+import com.bartlomiejpluta.base.util.world.EntitySpawner;
+
 import com.bartlomiejpluta.demo.runner.DemoRunner;
 import com.bartlomiejpluta.demo.entity.*;
+import com.bartlomiejpluta.demo.event.*;
+
+import com.bartlomiejpluta.demo.util.*;
+
+import java.util.*;
+import java.util.function.*;
 
 public abstract class BaseMapHandler implements MapHandler {
 	protected Screen screen;
 	protected Context context;
 	protected DemoRunner runner;
 	protected Camera camera;
+	protected GameMap map;
 	protected Player player;
 	protected ObjectLayer mainLayer;
 	protected CameraController cameraController;
+	protected final List<EntitySpawner> spawners = new LinkedList<>();
 
 	@Override
 	public void onCreate(Context context, GameMap map) {
@@ -31,6 +41,7 @@ public abstract class BaseMapHandler implements MapHandler {
 		this.screen = context.getScreen();
 		this.runner = (DemoRunner) context.getGameRunner();
 		this.camera = context.getCamera();
+		this.map = map;
 		this.player = runner.getPlayer();
 		this.cameraController = FollowingCameraController
 			.on(screen, camera, map)
@@ -77,6 +88,9 @@ public abstract class BaseMapHandler implements MapHandler {
 	@Override
 	public void update(Context context, GameMap map, float dt) {
 		cameraController.update();
+		for(var spawner : spawners) {
+			spawner.update(dt);
+		}
 	}
 
 	public Enemy enemy(int x, int y, @NonNull String id) {
@@ -91,5 +105,11 @@ public abstract class BaseMapHandler implements MapHandler {
 		object.setCoordinates(x, y);
 		mainLayer.addEntity(object);
 		return object;
+	}
+
+	public EntitySpawner spawner(int x, int y, ObjectLayer layer) {
+		var spawner = new EntitySpawner(x, y, map, layer).trackEntities(EnemyDiedEvent.TYPE);
+		this.spawners.add(spawner);
+		return spawner;
 	}
 }
