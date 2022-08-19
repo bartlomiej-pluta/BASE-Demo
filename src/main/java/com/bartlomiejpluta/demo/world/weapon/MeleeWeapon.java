@@ -48,7 +48,7 @@ public class MeleeWeapon implements Weapon {
 			if(entity.getCoordinates().equals(facingNeighbour) && entity.isBlocking() && entity instanceof Character) {
 				var character = (Character) entity;
 				var damage = roller.roll();
-				character.hit(damage);
+				character.hit(attacker, damage);
 				animation.run(context, character.getLayer(), character);
 				context.playSound(sound);
 				context.fireEvent(new HitEvent(attacker, character, damage));

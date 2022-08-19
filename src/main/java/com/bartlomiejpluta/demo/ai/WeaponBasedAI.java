@@ -12,8 +12,8 @@ import com.bartlomiejpluta.demo.world.weapon.*;
 
 public class WeaponBasedAI implements AI {
 	private static final int RANGE = 10;
-	private static final int MIN_RANGE = 4;
-	private static final int MAX_RANGE = 8;
+	private static final int MIN_RANGE = 3;
+	private static final int MAX_RANGE = 12;
 	private final Enemy enemy;
 	private final Character target;
 	private final RunawayAI runawayAI;
@@ -40,6 +40,20 @@ public class WeaponBasedAI implements AI {
 
 	@Override
 	public void nextActivity(ObjectLayer layer, float dt) {
+		var lastAttacker = enemy.getLastAttacker();
+		if(lastAttacker != null && lastAttacker instanceof Character) {
+			var attacker = (Character) lastAttacker;
+			if(attacker.isAlive()) {
+				runawayAI.setCharacter(attacker);
+				meleeAI.setTarget(attacker);
+				archerAI.setTarget(attacker);
+			} else {
+				runawayAI.setCharacter(target);
+				meleeAI.setTarget(target);
+				archerAI.setTarget(target);
+			}
+		}
+
 		if(enemy.getWeapon() == null) {
 			runawayAI.nextActivity(layer, dt);
 		}

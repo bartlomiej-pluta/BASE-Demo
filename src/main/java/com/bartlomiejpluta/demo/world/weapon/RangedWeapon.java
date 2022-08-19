@@ -12,6 +12,7 @@ import com.bartlomiejpluta.base.util.random.DiceRoller;
 
 import com.bartlomiejpluta.base.generated.db.model.RangedWeaponModel;
 import com.bartlomiejpluta.demo.entity.Character;
+import com.bartlomiejpluta.demo.entity.NamedEntity;
 
 import com.bartlomiejpluta.demo.event.HitEvent;
 
@@ -57,12 +58,13 @@ public class RangedWeapon implements Weapon {
 
 	private void onHit(Movable attacker, Entity target) {
 		if(target.isBlocking() && target instanceof Character) {
+			var namedAttacker = (Character) attacker;
 			var character = (Character) target;
 			var damage = dmgRoller.roll();
-			character.hit(damage);
+			character.hit(namedAttacker, damage);
 			punchAnimation.run(context, character.getLayer(), character);
 			context.playSound(punchSound);
-			context.fireEvent(new HitEvent((Character) attacker, character, damage));
+			context.fireEvent(new HitEvent(namedAttacker, character, damage));
 		}
 	}
 

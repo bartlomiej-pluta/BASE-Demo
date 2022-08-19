@@ -5,13 +5,12 @@ import org.slf4j.*;
 import org.joml.Vector2i;
 import com.bartlomiejpluta.base.api.context.Context;
 import com.bartlomiejpluta.base.api.entity.Entity;
-import com.bartlomiejpluta.base.lib.entity.EntityDelegate;
 import com.bartlomiejpluta.base.lib.animation.AnimationRunner;
 
 import com.bartlomiejpluta.demo.runner.DemoRunner;
 import com.bartlomiejpluta.demo.world.weapon.Weapon;
 
-public abstract class Character extends EntityDelegate {
+public abstract class Character extends NamedEntity {
 	private static final Logger log = LoggerFactory.getLogger(Character.class);
 	protected final Context context;
 	protected final DemoRunner runner;
@@ -34,6 +33,9 @@ public abstract class Character extends EntityDelegate {
 	@Setter
 	private Weapon weapon;
 
+	@Getter
+	private NamedEntity lastAttacker;
+
 	public Character(@NonNull Context context, @NonNull Entity entity) {
 		super(entity);
 		this.context = context;
@@ -52,7 +54,9 @@ public abstract class Character extends EntityDelegate {
 		}
 	}
 
-	public void hit(int dmg) {
+	public void hit(NamedEntity source, int dmg) {
+		this.lastAttacker = source;
+
 		if(immortal) {
 			return;
 		}

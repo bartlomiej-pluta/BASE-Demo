@@ -10,8 +10,8 @@ public class Player extends Character {
 
 	public Player(@NonNull Context context, @NonNull Entity entity) {
 		super(context, entity);
-		this.hp = 100;
-		this.maxHp = 100;
+		this.hp = 500;
+		this.maxHp = 500;
 	}
 
 	public void interact() {
