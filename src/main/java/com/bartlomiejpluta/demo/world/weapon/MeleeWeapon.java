@@ -8,7 +8,7 @@ import com.bartlomiejpluta.base.api.context.*;
 import com.bartlomiejpluta.base.lib.animation.*;
 import com.bartlomiejpluta.base.util.random.DiceRoller;
 
-import com.bartlomiejpluta.demo.entity.Character;
+import com.bartlomiejpluta.demo.entity.Creature;
 
 import com.bartlomiejpluta.demo.event.HitEvent;
 
@@ -40,16 +40,16 @@ public class MeleeWeapon implements Weapon {
 			.uAnimationSpeed(0.01f, 0.05f)
 			.offset(0, -10)
 			.uDelay(0, 500)
-			.with(template.getAnimation());
-		this.sound = template.getSound();
+			.with(A.animations.get(template.getAnimation()).uid);
+		this.sound = A.sounds.get(template.getSound()).uid;
 	}
 
 	@Override
-	public boolean attack(Character attacker) {
+	public boolean attack(Creature attacker) {
 		var facingNeighbour = attacker.getCoordinates().add(attacker.getFaceDirection().vector, new Vector2i());
 		for(var entity : attacker.getLayer().getEntities()) {
-			if(entity.getCoordinates().equals(facingNeighbour) && entity.isBlocking() && entity instanceof Character) {
-				var character = (Character) entity;
+			if(entity.getCoordinates().equals(facingNeighbour) && entity.isBlocking() && entity instanceof Creature) {
+				var character = (Creature) entity;
 				var damage = roller.roll();
 				character.hit(attacker, damage);
 				animation.run(context, character.getLayer(), character);

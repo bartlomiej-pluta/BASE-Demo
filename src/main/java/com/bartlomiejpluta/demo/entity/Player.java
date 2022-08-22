@@ -4,11 +4,11 @@ import lombok.*;
 import org.joml.Vector2i;
 import com.bartlomiejpluta.base.api.context.Context;
 import com.bartlomiejpluta.base.api.entity.Entity;
-import com.bartlomiejpluta.demo.entity.MapObject;
+import com.bartlomiejpluta.base.api.character.Character;
 
-public class Player extends Character {
+public class Player extends Creature {
 
-	public Player(@NonNull Entity entity) {
+	public Player(@NonNull Character entity) {
 		super(entity);
 		this.hp = 500;
 		this.maxHp = 500;

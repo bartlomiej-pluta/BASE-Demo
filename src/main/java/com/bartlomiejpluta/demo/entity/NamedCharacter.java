@@ -2,16 +2,17 @@ package com.bartlomiejpluta.demo.entity;
 
 import com.bartlomiejpluta.base.api.context.*;
 import com.bartlomiejpluta.base.api.entity.Entity;
-import com.bartlomiejpluta.base.lib.entity.EntityDelegate;
+import com.bartlomiejpluta.base.lib.character.CharacterDelegate;
+import com.bartlomiejpluta.base.api.character.Character;
 
 import com.bartlomiejpluta.demo.runner.DemoRunner;
 
-public abstract class NamedEntity extends EntityDelegate {
+public abstract class NamedCharacter extends CharacterDelegate {
 	protected final Context context;
 	protected final DemoRunner runner;	
 	
-	public NamedEntity(Entity entity) {
-		super(entity);
+	public NamedCharacter(Character character) {
+		super(character);
 		this.context = ContextHolder.INSTANCE.getContext();
 		this.runner = (DemoRunner) context.getGameRunner();
 	}

@@ -13,7 +13,7 @@ import com.bartlomiejpluta.base.api.input.*;
 
 import com.bartlomiejpluta.base.lib.camera.*;
 
-import com.bartlomiejpluta.base.util.world.EntitySpawner;
+import com.bartlomiejpluta.base.util.world.CharacterSpawner;
 
 import com.bartlomiejpluta.demo.runner.DemoRunner;
 import com.bartlomiejpluta.demo.entity.*;
@@ -33,7 +33,7 @@ public abstract class BaseMapHandler implements MapHandler {
 	protected Player player;
 	protected ObjectLayer mainLayer;
 	protected CameraController cameraController;
-	protected final List<EntitySpawner> spawners = new LinkedList<>();
+	protected final List<CharacterSpawner> spawners = new LinkedList<>();
 
 	@Override
 	public void onCreate(Context context, GameMap map) {
@@ -111,8 +111,8 @@ public abstract class BaseMapHandler implements MapHandler {
 		return object;
 	}
 
-	public EntitySpawner spawner(int x, int y, ObjectLayer layer) {
-		var spawner = new EntitySpawner(x, y, context, map, layer).trackEntities(EnemyDiedEvent.TYPE);
+	public CharacterSpawner spawner(int x, int y, ObjectLayer layer) {
+		var spawner = new CharacterSpawner(x, y, context, map, layer).trackEntities(EnemyDiedEvent.TYPE);
 		this.spawners.add(spawner);
 		return spawner;
 	}

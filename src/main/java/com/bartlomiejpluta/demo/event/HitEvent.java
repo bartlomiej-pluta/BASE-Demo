@@ -4,15 +4,15 @@ import lombok.*;
 
 import com.bartlomiejpluta.base.api.event.*;
 import com.bartlomiejpluta.base.lib.event.*;
-import com.bartlomiejpluta.demo.entity.Character;
+import com.bartlomiejpluta.demo.entity.Creature;
 
 @Getter
 @RequiredArgsConstructor
 public class HitEvent extends BaseEvent {
 	public static final EventType<HitEvent> TYPE = new EventType<>("HIT_EVENT");
 
-	private final Character attacker;
-	private final Character target;
+	private final Creature attacker;
+	private final Creature target;
 	private final int damage;
 
 	@Override

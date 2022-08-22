@@ -10,8 +10,7 @@ import com.bartlomiejpluta.base.api.move.*;
 import com.bartlomiejpluta.base.lib.animation.*;
 import com.bartlomiejpluta.base.util.random.DiceRoller;
 
-import com.bartlomiejpluta.demo.entity.Character;
-import com.bartlomiejpluta.demo.entity.NamedEntity;
+import com.bartlomiejpluta.demo.entity.Creature;
 
 import com.bartlomiejpluta.demo.event.HitEvent;
 
@@ -43,7 +42,7 @@ public class RangedWeapon implements Weapon {
 		this.dmgRoller = DiceRoller.of(template.getDamage());
 		this.rangeRoller = DiceRoller.of(template.getRange());
 		this.cooldown = template.getCooldown();
-		this.animation = new BulletAnimationRunner(template.getAnimation())
+		this.animation = new BulletAnimationRunner(A.animations.get(template.getAnimation()).uid)
 			.infinite()
 			.offset(0, -15)
 			.onHit(this::onHit)
@@ -51,18 +50,18 @@ public class RangedWeapon implements Weapon {
 			.speed(0.25f)
 			.animationSpeed(0.07f)
 			.scale(0.6f);
-		this.sound = template.getSound();
-		this.punchAnimation = new SimpleAnimationRunner(template.getPunchAnimation());
-		this.punchSound = template.getPunchSound();
-		this.missAnimation = new SimpleAnimationRunner(template.getMissAnimation())
+		this.sound = A.sounds.get(template.getSound()).uid;
+		this.punchAnimation = new SimpleAnimationRunner(A.animations.get(template.getPunchAnimation()).uid);
+		this.punchSound = A.sounds.get(template.getPunchSound()).uid;
+		this.missAnimation = new SimpleAnimationRunner(A.animations.get(template.getMissAnimation()).uid)
 			.scale(0.4f);
-		this.missSound = template.getMissSound();
+		this.missSound = A.sounds.get(template.getMissSound()).uid;
 	}
 
 	private void onHit(Movable attacker, Entity target) {
-		if(target.isBlocking() && target instanceof Character) {
-			var namedAttacker = (Character) attacker;
-			var character = (Character) target;
+		if(target.isBlocking() && target instanceof Creature) {
+			var namedAttacker = (Creature) attacker;
+			var character = (Creature) target;
 			var damage = dmgRoller.roll();
 			character.hit(namedAttacker, damage);
 			punchAnimation.run(context, character.getLayer(), character);
@@ -72,12 +71,12 @@ public class RangedWeapon implements Weapon {
 	}
 
 	private void onMiss(Movable attacker, Animation animation) {
-		missAnimation.run(context, ((Character) attacker).getLayer(), animation.getPosition());
+		missAnimation.run(context, ((Creature) attacker).getLayer(), animation.getPosition());
 		context.playSound(missSound);
 	}
 
 	@Override
-	public boolean attack(Character attacker) {
+	public boolean attack(Creature attacker) {
 		var direction = attacker.getFaceDirection();
 		context.playSound(sound);
 		animation

@@ -7,21 +7,21 @@ import com.bartlomiejpluta.base.api.move.Direction;
 import com.bartlomiejpluta.base.lib.ai.*;
 
 import com.bartlomiejpluta.demo.entity.Enemy;
-import com.bartlomiejpluta.demo.entity.Character;
+import com.bartlomiejpluta.demo.entity.Creature;
 
 public class AnimalAI implements AI {
 	private final Enemy animal;
-	private final Character character;
+	private final Creature creature;
 	private final int range;
 	private final AI idleAI;
 	private final AI runawayAI;
 
-	public AnimalAI(Enemy animal, Character character, int range) {
+	public AnimalAI(Enemy animal, Creature creature, int range) {
 		this.animal = animal;
-		this.character = character;
+		this.creature = creature;
 		this.range = range;
 		this.idleAI = new RandomMovementAI<>(animal, 4);
-		this.runawayAI = new RunawayAI<>(animal, character);
+		this.runawayAI = new RunawayAI<>(animal, creature);
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class AnimalAI implements AI {
 			return;
 		}
 
-		var distance = animal.manhattanDistance(character);
+		var distance = animal.manhattanDistance(creature);
 
 		if(animal.getHp() < animal.getMaxHp() && distance < range) {
 			runawayAI.nextActivity(layer, dt);

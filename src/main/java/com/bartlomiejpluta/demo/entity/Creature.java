@@ -4,13 +4,15 @@ import lombok.*;
 import org.slf4j.*;
 import org.joml.Vector2i;
 import com.bartlomiejpluta.base.api.context.*;
+import com.bartlomiejpluta.base.api.character.Character;
 import com.bartlomiejpluta.base.api.entity.Entity;
+
 import com.bartlomiejpluta.base.lib.animation.AnimationRunner;
 
 import com.bartlomiejpluta.demo.world.weapon.Weapon;
 
-public abstract class Character extends NamedEntity {
-	private static final Logger log = LoggerFactory.getLogger(Character.class);
+public abstract class Creature extends NamedCharacter {
+	private static final Logger log = LoggerFactory.getLogger(Creature.class);
 
 	protected int attackCooldown = 0;
 
@@ -31,9 +33,9 @@ public abstract class Character extends NamedEntity {
 	private Weapon weapon;
 
 	@Getter
-	private NamedEntity lastAttacker;
+	private NamedCharacter lastAttacker;
 
-	public Character(@NonNull Entity entity) {
+	public Creature(@NonNull Character entity) {
 		super(entity);
 	}
 
@@ -49,7 +51,7 @@ public abstract class Character extends NamedEntity {
 		}
 	}
 
-	public void hit(NamedEntity source, int dmg) {
+	public void hit(NamedCharacter source, int dmg) {
 		this.lastAttacker = source;
 
 		if(immortal) {

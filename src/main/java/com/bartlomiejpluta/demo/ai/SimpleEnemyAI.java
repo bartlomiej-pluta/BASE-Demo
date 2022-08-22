@@ -7,37 +7,37 @@ import com.bartlomiejpluta.base.api.ai.*;
 import com.bartlomiejpluta.base.lib.ai.*;
 
 import com.bartlomiejpluta.demo.entity.Enemy;
-import com.bartlomiejpluta.demo.entity.Character;
+import com.bartlomiejpluta.demo.entity.Creature;
 
-public class SimpleEnemyAI extends FollowEntityAI<Enemy, Character> {
+public class SimpleEnemyAI extends FollowObjectAI<Enemy, Creature> {
 	private static final int ASTAR_MAX_NODES = 100;
 	private static final int IDLE_MOVEMENT_INTERVAL = 4;
 	private final AI idle;
 	private final int range;
 
-	public SimpleEnemyAI(Enemy enemy, Character target, int range) {
+	public SimpleEnemyAI(Enemy enemy, Creature target, int range) {
 		super(new AstarPathFinder(ASTAR_MAX_NODES), enemy, target);
 		this.range = range;
 		this.idle = new RandomMovementAI<>(enemy, IDLE_MOVEMENT_INTERVAL);
 	}
 
 	@Override
-	protected boolean sees(Enemy enemy, Character target, ObjectLayer layer, int distance) {
+	protected boolean sees(Enemy enemy, Creature target, ObjectLayer layer, int distance) {
 		return distance < range;
 	}
 
 	@Override
-	protected void interact(Enemy enemy, Character target, ObjectLayer layer, float dt) {
+	protected void interact(Enemy enemy, Creature target, ObjectLayer layer, float dt) {
 		enemy.attack();
 	}
 
 	@Override
-	protected void follow(Enemy enemy, Character target, ObjectLayer layer, float dt) {
+	protected void follow(Enemy enemy, Creature target, ObjectLayer layer, float dt) {
 		// noop
 	}
 
 	@Override
-	protected void idle(Enemy enemy, Character target, ObjectLayer layer, float dt) {
+	protected void idle(Enemy enemy, Creature target, ObjectLayer layer, float dt) {
 		idle.nextActivity(layer, dt);
 	}
 }

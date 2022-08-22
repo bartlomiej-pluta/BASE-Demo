@@ -70,11 +70,11 @@ public class DemoRunner implements GameRunner {
 	}
 
    private void initPlayer() {
-		this.player = new Player(context.createEntity(A.entsets.luna.uid));
+		this.player = new Player(context.createCharacter(A.charsets.luna.uid));
    }
 
    private void resetPlayer() {
-		this.player.changeEntitySet(A.entsets.luna.uid);
+		this.player.changeCharacterSet(A.charsets.luna.uid);
 		this.player.setScale(1.0f);
 		this.player.setSpeed(0.07f);
 		this.player.setAnimationSpeed(0.005f);	

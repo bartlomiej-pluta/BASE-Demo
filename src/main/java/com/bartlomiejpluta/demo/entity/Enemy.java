@@ -4,6 +4,7 @@ import lombok.*;
 
 import com.bartlomiejpluta.base.api.context.*;
 import com.bartlomiejpluta.base.api.entity.Entity;
+import com.bartlomiejpluta.base.api.character.Character;
 import com.bartlomiejpluta.base.api.ai.AI;
 import com.bartlomiejpluta.base.api.ai.NPC;
 import com.bartlomiejpluta.base.api.move.MoveEvent;
@@ -19,7 +20,7 @@ import com.bartlomiejpluta.demo.ai.*;
 import com.bartlomiejpluta.demo.ai.ArcherAI;
 
 
-public class Enemy extends Character implements NPC {
+public class Enemy extends Creature implements NPC {
 	private final DB.model.EnemyModel template;
 	private AI ai = NoopAI.INSTANCE;
 	private final AnimationRunner dieAnimation;
@@ -38,7 +39,7 @@ public class Enemy extends Character implements NPC {
 	}
 
 	public Enemy(@NonNull DB.model.EnemyModel template) {
-		super(ContextHolder.INSTANCE.getContext().createEntity(template.getEntset()));
+		super(ContextHolder.INSTANCE.getContext().createCharacter(A.charsets.get(template.getCharset()).uid));
 		this.template = template;
 		name = template.getName();
 		maxHp = DiceRoller.of(template.getHp()).roll();
@@ -58,7 +59,7 @@ public class Enemy extends Character implements NPC {
 			this.rangedWeapon = new RangedWeapon(rangedWeaponTemplate);
 		}
 
-		this.dieAnimation = new SimpleAnimationRunner(template.getDieAnimation());
+		this.dieAnimation = new SimpleAnimationRunner(A.animations.get(template.getDieAnimation()).uid);
 	}
 
 	@Override
@@ -69,7 +70,7 @@ public class Enemy extends Character implements NPC {
 	@Override
 	public void die() {
 		super.die();
-		changeEntitySet(template.getDeadEntset());
+		changeCharacterSet(A.charsets.get(template.getDeadCharset()).uid);
 		setScale(0.5f);
 		setBlocking(false);
 		setZIndex(-1);
@@ -77,11 +78,11 @@ public class Enemy extends Character implements NPC {
 		ai = NoopAI.INSTANCE;
 
 		dieAnimation.run(context, getLayer(), this);
-		context.playSound(template.getDieSound());
+		context.playSound(A.sounds.get(template.getDieSound()).uid);
 		context.fireEvent(new EnemyDiedEvent(this));
 	}
 
-	public Enemy followAndAttack(Character target, int range) {
+	public Enemy followAndAttack(Creature target, int range) {
 		var ai = new SimpleEnemyAI(this, target, range);
 
 		addEventListener(MoveEvent.TYPE, ai::recomputePath);
@@ -92,19 +93,19 @@ public class Enemy extends Character implements NPC {
 		return this;
 	}
 
-	public Enemy campAndHunt(Character target, int range) {
+	public Enemy campAndHunt(Creature target, int range) {
 		this.ai = new SimpleSniperAI(this, target, range);
 
 		return this;
 	}
 
-	public Enemy asAnimal(Character source, int range) {
+	public Enemy asAnimal(Creature source, int range) {
 		this.ai = new AnimalAI(this, source, range);
 
 		return this;
 	}
 
-	public Enemy archer(Character target, int minRange, int maxRange, int range) {
+	public Enemy archer(Creature target, int minRange, int maxRange, int range) {
 		var ai = new ArcherAI(this, target, minRange, maxRange, range);
 
 		addEventListener(MoveEvent.TYPE, ai::recomputePath);

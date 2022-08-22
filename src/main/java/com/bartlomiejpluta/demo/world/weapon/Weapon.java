@@ -1,9 +1,9 @@
 package com.bartlomiejpluta.demo.world.weapon;
 
-import com.bartlomiejpluta.demo.entity.Character;
+import com.bartlomiejpluta.demo.entity.Creature;
 
 public interface Weapon {
 	String getName();
 	int getCooldown();
-	boolean attack(Character attacker);
+	boolean attack(Creature attacker);
 }

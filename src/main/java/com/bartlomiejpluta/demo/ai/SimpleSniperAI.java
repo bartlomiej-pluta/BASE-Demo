@@ -6,12 +6,12 @@ import com.bartlomiejpluta.base.api.ai.*;
 import com.bartlomiejpluta.base.lib.ai.*;
 
 import com.bartlomiejpluta.demo.entity.Enemy;
-import com.bartlomiejpluta.demo.entity.Character;
+import com.bartlomiejpluta.demo.entity.Creature;
 
 @AllArgsConstructor
 public class SimpleSniperAI implements AI {
 	private final Enemy enemy;
-	private Character target;
+	private Creature target;
 	private int range;
 
 	@Override

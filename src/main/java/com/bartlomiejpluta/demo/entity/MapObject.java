@@ -4,12 +4,9 @@ import lombok.*;
 import com.bartlomiejpluta.base.api.entity.Entity;
 import com.bartlomiejpluta.base.api.context.*;
 import com.bartlomiejpluta.base.api.move.*;
-import com.bartlomiejpluta.base.lib.entity.EntityDelegate;
 import com.bartlomiejpluta.base.util.path.*;
 
-import com.bartlomiejpluta.demo.entity.Character;
-
-public class MapObject extends NamedEntity {
+public class MapObject extends NamedCharacter {
 	private final PathExecutor<MapObject> pathExecutor = new PathExecutor<>(this);
 	private final DB.model.MapObjectModel template;
 	private final Short frame;
@@ -25,11 +22,11 @@ public class MapObject extends NamedEntity {
 	}
 
 	public MapObject(@NonNull DB.model.MapObjectModel template) {
-		super(ContextHolder.INSTANCE.getContext().createEntity(template.getEntset()));
+		super(ContextHolder.INSTANCE.getContext().createCharacter(A.charsets.get(template.getCharset()).uid));
 		this.template = template;
 		this.frame = template.getFrame();
 		this.name = template.getName();
-		this.interactSound = template.getInteractSound();
+		this.interactSound = A.sounds.get(template.getInteractSound()).uid;
 
 		setBlocking(true);
 		disableAnimation();
@@ -40,7 +37,7 @@ public class MapObject extends NamedEntity {
 
 		pathExecutor.setPath(
 			frame != null
-			? new EntityPath<MapObject>()
+			? new CharacterPath<MapObject>()
 				.run(this::startInteraction)
 				.turn(Direction.LEFT, frame)
 				.wait(0.05f)
@@ -55,11 +52,11 @@ public class MapObject extends NamedEntity {
 				.turn(Direction.DOWN, frame)
 				.wait(0.5f)
 				.run(this::finishInteraction)
-			: new EntityPath<MapObject>()
+			: new CharacterPath<MapObject>()
 		);
 	}
 
-	public void interact(Character character) {
+	public void interact(Creature creature) {
 		interacting = true;
 	}
 
