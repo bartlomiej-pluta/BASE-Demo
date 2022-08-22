@@ -13,7 +13,6 @@ import com.bartlomiejpluta.base.lib.animation.*;
 import com.bartlomiejpluta.base.util.random.DiceRoller;
 
 import com.bartlomiejpluta.demo.runner.DemoRunner;
-import com.bartlomiejpluta.base.generated.db.model.EnemyModel;
 import com.bartlomiejpluta.demo.world.weapon.*;
 import com.bartlomiejpluta.demo.event.EnemyDiedEvent;
 import com.bartlomiejpluta.demo.ai.*;
@@ -21,7 +20,7 @@ import com.bartlomiejpluta.demo.ai.ArcherAI;
 
 
 public class Enemy extends Character implements NPC {
-	private final EnemyModel template;
+	private final DB.model.EnemyModel template;
 	private AI ai = NoopAI.INSTANCE;
 	private final AnimationRunner dieAnimation;
 
@@ -34,7 +33,7 @@ public class Enemy extends Character implements NPC {
 	@Getter
 	private final String name;
 
-	public Enemy(@NonNull Context context, @NonNull EnemyModel template) {
+	public Enemy(@NonNull Context context, @NonNull DB.model.EnemyModel template) {
 		super(context, context.createEntity(template.getEntset()));
 		this.template = template;
 		name = template.getName();
@@ -48,11 +47,11 @@ public class Enemy extends Character implements NPC {
 		var rangedWeaponTemplate = template.getRangedWeapon();
 
 		if(meleeWeaponTemplate != null) {
-			this.meleeWeapon = new MeleeWeapon(context, runner.getMeleeWeaponDAO().find(meleeWeaponTemplate));
+			this.meleeWeapon = new MeleeWeapon(context, DB.dao.melee_weapon.find(meleeWeaponTemplate));
 		}
 
 		if(rangedWeaponTemplate != null) {
-			this.rangedWeapon = new RangedWeapon(context, runner.getRangedWeaponDAO().find(rangedWeaponTemplate));
+			this.rangedWeapon = new RangedWeapon(context, DB.dao.ranged_weapon.find(rangedWeaponTemplate));
 		}
 
 		this.dieAnimation = new SimpleAnimationRunner(template.getDieAnimation());

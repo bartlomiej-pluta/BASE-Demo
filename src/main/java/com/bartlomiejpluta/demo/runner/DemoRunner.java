@@ -13,13 +13,12 @@ import com.bartlomiejpluta.base.api.gui.GUI;
 
 import com.bartlomiejpluta.base.util.profiler.FPSProfiler;
 
-import com.bartlomiejpluta.base.generated.db.dao.*;
-
 import com.bartlomiejpluta.demo.map.ForrestTempleHandler;
 import com.bartlomiejpluta.demo.entity.Player;
 import com.bartlomiejpluta.demo.menu.MenuManager;
 
 import com.bartlomiejpluta.demo.world.weapon.*;
+
 
 public class DemoRunner implements GameRunner {
    private static final Logger log = LoggerFactory.getLogger(DemoRunner.class);
@@ -27,18 +26,6 @@ public class DemoRunner implements GameRunner {
    private Context context;
    private MenuManager menu;
    private GUI hud;
-
-	@Getter
-   private MeleeWeaponDAO meleeWeaponDAO;
-
-	@Getter
-	private RangedWeaponDAO rangedWeaponDAO;
-
-	@Getter
-	private EnemyDAO enemyDAO;
-
-	@Getter
-	private MapObjectDAO mapObjectDAO;
 
 	@Getter
 	private Player player;
@@ -53,7 +40,6 @@ public class DemoRunner implements GameRunner {
 		configureScreen();
 		configureCamera();
 		initPlayer();
-		initDAOs();
 		initHUD();
 		initMenu();
 
@@ -72,13 +58,6 @@ public class DemoRunner implements GameRunner {
    	context.getCamera().setScale(2f);
    }
 
-   private void initDAOs() {
-		meleeWeaponDAO = new MeleeWeaponDAO(context);
-		enemyDAO = new EnemyDAO(context);
-		rangedWeaponDAO = new RangedWeaponDAO(context);
-		mapObjectDAO = new MapObjectDAO(context);
-   }
-
    private void initMenu() {
 		this.menu = new MenuManager(this, context);
    }
@@ -86,29 +65,29 @@ public class DemoRunner implements GameRunner {
 	private void initHUD() {
 		hud = context.newGUI();
 		hud.hide();
-		var hudComponent = hud.inflateComponent("00bd0625-b3b8-4abf-97b7-91f42bce28ec");
+		var hudComponent = hud.inflateComponent(A.widgets.hud.uid);
 		hud.setRoot(hudComponent);
 	}
 
    private void initPlayer() {
-		this.player = new Player(context, context.createEntity("815a5c5c-4979-42f5-a42a-ccbbff9a97e5"));
+		this.player = new Player(context, context.createEntity(A.entsets.luna.uid));
    }
 
    private void resetPlayer() {
-   	this.player.changeEntitySet("815a5c5c-4979-42f5-a42a-ccbbff9a97e5");
+		this.player.changeEntitySet(A.entsets.luna.uid);
 		this.player.setScale(1.0f);
 		this.player.setSpeed(0.07f);
 		this.player.setAnimationSpeed(0.005f);	
 		this.player.setBlocking(true);	
 		this.player.setCoordinates(0, 11);
-		this.player.setWeapon(new RangedWeapon(context, rangedWeaponDAO.find("wooden_bow")));
+		this.player.setWeapon(new RangedWeapon(context, DB.dao.ranged_weapon.find("wooden_bow")));
    }
 
    public void newGame() {
 		menu.closeAll();
 		menu.enableGameMenu();
 		resetPlayer();
-		context.openMap(ForrestTempleHandler.UID);
+		context.openMap(A.maps.forrest_temple.uid);
 		context.getMap().getObjectLayer(ForrestTempleHandler.MAIN_LAYER).addEntity(this.player);
 		context.resume();
 		hud.show();

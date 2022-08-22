@@ -10,7 +10,6 @@ import com.bartlomiejpluta.base.api.move.*;
 import com.bartlomiejpluta.base.lib.animation.*;
 import com.bartlomiejpluta.base.util.random.DiceRoller;
 
-import com.bartlomiejpluta.base.generated.db.model.RangedWeaponModel;
 import com.bartlomiejpluta.demo.entity.Character;
 import com.bartlomiejpluta.demo.entity.NamedEntity;
 
@@ -34,7 +33,7 @@ public class RangedWeapon implements Weapon {
 	@Getter
 	private int cooldown;
 
-	public RangedWeapon(@NonNull Context context, @NonNull RangedWeaponModel template) {
+	public RangedWeapon(@NonNull Context context, @NonNull DB.model.RangedWeaponModel template) {
 		this.context = context;
 		this.name = template.getName();
 		this.dmgRoller = DiceRoller.of(template.getDamage());

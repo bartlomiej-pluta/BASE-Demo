@@ -8,7 +8,6 @@ import com.bartlomiejpluta.base.api.context.Context;
 import com.bartlomiejpluta.base.lib.animation.*;
 import com.bartlomiejpluta.base.util.random.DiceRoller;
 
-import com.bartlomiejpluta.base.generated.db.model.MeleeWeaponModel;
 import com.bartlomiejpluta.demo.entity.Character;
 
 import com.bartlomiejpluta.demo.event.HitEvent;
@@ -26,7 +25,7 @@ public class MeleeWeapon implements Weapon {
 	@Getter
 	private int cooldown;
 
-	public MeleeWeapon(@NonNull Context context, @NonNull MeleeWeaponModel template) {
+	public MeleeWeapon(@NonNull Context context, @NonNull DB.model.MeleeWeaponModel template) {
 		this.context = context;
 		this.name = template.getName();
 		this.roller = DiceRoller.of(template.getDamage());

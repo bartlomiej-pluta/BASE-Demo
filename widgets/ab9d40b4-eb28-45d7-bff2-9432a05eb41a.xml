@@ -28,7 +28,7 @@
 
 				<demo:Button
 					ref="new_game"
-					font="&quot;2261c04f-b02e-4486-b388-8a0fa41622e9&quot;"
+					font="A.fonts.roboto_regular.uid"
 					widthMode="SizeMode.RELATIVE"
 					width="1f"
 					red="1f"
@@ -38,7 +38,7 @@
 
 				<demo:Button
 					ref="exit"
-					font="&quot;2261c04f-b02e-4486-b388-8a0fa41622e9&quot;"
+					font="A.fonts.roboto_regular.uid"
 					widthMode="SizeMode.RELATIVE"
 					width="1f"
 					red="1f"

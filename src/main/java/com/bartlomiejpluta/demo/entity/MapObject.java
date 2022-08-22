@@ -7,19 +7,17 @@ import com.bartlomiejpluta.base.api.move.*;
 import com.bartlomiejpluta.base.lib.entity.EntityDelegate;
 import com.bartlomiejpluta.base.util.path.*;
 
-import com.bartlomiejpluta.base.generated.db.model.MapObjectModel;
-
 import com.bartlomiejpluta.demo.entity.Character;
 
 public class MapObject extends EntityDelegate {
 	private final PathExecutor<MapObject> pathExecutor = new PathExecutor<>(this);
 	private final Context context;
-	private final MapObjectModel template;
+	private final DB.model.MapObjectModel template;
 	private final Short frame;
 	private final String interactSound;
 	private boolean interacting = false;
 
-	public MapObject(@NonNull Context context, @NonNull MapObjectModel template) {
+	public MapObject(@NonNull Context context, @NonNull DB.model.MapObjectModel template) {
 		super(context.createEntity(template.getEntset()));
 		this.context = context;
 		this.template = template;

@@ -32,11 +32,11 @@ public class MenuManager {
 
 		this.gui.setRoot(this.manager);
 
-		this.startMenu = (StartMenuWindow) gui.inflateWindow("ab9d40b4-eb28-45d7-bff2-9432a05eb41a");
+		this.startMenu = (StartMenuWindow) gui.inflateWindow(A.widgets.start_menu.uid);
 		this.startMenu.getNewGameBtn().setAction(runner::newGame);
 		this.startMenu.getExitBtn().setAction(runner::exit);
 
-		this.gameMenu = (GameMenuWindow) gui.inflateWindow("56ca6b39-f949-4212-9c23-312db25887e0");
+		this.gameMenu = (GameMenuWindow) gui.inflateWindow(A.widgets.game_menu.uid);
 		this.gameMenu.getResumeGameBtn().setAction(this::resumeGame);
 		this.gameMenu.getStartMenuBtn().setAction(runner::returnToStartMenu);
 		this.gameMenu.getExitBtn().setAction(runner::exit);
