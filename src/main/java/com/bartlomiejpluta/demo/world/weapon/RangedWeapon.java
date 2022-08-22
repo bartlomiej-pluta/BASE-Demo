@@ -3,7 +3,7 @@ package com.bartlomiejpluta.demo.world.weapon;
 import java.util.Random;
 
 import lombok.*;
-import com.bartlomiejpluta.base.api.context.Context;
+import com.bartlomiejpluta.base.api.context.*;
 import com.bartlomiejpluta.base.api.entity.Entity;
 import com.bartlomiejpluta.base.api.animation.Animation;
 import com.bartlomiejpluta.base.api.move.*;
@@ -33,8 +33,12 @@ public class RangedWeapon implements Weapon {
 	@Getter
 	private int cooldown;
 
-	public RangedWeapon(@NonNull Context context, @NonNull DB.model.RangedWeaponModel template) {
-		this.context = context;
+	public RangedWeapon(@NonNull String id) {
+		this(DB.dao.ranged_weapon.find(id));
+	}
+
+	public RangedWeapon(@NonNull DB.model.RangedWeaponModel template) {
+		this.context = ContextHolder.INSTANCE.getContext();
 		this.name = template.getName();
 		this.dmgRoller = DiceRoller.of(template.getDamage());
 		this.rangeRoller = DiceRoller.of(template.getRange());

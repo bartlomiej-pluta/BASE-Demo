@@ -4,7 +4,7 @@ import java.util.Random;
 
 import lombok.*;
 import org.joml.Vector2i;
-import com.bartlomiejpluta.base.api.context.Context;
+import com.bartlomiejpluta.base.api.context.*;
 import com.bartlomiejpluta.base.lib.animation.*;
 import com.bartlomiejpluta.base.util.random.DiceRoller;
 
@@ -25,8 +25,12 @@ public class MeleeWeapon implements Weapon {
 	@Getter
 	private int cooldown;
 
-	public MeleeWeapon(@NonNull Context context, @NonNull DB.model.MeleeWeaponModel template) {
-		this.context = context;
+	public MeleeWeapon(@NonNull String id) {
+		this(DB.dao.melee_weapon.find(id));
+	}
+
+	public MeleeWeapon(@NonNull DB.model.MeleeWeaponModel template) {
+		this.context = ContextHolder.INSTANCE.getContext();
 		this.name = template.getName();
 		this.roller = DiceRoller.of(template.getDamage());
 		this.cooldown = template.getCooldown();

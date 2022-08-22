@@ -8,8 +8,8 @@ import com.bartlomiejpluta.demo.entity.MapObject;
 
 public class Player extends Character {
 
-	public Player(@NonNull Context context, @NonNull Entity entity) {
-		super(context, entity);
+	public Player(@NonNull Entity entity) {
+		super(entity);
 		this.hp = 500;
 		this.maxHp = 500;
 	}

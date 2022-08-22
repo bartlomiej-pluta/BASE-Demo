@@ -2,7 +2,7 @@ package com.bartlomiejpluta.demo.entity;
 
 import lombok.*;
 
-import com.bartlomiejpluta.base.api.context.Context;
+import com.bartlomiejpluta.base.api.context.*;
 import com.bartlomiejpluta.base.api.entity.Entity;
 import com.bartlomiejpluta.base.api.ai.AI;
 import com.bartlomiejpluta.base.api.ai.NPC;
@@ -33,8 +33,12 @@ public class Enemy extends Character implements NPC {
 	@Getter
 	private final String name;
 
-	public Enemy(@NonNull Context context, @NonNull DB.model.EnemyModel template) {
-		super(context, context.createEntity(template.getEntset()));
+	public Enemy(@NonNull String id) {
+		this(DB.dao.enemy.find(id));
+	}
+
+	public Enemy(@NonNull DB.model.EnemyModel template) {
+		super(ContextHolder.INSTANCE.getContext().createEntity(template.getEntset()));
 		this.template = template;
 		name = template.getName();
 		maxHp = DiceRoller.of(template.getHp()).roll();
@@ -47,11 +51,11 @@ public class Enemy extends Character implements NPC {
 		var rangedWeaponTemplate = template.getRangedWeapon();
 
 		if(meleeWeaponTemplate != null) {
-			this.meleeWeapon = new MeleeWeapon(context, DB.dao.melee_weapon.find(meleeWeaponTemplate));
+			this.meleeWeapon = new MeleeWeapon(meleeWeaponTemplate);
 		}
 
 		if(rangedWeaponTemplate != null) {
-			this.rangedWeapon = new RangedWeapon(context, DB.dao.ranged_weapon.find(rangedWeaponTemplate));
+			this.rangedWeapon = new RangedWeapon(rangedWeaponTemplate);
 		}
 
 		this.dieAnimation = new SimpleAnimationRunner(template.getDieAnimation());

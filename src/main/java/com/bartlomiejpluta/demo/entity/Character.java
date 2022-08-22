@@ -3,17 +3,14 @@ package com.bartlomiejpluta.demo.entity;
 import lombok.*;
 import org.slf4j.*;
 import org.joml.Vector2i;
-import com.bartlomiejpluta.base.api.context.Context;
+import com.bartlomiejpluta.base.api.context.*;
 import com.bartlomiejpluta.base.api.entity.Entity;
 import com.bartlomiejpluta.base.lib.animation.AnimationRunner;
 
-import com.bartlomiejpluta.demo.runner.DemoRunner;
 import com.bartlomiejpluta.demo.world.weapon.Weapon;
 
 public abstract class Character extends NamedEntity {
 	private static final Logger log = LoggerFactory.getLogger(Character.class);
-	protected final Context context;
-	protected final DemoRunner runner;
 
 	protected int attackCooldown = 0;
 
@@ -36,10 +33,8 @@ public abstract class Character extends NamedEntity {
 	@Getter
 	private NamedEntity lastAttacker;
 
-	public Character(@NonNull Context context, @NonNull Entity entity) {
+	public Character(@NonNull Entity entity) {
 		super(entity);
-		this.context = context;
-		this.runner = (DemoRunner) context.getGameRunner();
 	}
 
 	public void attack() {

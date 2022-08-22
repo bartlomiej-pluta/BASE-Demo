@@ -70,7 +70,7 @@ public class DemoRunner implements GameRunner {
 	}
 
    private void initPlayer() {
-		this.player = new Player(context, context.createEntity(A.entsets.luna.uid));
+		this.player = new Player(context.createEntity(A.entsets.luna.uid));
    }
 
    private void resetPlayer() {
@@ -80,7 +80,7 @@ public class DemoRunner implements GameRunner {
 		this.player.setAnimationSpeed(0.005f);	
 		this.player.setBlocking(true);	
 		this.player.setCoordinates(0, 11);
-		this.player.setWeapon(new RangedWeapon(context, DB.dao.ranged_weapon.find("wooden_bow")));
+		this.player.setWeapon(new RangedWeapon("wooden_bow"));
    }
 
    public void newGame() {

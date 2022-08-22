@@ -94,18 +94,18 @@ public abstract class BaseMapHandler implements MapHandler {
 	}
 
 	public Enemy enemy(@NonNull String id) {
-		return new Enemy(context, DB.dao.enemy.find(id));
+		return new Enemy(id);
 	}
 
 	public Enemy enemy(int x, int y, @NonNull String id) {
-		var enemy = new Enemy(context, DB.dao.enemy.find(id));
+		var enemy = new Enemy(id);
 		enemy.setCoordinates(x, y);
 		mainLayer.addEntity(enemy);
 		return enemy;
 	}
 
 	public MapObject object(int x, int y, @NonNull String id) {
-		var object = new MapObject(context, DB.dao.map_object.find(id));
+		var object = new MapObject(id);
 		object.setCoordinates(x, y);
 		mainLayer.addEntity(object);
 		return object;

@@ -2,26 +2,33 @@ package com.bartlomiejpluta.demo.entity;
 
 import lombok.*;
 import com.bartlomiejpluta.base.api.entity.Entity;
-import com.bartlomiejpluta.base.api.context.Context;
+import com.bartlomiejpluta.base.api.context.*;
 import com.bartlomiejpluta.base.api.move.*;
 import com.bartlomiejpluta.base.lib.entity.EntityDelegate;
 import com.bartlomiejpluta.base.util.path.*;
 
 import com.bartlomiejpluta.demo.entity.Character;
 
-public class MapObject extends EntityDelegate {
+public class MapObject extends NamedEntity {
 	private final PathExecutor<MapObject> pathExecutor = new PathExecutor<>(this);
-	private final Context context;
 	private final DB.model.MapObjectModel template;
 	private final Short frame;
 	private final String interactSound;
+	
+	@Getter
+	private final String name;
+	
 	private boolean interacting = false;
 
-	public MapObject(@NonNull Context context, @NonNull DB.model.MapObjectModel template) {
-		super(context.createEntity(template.getEntset()));
-		this.context = context;
+	public MapObject(@NonNull String id) {
+		this(DB.dao.map_object.find(id));
+	}
+
+	public MapObject(@NonNull DB.model.MapObjectModel template) {
+		super(ContextHolder.INSTANCE.getContext().createEntity(template.getEntset()));
 		this.template = template;
 		this.frame = template.getFrame();
+		this.name = template.getName();
 		this.interactSound = template.getInteractSound();
 
 		setBlocking(true);
