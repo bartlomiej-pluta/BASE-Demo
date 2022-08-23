@@ -47,8 +47,8 @@ public class RangedWeapon implements Weapon {
 			.offset(0, -15)
 			.onHit(this::onHit)
 			.onMiss(this::onMiss)
-			.speed(0.25f)
-			.animationSpeed(0.07f)
+			.speed(7f)
+			.animationSpeed(4f)
 			.scale(0.6f);
 		this.sound = A.sounds.get(template.getSound()).uid;
 		this.punchAnimation = new SimpleAnimationRunner(A.animations.get(template.getPunchAnimation()).uid);

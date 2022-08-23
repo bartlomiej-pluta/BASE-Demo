@@ -75,11 +75,11 @@ public class DemoRunner implements GameRunner {
 
    private void resetPlayer() {
 		this.player.changeCharacterSet(A.charsets.luna.uid);
-		this.player.setScale(1.0f);
-		this.player.setSpeed(0.07f);
-		this.player.setAnimationSpeed(0.005f);	
+		this.player.setScale(1f);
+		this.player.setSpeed(4f);
+		this.player.setAnimationSpeed(2f);
 		this.player.setBlocking(true);	
-		this.player.setCoordinates(0, 11);
+		this.player.setCoordinates(14, 11);
 		this.player.setWeapon(new RangedWeapon("wooden_bow"));
    }
 

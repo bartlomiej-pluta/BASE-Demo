@@ -76,7 +76,9 @@ public abstract class Creature extends NamedCharacter {
 	}
 
 	protected void die() {
-
+		if(isMoving()) {
+			abortMove();
+		}
 	}
 
 	public abstract String getName();

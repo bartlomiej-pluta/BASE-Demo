@@ -10,6 +10,7 @@ import com.bartlomiejpluta.base.api.move.Direction;
 import com.bartlomiejpluta.base.api.screen.Screen;
 import com.bartlomiejpluta.base.api.camera.Camera;
 import com.bartlomiejpluta.base.api.input.*;
+import com.bartlomiejpluta.base.api.icon.Icon;
 
 import com.bartlomiejpluta.base.lib.camera.*;
 

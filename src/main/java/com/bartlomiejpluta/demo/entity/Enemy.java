@@ -7,11 +7,12 @@ import com.bartlomiejpluta.base.api.entity.Entity;
 import com.bartlomiejpluta.base.api.character.Character;
 import com.bartlomiejpluta.base.api.ai.AI;
 import com.bartlomiejpluta.base.api.ai.NPC;
-import com.bartlomiejpluta.base.api.move.MoveEvent;
+import com.bartlomiejpluta.base.api.move.*;
 
 import com.bartlomiejpluta.base.lib.ai.*;
 import com.bartlomiejpluta.base.lib.animation.*;
 import com.bartlomiejpluta.base.util.random.DiceRoller;
+import com.bartlomiejpluta.base.util.path.*;
 
 import com.bartlomiejpluta.demo.runner.DemoRunner;
 import com.bartlomiejpluta.demo.world.weapon.*;
@@ -44,8 +45,9 @@ public class Enemy extends Creature implements NPC {
 		name = template.getName();
 		maxHp = DiceRoller.of(template.getHp()).roll();
 		hp = maxHp;
-		setSpeed(template.getSpeed());
-		setAnimationSpeed(template.getAnimationSpeed());
+		var speed = DiceRoller.of(template.getSpeed()).roll()/10f;
+		setSpeed(speed);
+		setAnimationSpeed(speed/2.0f);
 		setBlocking(template.isBlocking());
 		var runner = (DemoRunner) context.getGameRunner();
 		var meleeWeaponTemplate = template.getMeleeWeapon();
