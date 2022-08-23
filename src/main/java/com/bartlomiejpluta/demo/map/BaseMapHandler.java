@@ -117,4 +117,12 @@ public abstract class BaseMapHandler implements MapHandler {
 		this.spawners.add(spawner);
 		return spawner;
 	}
+
+	public void icon(int x, int y, String iconSetUid, int row, int column) {
+		var icon = context.createIcon(iconSetUid, row, column);
+		icon.setScale(1f);
+		icon.setZIndex(-1);
+		icon.setCoordinates(x, y);
+		mainLayer.addEntity(icon);
+	}
 }
