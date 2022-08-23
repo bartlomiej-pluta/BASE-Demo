@@ -14,7 +14,7 @@ import com.bartlomiejpluta.base.api.icon.Icon;
 
 import com.bartlomiejpluta.base.lib.camera.*;
 
-import com.bartlomiejpluta.base.util.world.CharacterSpawner;
+import com.bartlomiejpluta.base.util.world.*;
 
 import com.bartlomiejpluta.demo.runner.DemoRunner;
 import com.bartlomiejpluta.demo.entity.*;
@@ -34,7 +34,6 @@ public abstract class BaseMapHandler implements MapHandler {
 	protected Player player;
 	protected ObjectLayer mainLayer;
 	protected CameraController cameraController;
-	protected final List<CharacterSpawner> spawners = new LinkedList<>();
 
 	@Override
 	public void onCreate(Context context, GameMap map) {
@@ -75,13 +74,13 @@ public abstract class BaseMapHandler implements MapHandler {
 			}		
 		} else {
 			if(input.isKeyPressed(Key.KEY_DOWN)) {
-				mainLayer.pushMovement(player.prepareMovement(Direction.DOWN));
+				player.getLayer().pushMovement(player.prepareMovement(Direction.DOWN));
 			} else if(input.isKeyPressed(Key.KEY_UP)) {
-				mainLayer.pushMovement(player.prepareMovement(Direction.UP));
+				player.getLayer().pushMovement(player.prepareMovement(Direction.UP));
 			} else if(input.isKeyPressed(Key.KEY_LEFT)) {
-				mainLayer.pushMovement(player.prepareMovement(Direction.LEFT));
+				player.getLayer().pushMovement(player.prepareMovement(Direction.LEFT));
 			} else if(input.isKeyPressed(Key.KEY_RIGHT)) {
-				mainLayer.pushMovement(player.prepareMovement(Direction.RIGHT));
+				player.getLayer().pushMovement(player.prepareMovement(Direction.RIGHT));
 			}
 		}
 	}
@@ -89,40 +88,47 @@ public abstract class BaseMapHandler implements MapHandler {
 	@Override
 	public void update(Context context, GameMap map, float dt) {
 		cameraController.update();
-		for(var spawner : spawners) {
-			spawner.update(dt);
-		}
 	}
 
 	public Enemy enemy(@NonNull String id) {
 		return new Enemy(id);
 	}
 
-	public Enemy enemy(int x, int y, @NonNull String id) {
+	public Enemy enemy(ObjectLayer layer, int x, int y, @NonNull String id) {
 		var enemy = new Enemy(id);
 		enemy.setCoordinates(x, y);
-		mainLayer.addEntity(enemy);
+		layer.addEntity(enemy);
 		return enemy;
 	}
 
-	public MapObject object(int x, int y, @NonNull String id) {
+	public MapObject object(ObjectLayer layer, int x, int y, @NonNull String id) {
 		var object = new MapObject(id);
 		object.setCoordinates(x, y);
-		mainLayer.addEntity(object);
+		layer.addEntity(object);
 		return object;
 	}
 
-	public CharacterSpawner spawner(int x, int y, ObjectLayer layer) {
-		var spawner = new CharacterSpawner(x, y, context, map, layer).trackEntities(EnemyDiedEvent.TYPE);
-		this.spawners.add(spawner);
+	public CharacterSpawner spawner(ObjectLayer layer, int x, int y) {
+		var spawner = new CharacterSpawner().trackEntities(EnemyDiedEvent.TYPE);
+		spawner.setCoordinates(x, y);
+		layer.addEntity(spawner);
 		return spawner;
 	}
 
-	public void icon(int x, int y, String iconSetUid, int row, int column) {
+	public Icon icon(ObjectLayer layer, int x, int y, String iconSetUid, int row, int column) {
 		var icon = context.createIcon(iconSetUid, row, column);
 		icon.setScale(1f);
 		icon.setZIndex(-1);
 		icon.setCoordinates(x, y);
-		mainLayer.addEntity(icon);
+		layer.addEntity(icon);
+		return icon;
+	}
+	
+	public Warp warp(ObjectLayer layer, int x, int y, String targetMap, String targetLayer, int targetX, int targetY) {
+		var warp = new Warp(A.maps.get(targetMap).uid, A.maps.getLayer(targetMap, targetLayer), targetX, targetY);
+		warp.setEntity(player);
+		warp.setCoordinates(x, y);
+		layer.addEntity(warp);
+		return warp;
 	}
 }

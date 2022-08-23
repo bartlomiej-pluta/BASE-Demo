@@ -50,8 +50,8 @@ public class DemoRunner implements GameRunner {
 
    private void configureScreen() {
 		var resolution = screen.getCurrentResolution();		
-		screen.setSize(800, 600);
-		screen.setPosition((resolution.x() - 800)/2, (resolution.y() - 600)/2);   
+		screen.setSize(1800, 1000);
+		screen.setPosition((resolution.x() - 1800)/2, (resolution.y() - 1000)/2);   
    }
 
    private void configureCamera() {
@@ -79,7 +79,6 @@ public class DemoRunner implements GameRunner {
 		this.player.setSpeed(4f);
 		this.player.setAnimationSpeed(2f);
 		this.player.setBlocking(true);	
-		this.player.setCoordinates(14, 11);
 		this.player.setWeapon(new RangedWeapon("wooden_bow"));
    }
 
@@ -87,8 +86,9 @@ public class DemoRunner implements GameRunner {
 		menu.closeAll();
 		menu.enableGameMenu();
 		resetPlayer();
-		context.openMap(A.maps.forrest_temple.uid);
-		context.getMap().getObjectLayer(ForrestTempleHandler.MAIN_LAYER).addEntity(this.player);
+		context.openMap(A.maps.forrest.uid);
+		context.getMap().getObjectLayer(A.maps.forrest.layers.main).addEntity(this.player);
+		player.setCoordinates(5, 36);		
 		context.resume();
 		hud.show();
    }
