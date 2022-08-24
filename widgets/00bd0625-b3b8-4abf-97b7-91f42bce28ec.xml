@@ -1,55 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <demo:HUD
-	xmlns:base="com.bartlomiejpluta.base.lib.gui"
-	xmlns:demo="com.bartlomiejpluta.demo.gui"
-	widthMode="SizeMode.RELATIVE"
-	heightMode="SizeMode.RELATIVE"
-	width="1f"
-	height="1f">
+        xmlns:base="com.bartlomiejpluta.base.lib.gui"
+        xmlns:demo="com.bartlomiejpluta.demo.gui"
+        widthMode="SizeMode.RELATIVE"
+        heightMode="SizeMode.RELATIVE"
+        width="1f"
+        height="1f">
 
-	<base:BorderLayout-TopLeft>
+    <base:BorderLayout-TopLeft>
+        <demo:Bar
+                ref="hp"
+                strokeColor="0x111111"
+                fillColor="0xFF0000"
+                widthMode="SizeMode.ABSOLUTE"
+                heightMode="SizeMode.ABSOLUTE"
+                width="250f"
+                height="20f"/>
+    </base:BorderLayout-TopLeft>
 
-		<demo:Bar
-			ref="hp"
-			strokeColor="0x111111"
-			fillColor="0xFF0000"
-			widthMode="SizeMode.ABSOLUTE"
-			heightMode="SizeMode.ABSOLUTE"
-			width="250f"
-			height="20f"
-			margin="5f" />
+    <base:BorderLayout-TopRight>
+        <base:IconView ref="weapon" scale="2f"/>
+    </base:BorderLayout-TopRight>
 
-	</base:BorderLayout-TopLeft>
+    <base:BorderLayout-BottomLeft>
+        <base:Label
+                ref="log"
+                font="A.fonts.roboto_regular.uid"
+                widthMode="SizeMode.ABSOLUTE"
+                width="400f"
+                height="25f"
+                alignment="GUI.ALIGN_BOTTOM | GUI.ALIGN_LEFT"
+                color="0xFFFFFF"
+                fontSize="15f"/>
+    </base:BorderLayout-BottomLeft>
 
-	<base:BorderLayout-BottomLeft>
-
-		<base:Label
-			ref="log"
-			font="&quot;2261c04f-b02e-4486-b388-8a0fa41622e9&quot;"
-			widthMode="SizeMode.ABSOLUTE"
-			width="400f"
-			height="25f"
-			margin="10f"
-			alignment="GUI.ALIGN_BOTTOM | GUI.ALIGN_LEFT"
-			color="0xFFFFFF"
-			fontSize="15f"/>
-
-	</base:BorderLayout-BottomLeft>
-
-	<base:BorderLayout-BottomRight>
-
-		<base:Label
-			ref="debug"
-			font="&quot;2261c04f-b02e-4486-b388-8a0fa41622e9&quot;"
-			widthMode="SizeMode.ABSOLUTE"
-			width="200f"
-			height="25f"
-			margin="10f"
-			alignment="GUI.ALIGN_BOTTOM | GUI.ALIGN_RIGHT"
-			color="0xFFFFFF"
-			fontSize="15f"/>
-
-	</base:BorderLayout-BottomRight>
+    <base:BorderLayout-BottomRight>
+        <base:Label
+                ref="debug"
+                font="A.fonts.roboto_regular.uid"
+                widthMode="SizeMode.ABSOLUTE"
+                width="200f"
+                height="25f"
+                alignment="GUI.ALIGN_BOTTOM | GUI.ALIGN_RIGHT"
+                color="0xFFFFFF"
+                fontSize="15f"/>
+    </base:BorderLayout-BottomRight>
 
 </demo:HUD>
