@@ -18,16 +18,22 @@ import lombok.NonNull;
 
 public class RangedWeapon extends IconDelegate implements Weapon {
    private final Context context;
-   private final DiceRoller dmgRoller;
-   private final DiceRoller rangeRoller;
    private final BulletAnimationRunner animation;
    private final String sound;
    private final AnimationRunner punchAnimation;
    private final String punchSound;
    private final AnimationRunner missAnimation;
    private final String missSound;
+
    @Getter
    private final String name;
+
+   @Getter
+   private final DiceRoller dmgRoller;
+
+   @Getter
+   private final DiceRoller rangeRoller;
+
    @Getter
    private final int cooldown;
 

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<demo:DecoratedWindow
+        xmlns:base="com.bartlomiejpluta.base.lib.gui"
+        xmlns:demo="com.bartlomiejpluta.demo.gui"
+        windowPosition="center"
+        padding="20f"
+        width="auto"
+        height="auto">
+    <base:VOptionChoice ref="menu" height="auto" width="auto">
+
+        <demo:Button
+                ref="use"
+                font="A.fonts.roboto_regular.uid"
+                width="relative"
+                red="1f"
+                green="1f"
+                blue="1f"
+                fontSize="17f">Use
+        </demo:Button>
+
+        <demo:Button
+                ref="drop"
+                font="A.fonts.roboto_regular.uid"
+                width="relative"
+                red="1f"
+                green="1f"
+                blue="1f"
+                fontSize="17f">Drop
+        </demo:Button>
+
+        <demo:Button
+                ref="cancel"
+                font="A.fonts.roboto_regular.uid"
+                width="relative"
+                red="1f"
+                green="1f"
+                blue="1f"
+                fontSize="17f">Cancel
+        </demo:Button>
+
+    </base:VOptionChoice>
+</demo:DecoratedWindow>

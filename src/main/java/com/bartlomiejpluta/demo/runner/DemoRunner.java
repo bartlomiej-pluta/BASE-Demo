@@ -74,7 +74,6 @@ public class DemoRunner implements GameRunner {
       this.player.setSpeed(4f);
       this.player.setAnimationSpeed(1f);
       this.player.setBlocking(true);
-      this.player.setWeapon(new RangedWeapon("wooden_bow"));
    }
 
    public void newGame() {

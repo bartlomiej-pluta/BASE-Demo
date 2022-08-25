@@ -20,12 +20,16 @@ public class StartMenuWindow extends DecoratedWindow implements Inflatable {
    @Getter
    private Button exitBtn;
 
+   @Ref("menu")
+   private VOptionChoice menu;
+
    public StartMenuWindow(Context context, GUI gui, Map<String, Component> refs) {
       super(context, gui, refs);
    }
 
    @Override
    public void onInflate() {
-      newGameBtn.focus();
+      menu.select(0);
+      menu.focus();
    }
 }

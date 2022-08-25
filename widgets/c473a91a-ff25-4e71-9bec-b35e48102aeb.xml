@@ -20,24 +20,46 @@
                 fontSize="30f">Equipment
         </base:Label>
 
-        <base:VGridOptionChoice ref="eq" columns="4" width="auto" height="auto">
-            <demo:ItemIconView margin="5f" />
-            <demo:ItemIconView margin="5f" />
-            <demo:ItemIconView margin="5f" />
-            <demo:ItemIconView margin="5f" />
-            <demo:ItemIconView margin="5f" />
-            <demo:ItemIconView margin="5f" />
-            <demo:ItemIconView margin="5f" />
-            <demo:ItemIconView margin="5f" />
-            <demo:ItemIconView margin="5f" />
-            <demo:ItemIconView margin="5f" />
-            <demo:ItemIconView margin="5f" />
-            <demo:ItemIconView margin="5f" />
-            <demo:ItemIconView margin="5f" />
-            <demo:ItemIconView margin="5f" />
-            <demo:ItemIconView margin="5f" />
-            <demo:ItemIconView margin="5f" />
-        </base:VGridOptionChoice>
+        <base:HLayout>
+            <base:VGridOptionChoice ref="eq" columns="4" width="auto" height="auto">
+                <demo:ItemIconView margin="5f"/>
+                <demo:ItemIconView margin="5f"/>
+                <demo:ItemIconView margin="5f"/>
+                <demo:ItemIconView margin="5f"/>
+                <demo:ItemIconView margin="5f"/>
+                <demo:ItemIconView margin="5f"/>
+                <demo:ItemIconView margin="5f"/>
+                <demo:ItemIconView margin="5f"/>
+                <demo:ItemIconView margin="5f"/>
+                <demo:ItemIconView margin="5f"/>
+                <demo:ItemIconView margin="5f"/>
+                <demo:ItemIconView margin="5f"/>
+                <demo:ItemIconView margin="5f"/>
+                <demo:ItemIconView margin="5f"/>
+                <demo:ItemIconView margin="5f"/>
+                <demo:ItemIconView margin="5f"/>
+            </base:VGridOptionChoice>
+
+            <base:VLayout height="relative" padding="20f" width="250f">
+                <base:Label ref="item-name"
+                            font="A.fonts.roboto_regular.uid"
+                            width="relative"
+                            alignment="top|center"
+                            color="0xFFFFFF"
+                            fontSize="20f"
+                            margin="5f"/>
+
+                <base:Label ref="item-details"
+                            font="A.fonts.roboto_regular.uid"
+                            width="relative"
+                            alignment="top|left"
+                            color="0xFFFFFF"
+                            fontSize="15f"
+                            margin="5f"/>
+
+            </base:VLayout>
+
+        </base:HLayout>
     </base:VLayout>
 
 </demo:EquipmentWindow>

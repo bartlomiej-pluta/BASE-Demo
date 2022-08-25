@@ -1,6 +1,7 @@
 package com.bartlomiejpluta.demo.entity;
 
 import com.bartlomiejpluta.base.api.character.Character;
+import com.bartlomiejpluta.demo.world.item.Item;
 import com.bartlomiejpluta.demo.world.weapon.Weapon;
 import lombok.Getter;
 import lombok.NonNull;
@@ -56,6 +57,12 @@ public abstract class Creature extends NamedCharacter {
       }
 
       hp -= dmg;
+   }
+
+   public void useEquipmentItem(Item item) {
+      if (item instanceof Weapon weapon) {
+         setWeapon(weapon);
+      }
    }
 
    @Override
