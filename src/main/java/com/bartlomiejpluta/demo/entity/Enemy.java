@@ -1,131 +1,124 @@
 package com.bartlomiejpluta.demo.entity;
 
-import lombok.*;
-
-import com.bartlomiejpluta.base.api.context.*;
-import com.bartlomiejpluta.base.api.entity.Entity;
-import com.bartlomiejpluta.base.api.character.Character;
 import com.bartlomiejpluta.base.api.ai.AI;
 import com.bartlomiejpluta.base.api.ai.NPC;
-import com.bartlomiejpluta.base.api.move.*;
-
-import com.bartlomiejpluta.base.lib.ai.*;
-import com.bartlomiejpluta.base.lib.animation.*;
+import com.bartlomiejpluta.base.api.context.ContextHolder;
+import com.bartlomiejpluta.base.api.move.MoveEvent;
+import com.bartlomiejpluta.base.lib.ai.NoopAI;
+import com.bartlomiejpluta.base.lib.animation.AnimationRunner;
+import com.bartlomiejpluta.base.lib.animation.SimpleAnimationRunner;
 import com.bartlomiejpluta.base.util.random.DiceRoller;
-import com.bartlomiejpluta.base.util.path.*;
-
-import com.bartlomiejpluta.demo.runner.DemoRunner;
-import com.bartlomiejpluta.demo.world.weapon.*;
-import com.bartlomiejpluta.demo.event.EnemyDiedEvent;
 import com.bartlomiejpluta.demo.ai.*;
-import com.bartlomiejpluta.demo.ai.ArcherAI;
+import com.bartlomiejpluta.demo.event.EnemyDiedEvent;
+import com.bartlomiejpluta.demo.runner.DemoRunner;
+import com.bartlomiejpluta.demo.world.weapon.MeleeWeapon;
+import com.bartlomiejpluta.demo.world.weapon.RangedWeapon;
+import lombok.Getter;
+import lombok.NonNull;
 
 
 public class Enemy extends Creature implements NPC {
-	private final DB.model.EnemyModel template;
-	private AI ai = NoopAI.INSTANCE;
-	private final AnimationRunner dieAnimation;
+   private final DB.model.EnemyModel template;
+   private final AnimationRunner dieAnimation;
+   @Getter
+   private final String name;
+   private AI ai = NoopAI.INSTANCE;
+   @Getter
+   private MeleeWeapon meleeWeapon;
+   @Getter
+   private RangedWeapon rangedWeapon;
 
-	@Getter
-	private MeleeWeapon meleeWeapon;
+   public Enemy(@NonNull String id) {
+      this(DB.dao.enemy.find(id));
+   }
 
-	@Getter
-	private RangedWeapon rangedWeapon;
+   public Enemy(@NonNull DB.model.EnemyModel template) {
+      super(ContextHolder.INSTANCE.getContext().createCharacter(A.charsets.get(template.getCharset()).uid));
+      this.template = template;
+      name = template.getName();
+      maxHp = DiceRoller.of(template.getHp()).roll();
+      hp = maxHp;
+      var speed = DiceRoller.of(template.getSpeed()).roll() / 10f;
+      setSpeed(speed);
+      setAnimationSpeed(speed / 2.0f);
+      setBlocking(template.isBlocking());
+      var runner = (DemoRunner) context.getGameRunner();
+      var meleeWeaponTemplate = template.getMeleeWeapon();
+      var rangedWeaponTemplate = template.getRangedWeapon();
 
-	@Getter
-	private final String name;
+      if (meleeWeaponTemplate != null) {
+         this.meleeWeapon = new MeleeWeapon(meleeWeaponTemplate);
+      }
 
-	public Enemy(@NonNull String id) {
-		this(DB.dao.enemy.find(id));
-	}
+      if (rangedWeaponTemplate != null) {
+         this.rangedWeapon = new RangedWeapon(rangedWeaponTemplate);
+      }
 
-	public Enemy(@NonNull DB.model.EnemyModel template) {
-		super(ContextHolder.INSTANCE.getContext().createCharacter(A.charsets.get(template.getCharset()).uid));
-		this.template = template;
-		name = template.getName();
-		maxHp = DiceRoller.of(template.getHp()).roll();
-		hp = maxHp;
-		var speed = DiceRoller.of(template.getSpeed()).roll()/10f;
-		setSpeed(speed);
-		setAnimationSpeed(speed/2.0f);
-		setBlocking(template.isBlocking());
-		var runner = (DemoRunner) context.getGameRunner();
-		var meleeWeaponTemplate = template.getMeleeWeapon();
-		var rangedWeaponTemplate = template.getRangedWeapon();
+      this.dieAnimation = new SimpleAnimationRunner(A.animations.get(template.getDieAnimation()).uid);
+   }
 
-		if(meleeWeaponTemplate != null) {
-			this.meleeWeapon = new MeleeWeapon(meleeWeaponTemplate);
-		}
+   @Override
+   public AI getStrategy() {
+      return ai;
+   }
 
-		if(rangedWeaponTemplate != null) {
-			this.rangedWeapon = new RangedWeapon(rangedWeaponTemplate);
-		}
+   @Override
+   public void die() {
+      super.die();
+      changeCharacterSet(A.charsets.get(template.getDeadCharset()).uid);
+      setScale(0.5f);
+      setBlocking(false);
+      setZIndex(-1);
 
-		this.dieAnimation = new SimpleAnimationRunner(A.animations.get(template.getDieAnimation()).uid);
-	}
+      ai = NoopAI.INSTANCE;
 
-	@Override
-	public AI getStrategy() {
-		return ai;
-	}
+      dieAnimation.run(context, getLayer(), this);
+      context.playSound(A.sounds.get(template.getDieSound()).uid);
+      context.fireEvent(new EnemyDiedEvent(this));
+   }
 
-	@Override
-	public void die() {
-		super.die();
-		changeCharacterSet(A.charsets.get(template.getDeadCharset()).uid);
-		setScale(0.5f);
-		setBlocking(false);
-		setZIndex(-1);
+   public Enemy followAndAttack(Creature target, int range) {
+      var ai = new SimpleEnemyAI(this, target, range);
 
-		ai = NoopAI.INSTANCE;
+      addEventListener(MoveEvent.TYPE, ai::recomputePath);
+      addEventListener(EnemyDiedEvent.TYPE, e -> ai.recomputePath());
 
-		dieAnimation.run(context, getLayer(), this);
-		context.playSound(A.sounds.get(template.getDieSound()).uid);
-		context.fireEvent(new EnemyDiedEvent(this));
-	}
+      this.ai = ai;
 
-	public Enemy followAndAttack(Creature target, int range) {
-		var ai = new SimpleEnemyAI(this, target, range);
+      return this;
+   }
 
-		addEventListener(MoveEvent.TYPE, ai::recomputePath);
-		addEventListener(EnemyDiedEvent.TYPE, e -> ai.recomputePath());
+   public Enemy campAndHunt(Creature target, int range) {
+      this.ai = new SimpleSniperAI(this, target, range);
 
-		this.ai = ai;
+      return this;
+   }
 
-		return this;
-	}
+   public Enemy asAnimal(Creature source, int range) {
+      this.ai = new AnimalAI(this, source, range);
 
-	public Enemy campAndHunt(Creature target, int range) {
-		this.ai = new SimpleSniperAI(this, target, range);
+      return this;
+   }
 
-		return this;
-	}
+   public Enemy archer(Creature target, int minRange, int maxRange, int range) {
+      var ai = new ArcherAI(this, target, minRange, maxRange, range);
 
-	public Enemy asAnimal(Creature source, int range) {
-		this.ai = new AnimalAI(this, source, range);
+      addEventListener(MoveEvent.TYPE, ai::recomputePath);
+      addEventListener(EnemyDiedEvent.TYPE, e -> ai.recomputePath());
 
-		return this;
-	}
+      this.ai = ai;
 
-	public Enemy archer(Creature target, int minRange, int maxRange, int range) {
-		var ai = new ArcherAI(this, target, minRange, maxRange, range);
+      return this;
+   }
 
-		addEventListener(MoveEvent.TYPE, ai::recomputePath);
-		addEventListener(EnemyDiedEvent.TYPE, e -> ai.recomputePath());
+   public Enemy defaultAI() {
+      var ai = new WeaponBasedAI(this, runner.getPlayer());
 
-		this.ai = ai;
+      addEventListener(MoveEvent.TYPE, ai::recomputePath);
+      addEventListener(EnemyDiedEvent.TYPE, e -> ai.recomputePath());
 
-		return this;
-	}
+      this.ai = ai;
 
-	public Enemy defaultAI() {
-		var ai = new WeaponBasedAI(this, runner.getPlayer());
-
-		addEventListener(MoveEvent.TYPE, ai::recomputePath);
-		addEventListener(EnemyDiedEvent.TYPE, e -> ai.recomputePath());
-
-		this.ai = ai;
-
-		return this;
-	}
+      return this;
+   }
 }

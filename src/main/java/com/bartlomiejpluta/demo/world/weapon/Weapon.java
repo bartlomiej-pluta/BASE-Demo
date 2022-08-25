@@ -4,11 +4,11 @@ import com.bartlomiejpluta.base.api.icon.Icon;
 import com.bartlomiejpluta.demo.entity.Creature;
 
 public interface Weapon {
-    String getName();
+   String getName();
 
-    Icon getIcon();
+   Icon getIcon();
 
-    int getCooldown();
+   int getCooldown();
 
-    boolean attack(Creature attacker);
+   boolean attack(Creature attacker);
 }

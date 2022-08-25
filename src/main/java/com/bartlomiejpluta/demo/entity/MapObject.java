@@ -1,79 +1,80 @@
 package com.bartlomiejpluta.demo.entity;
 
-import lombok.*;
-import com.bartlomiejpluta.base.api.entity.Entity;
-import com.bartlomiejpluta.base.api.context.*;
-import com.bartlomiejpluta.base.api.move.*;
-import com.bartlomiejpluta.base.util.path.*;
+import com.bartlomiejpluta.base.api.context.ContextHolder;
+import com.bartlomiejpluta.base.api.move.Direction;
+import com.bartlomiejpluta.base.util.path.CharacterPath;
+import com.bartlomiejpluta.base.util.path.PathExecutor;
+import lombok.Getter;
+import lombok.NonNull;
 
 public class MapObject extends NamedCharacter {
-	private final PathExecutor<MapObject> pathExecutor = new PathExecutor<>(this);
-	private final DB.model.MapObjectModel template;
-	private final Short frame;
-	private final String interactSound;
-	
-	@Getter
-	private final String name;
-	
-	private boolean interacting = false;
+   private final PathExecutor<MapObject> pathExecutor = new PathExecutor<>(this);
+   private final DB.model.MapObjectModel template;
+   private final Short frame;
+   private final String interactSound;
 
-	public MapObject(@NonNull String id) {
-		this(DB.dao.map_object.find(id));
-	}
+   @Getter
+   private final String name;
 
-	public MapObject(@NonNull DB.model.MapObjectModel template) {
-		super(ContextHolder.INSTANCE.getContext().createCharacter(A.charsets.get(template.getCharset()).uid));
-		this.template = template;
-		this.frame = template.getFrame();
-		this.name = template.getName();
-		this.interactSound = A.sounds.get(template.getInteractSound()).uid;
+   private boolean interacting = false;
 
-		setBlocking(true);
-		disableAnimation();
+   public MapObject(@NonNull String id) {
+      this(DB.dao.map_object.find(id));
+   }
 
-		if(frame != null) {
-			setAnimationFrame(frame);
-		}
+   public MapObject(@NonNull DB.model.MapObjectModel template) {
+      super(ContextHolder.INSTANCE.getContext().createCharacter(A.charsets.get(template.getCharset()).uid));
+      this.template = template;
+      this.frame = template.getFrame();
+      this.name = template.getName();
+      this.interactSound = A.sounds.get(template.getInteractSound()).uid;
 
-		pathExecutor.setPath(
-			frame != null
-			? new CharacterPath<MapObject>()
-				.run(this::startInteraction)
-				.turn(Direction.LEFT, frame)
-				.wait(0.05f)
-				.turn(Direction.RIGHT, frame)
-				.wait(0.05f)
-				.turn(Direction.UP, frame)
-				.wait(0.5f)
-				.turn(Direction.RIGHT, frame)
-				.wait(0.05f)
-				.turn(Direction.LEFT, frame)
-				.wait(0.05f)
-				.turn(Direction.DOWN, frame)
-				.wait(0.5f)
-				.run(this::finishInteraction)
-			: new CharacterPath<MapObject>()
-		);
-	}
+      setBlocking(true);
+      disableAnimation();
 
-	public void interact(Creature creature) {
-		interacting = true;
-	}
+      if (frame != null) {
+         setAnimationFrame(frame);
+      }
 
-	private void startInteraction() {
-		if(interactSound != null) {
-			context.playSound(interactSound);
-		}
-	}
+      pathExecutor.setPath(
+              frame != null
+                      ? new CharacterPath<MapObject>()
+                      .run(this::startInteraction)
+                      .turn(Direction.LEFT, frame)
+                      .wait(0.05f)
+                      .turn(Direction.RIGHT, frame)
+                      .wait(0.05f)
+                      .turn(Direction.UP, frame)
+                      .wait(0.5f)
+                      .turn(Direction.RIGHT, frame)
+                      .wait(0.05f)
+                      .turn(Direction.LEFT, frame)
+                      .wait(0.05f)
+                      .turn(Direction.DOWN, frame)
+                      .wait(0.5f)
+                      .run(this::finishInteraction)
+                      : new CharacterPath<MapObject>()
+      );
+   }
 
-	private void finishInteraction() {
-		interacting = false;
-	}
+   public void interact(Creature creature) {
+      interacting = true;
+   }
 
-	@Override
-	public void update(float dt) {
-		if(interacting) {
-			pathExecutor.execute(getLayer(), dt);
-		}
-	}
+   private void startInteraction() {
+      if (interactSound != null) {
+         context.playSound(interactSound);
+      }
+   }
+
+   private void finishInteraction() {
+      interacting = false;
+   }
+
+   @Override
+   public void update(float dt) {
+      if (interacting) {
+         pathExecutor.execute(getLayer(), dt);
+      }
+   }
 }

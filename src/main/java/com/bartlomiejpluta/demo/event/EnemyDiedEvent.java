@@ -1,20 +1,20 @@
 package com.bartlomiejpluta.demo.event;
 
-import lombok.*;
-
-import com.bartlomiejpluta.base.api.event.*;
-import com.bartlomiejpluta.base.lib.event.*;
+import com.bartlomiejpluta.base.api.event.EventType;
+import com.bartlomiejpluta.base.lib.event.BaseEvent;
 import com.bartlomiejpluta.demo.entity.Enemy;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
 public class EnemyDiedEvent extends BaseEvent {
-	public static final EventType<EnemyDiedEvent> TYPE = new EventType<>("ENEMY_DIED_EVENT");
+   public static final EventType<EnemyDiedEvent> TYPE = new EventType<>("ENEMY_DIED_EVENT");
 
-	private final Enemy enemy;
+   private final Enemy enemy;
 
-	@Override
-	public EventType<EnemyDiedEvent> getType() {
-		return TYPE;
-	}
+   @Override
+   public EventType<EnemyDiedEvent> getType() {
+      return TYPE;
+   }
 }
