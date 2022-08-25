@@ -54,6 +54,10 @@ public class DemoRunner implements GameRunner {
     private void initMenu() {
         this.menu = new MenuManager(this, context);
     }
+    
+    public int openedWindows() {
+    	return this.menu.openedWindows();
+    }
 
     private void initHUD() {
         hud = context.newGUI();

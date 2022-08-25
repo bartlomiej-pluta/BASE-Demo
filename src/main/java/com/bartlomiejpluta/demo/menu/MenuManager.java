@@ -21,6 +21,7 @@ public class MenuManager {
 
 	private final StartMenuWindow startMenu;
 	private final GameMenuWindow gameMenu;
+	private final EquipmentWindow equipment;
 
 	private final Consumer<KeyEvent> gameMenuHandler = this::handleGameMenuKeyEvent;
 
@@ -40,9 +41,21 @@ public class MenuManager {
 		this.gameMenu.getResumeGameBtn().setAction(this::resumeGame);
 		this.gameMenu.getStartMenuBtn().setAction(runner::returnToStartMenu);
 		this.gameMenu.getExitBtn().setAction(runner::exit);
+		
+		this.equipment = (EquipmentWindow) gui.inflateWindow(A.widgets.equipment.uid);
 	}
 
 	private void handleGameMenuKeyEvent(KeyEvent event) {
+		if (event.getKey() == Key.KEY_E && event.getAction() == KeyAction.PRESS) {
+			if(manager.isEmpty()) {
+				manager.open(equipment);
+			} else if (manager.top() == equipment) {
+				manager.close();
+			}
+			
+			event.consume();
+		}
+	
 		if (event.getKey() == Key.KEY_ESCAPE && event.getAction() == KeyAction.PRESS) {
 			if(manager.size() > 0) {
 				manager.close();
@@ -58,6 +71,10 @@ public class MenuManager {
 
 			event.consume();
 		}
+	}
+
+	public int openedWindows() {
+		return manager.size();
 	}
 
 	public void showStartMenu() {

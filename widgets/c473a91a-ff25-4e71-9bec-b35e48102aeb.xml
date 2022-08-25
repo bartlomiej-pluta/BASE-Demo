@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<demo:EquipmentWindow
+        xmlns:base="com.bartlomiejpluta.base.lib.gui"
+        xmlns:demo="com.bartlomiejpluta.demo.gui"
+        windowPosition="WindowPosition.CENTER"
+        padding="20f"
+        widthMode="SizeMode.AUTO"
+        heightMode="SizeMode.AUTO">
+
+    <base:VLayout widthMode="SizeMode.AUTO" heightMode="SizeMode.AUTO">
+        <base:Label
+                font="A.fonts.roboto_regular.uid"
+                widthMode="SizeMode.RELATIVE"
+                width="1f"
+                alignment="GUI.ALIGN_TOP | GUI.ALIGN_CENTER"
+                red="1f"
+                green="1f"
+                blue="1f"
+                alpha="0.5f"
+                fontSize="30f">Equipment
+        </base:Label>
+
+        <base:VGridOptionChoice columns="4"
+                                scrollSpeed="0.2f"
+                                widthMode="SizeMode.ABSOLUTE"
+                                width="4 * 68f"
+                                heightMode="SizeMode.ABSOLUTE"
+                                height="4 * 68f">
+            <base:IconView iconSet="A.iconsets.generic.uid" iconSetRow="5" iconSetColumn="0" scale="2f"/>
+            <base:IconView iconSet="A.iconsets.generic.uid" iconSetRow="5" iconSetColumn="1" scale="2f"/>
+            <base:IconView iconSet="A.iconsets.generic.uid" iconSetRow="5" iconSetColumn="2" scale="2f"/>
+            <base:IconView iconSet="A.iconsets.generic.uid" iconSetRow="5" iconSetColumn="3" scale="2f"/>
+            <base:IconView iconSet="A.iconsets.generic.uid" iconSetRow="5" iconSetColumn="4" scale="2f"/>
+            <base:IconView iconSet="A.iconsets.generic.uid" iconSetRow="5" iconSetColumn="5" scale="2f"/>
+            <base:IconView iconSet="A.iconsets.generic.uid" iconSetRow="5" iconSetColumn="6" scale="2f"/>
+            <base:IconView iconSet="A.iconsets.generic.uid" iconSetRow="5" iconSetColumn="7" scale="2f"/>
+            <base:IconView iconSet="A.iconsets.generic.uid" iconSetRow="5" iconSetColumn="8" scale="2f"/>
+            <base:IconView iconSet="A.iconsets.generic.uid" iconSetRow="5" iconSetColumn="9" scale="2f"/>
+            <base:IconView iconSet="A.iconsets.generic.uid" iconSetRow="5" iconSetColumn="10" scale="2f"/>
+            <base:IconView iconSet="A.iconsets.generic.uid" iconSetRow="6" iconSetColumn="0" scale="2f"/>
+            <base:IconView iconSet="A.iconsets.generic.uid" iconSetRow="7" iconSetColumn="1" scale="2f"/>
+            <base:IconView iconSet="A.iconsets.generic.uid" iconSetRow="8" iconSetColumn="2" scale="2f"/>
+            <base:IconView iconSet="A.iconsets.generic.uid" iconSetRow="9" iconSetColumn="3" scale="2f"/>
+            <base:IconView iconSet="A.iconsets.generic.uid" iconSetRow="10" iconSetColumn="4" scale="2f"/>
+            <base:IconView iconSet="A.iconsets.generic.uid" iconSetRow="11" iconSetColumn="5" scale="2f"/>
+            <base:IconView iconSet="A.iconsets.generic.uid" iconSetRow="11" iconSetColumn="6" scale="2f"/>
+            <base:IconView iconSet="A.iconsets.generic.uid" iconSetRow="11" iconSetColumn="7" scale="2f"/>
+        </base:VGridOptionChoice>
+    </base:VLayout>
+
+</demo:EquipmentWindow>

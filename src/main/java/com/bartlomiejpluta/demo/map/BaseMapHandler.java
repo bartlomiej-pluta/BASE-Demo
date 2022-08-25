@@ -54,6 +54,10 @@ public abstract class BaseMapHandler implements MapHandler {
 			return;
 		}
 
+		if(runner.openedWindows() > 0) {
+			return;
+		}
+
 		if(input.isKeyPressed(Key.KEY_SPACE)) {
 			player.attack();
 		}
@@ -71,7 +75,7 @@ public abstract class BaseMapHandler implements MapHandler {
 				player.setFaceDirection(Direction.LEFT);
 			} else if(input.isKeyPressed(Key.KEY_RIGHT)) {
 				player.setFaceDirection(Direction.RIGHT);
-			}		
+			}
 		} else {
 			if(input.isKeyPressed(Key.KEY_DOWN)) {
 				player.getLayer().pushMovement(player.prepareMovement(Direction.DOWN));
@@ -123,7 +127,7 @@ public abstract class BaseMapHandler implements MapHandler {
 		layer.addEntity(icon);
 		return icon;
 	}
-	
+
 	public Warp warp(ObjectLayer layer, int x, int y, String targetMap, String targetLayer, int targetX, int targetY) {
 		var warp = new Warp(A.maps.get(targetMap).uid, A.maps.getLayer(targetMap, targetLayer), targetX, targetY);
 		warp.setEntity(player);
