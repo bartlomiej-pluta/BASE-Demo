@@ -11,6 +11,7 @@ import com.bartlomiejpluta.base.util.random.DiceRoller;
 import com.bartlomiejpluta.demo.ai.*;
 import com.bartlomiejpluta.demo.event.EnemyDiedEvent;
 import com.bartlomiejpluta.demo.runner.DemoRunner;
+import com.bartlomiejpluta.demo.world.weapon.Ammunition;
 import com.bartlomiejpluta.demo.world.weapon.MeleeWeapon;
 import com.bartlomiejpluta.demo.world.weapon.RangedWeapon;
 import lombok.Getter;
@@ -42,7 +43,6 @@ public class Enemy extends Creature implements NPC {
       setSpeed(speed);
       setAnimationSpeed(speed / 2.0f);
       setBlocking(template.isBlocking());
-      var runner = (DemoRunner) context.getGameRunner();
       var meleeWeaponTemplate = template.getMeleeWeapon();
       var rangedWeaponTemplate = template.getRangedWeapon();
 
@@ -51,7 +51,10 @@ public class Enemy extends Creature implements NPC {
       }
 
       if (rangedWeaponTemplate != null) {
-         this.rangedWeapon = new RangedWeapon(rangedWeaponTemplate);
+         var split = rangedWeaponTemplate.split(",");
+
+         this.rangedWeapon = new RangedWeapon(split[0]);
+         setAmmunition(new Ammunition(split[1], DiceRoller.of(split[2]).roll()));
       }
 
       this.dieAnimation = new SimpleAnimationRunner(A.animations.get(template.getDieAnimation()).uid);
