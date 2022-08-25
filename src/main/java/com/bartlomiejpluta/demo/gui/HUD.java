@@ -1,6 +1,7 @@
 package com.bartlomiejpluta.demo.gui;
 
 import com.bartlomiejpluta.base.api.context.Context;
+import com.bartlomiejpluta.base.api.gui.Component;
 import com.bartlomiejpluta.base.api.gui.GUI;
 import com.bartlomiejpluta.base.api.gui.Ref;
 import com.bartlomiejpluta.base.api.screen.Screen;
@@ -15,6 +16,7 @@ import com.bartlomiejpluta.demo.util.LimitedQueue;
 import com.bartlomiejpluta.demo.world.weapon.Weapon;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -43,8 +45,8 @@ public class HUD extends BorderLayout {
    @Ref("weapon")
    private IconView weapon;
 
-   public HUD(Context context, GUI gui) {
-      super(context, gui);
+   public HUD(Context context, GUI gui, Map<String, Component> refs) {
+      super(context, gui, refs);
       this.runner = (DemoRunner) context.getGameRunner();
       this.player = runner.getPlayer();
       this.runtime = Runtime.getRuntime();

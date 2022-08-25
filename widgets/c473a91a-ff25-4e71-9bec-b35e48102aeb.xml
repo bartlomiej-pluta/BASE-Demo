@@ -3,17 +3,16 @@
 <demo:EquipmentWindow
         xmlns:base="com.bartlomiejpluta.base.lib.gui"
         xmlns:demo="com.bartlomiejpluta.demo.gui"
-        windowPosition="WindowPosition.CENTER"
+        windowPosition="center"
         padding="20f"
-        widthMode="SizeMode.AUTO"
-        heightMode="SizeMode.AUTO">
+        width="auto"
+        height="auto">
 
-    <base:VLayout widthMode="SizeMode.AUTO" heightMode="SizeMode.AUTO">
+    <base:VLayout width="auto" height="auto">
         <base:Label
                 font="A.fonts.roboto_regular.uid"
-                widthMode="SizeMode.RELATIVE"
-                width="1f"
-                alignment="GUI.ALIGN_TOP | GUI.ALIGN_CENTER"
+                width="relative"
+                alignment="top|center"
                 red="1f"
                 green="1f"
                 blue="1f"
@@ -21,7 +20,7 @@
                 fontSize="30f">Equipment
         </base:Label>
 
-        <base:VGridOptionChoice ref="eq" columns="4" widthMode="SizeMode.AUTO" heightMode="SizeMode.AUTO">
+        <base:VGridOptionChoice ref="eq" columns="4" width="auto" height="auto">
             <demo:ItemIconView margin="5f" />
             <demo:ItemIconView margin="5f" />
             <demo:ItemIconView margin="5f" />

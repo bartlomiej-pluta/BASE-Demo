@@ -3,18 +3,14 @@
 <demo:HUD
         xmlns:base="com.bartlomiejpluta.base.lib.gui"
         xmlns:demo="com.bartlomiejpluta.demo.gui"
-        widthMode="SizeMode.RELATIVE"
-        heightMode="SizeMode.RELATIVE"
-        width="1f"
-        height="1f">
+        height="relative"
+        width="relative">
 
     <base:BorderLayout-TopLeft>
         <demo:Bar
                 ref="hp"
                 strokeColor="0x111111"
                 fillColor="0xFF0000"
-                widthMode="SizeMode.ABSOLUTE"
-                heightMode="SizeMode.ABSOLUTE"
                 width="250f"
                 height="20f"/>
     </base:BorderLayout-TopLeft>
@@ -27,10 +23,9 @@
         <base:Label
                 ref="log"
                 font="A.fonts.roboto_regular.uid"
-                widthMode="SizeMode.ABSOLUTE"
                 width="400f"
                 height="25f"
-                alignment="GUI.ALIGN_BOTTOM | GUI.ALIGN_LEFT"
+                alignment="bottom|left"
                 color="0xFFFFFF"
                 fontSize="15f"/>
     </base:BorderLayout-BottomLeft>
@@ -39,10 +34,9 @@
         <base:Label
                 ref="debug"
                 font="A.fonts.roboto_regular.uid"
-                widthMode="SizeMode.ABSOLUTE"
                 width="200f"
                 height="25f"
-                alignment="GUI.ALIGN_BOTTOM | GUI.ALIGN_RIGHT"
+                alignment="bottom|right"
                 color="0xFFFFFF"
                 fontSize="15f"/>
     </base:BorderLayout-BottomRight>

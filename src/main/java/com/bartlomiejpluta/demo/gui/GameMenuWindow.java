@@ -1,10 +1,13 @@
 package com.bartlomiejpluta.demo.gui;
 
 import com.bartlomiejpluta.base.api.context.Context;
+import com.bartlomiejpluta.base.api.gui.Component;
 import com.bartlomiejpluta.base.api.gui.GUI;
 import com.bartlomiejpluta.base.api.gui.Inflatable;
 import com.bartlomiejpluta.base.api.gui.Ref;
 import lombok.Getter;
+
+import java.util.Map;
 
 
 public class GameMenuWindow extends DecoratedWindow implements Inflatable {
@@ -21,8 +24,8 @@ public class GameMenuWindow extends DecoratedWindow implements Inflatable {
    @Getter
    private Button exitBtn;
 
-   public GameMenuWindow(Context context, GUI gui) {
-      super(context, gui);
+   public GameMenuWindow(Context context, GUI gui, Map<String, Component> refs) {
+      super(context, gui, refs);
    }
 
    @Override

@@ -3,19 +3,15 @@
 <demo:StartMenuWindow
         xmlns:base="com.bartlomiejpluta.base.lib.gui"
         xmlns:demo="com.bartlomiejpluta.demo.gui"
-        windowPosition="WindowPosition.BOTTOM"
+        windowPosition="bottom"
         margin="10f"
         padding="20f">
 
-    <base:VLayout
-            width="200f"
-            widthMode="SizeMode.ABSOLUTE">
-
+    <base:VLayout width="200f">
         <base:Label
                 font="A.fonts.roboto_regular.uid"
-                widthMode="SizeMode.RELATIVE"
-                width="1f"
-                alignment="GUI.ALIGN_TOP | GUI.ALIGN_CENTER"
+                width="relative"
+                alignment="top|center"
                 red="1f"
                 green="1f"
                 blue="1f"
@@ -23,15 +19,11 @@
                 fontSize="30f">Menu
         </base:Label>
 
-        <base:VOptionChoice
-                widthMode="SizeMode.RELATIVE"
-                width="1f">
-
+        <base:VOptionChoice ref="menu" width="relative">
             <demo:Button
                     ref="new_game"
                     font="A.fonts.roboto_regular.uid"
-                    widthMode="SizeMode.RELATIVE"
-                    width="1f"
+                    width="relative"
                     red="1f"
                     green="1f"
                     blue="1f"
@@ -41,16 +33,13 @@
             <demo:Button
                     ref="exit"
                     font="A.fonts.roboto_regular.uid"
-                    widthMode="SizeMode.RELATIVE"
-                    width="1f"
+                    width="relative"
                     red="1f"
                     green="1f"
                     blue="1f"
                     fontSize="17f">Exit
             </demo:Button>
-
         </base:VOptionChoice>
-
     </base:VLayout>
 
 </demo:StartMenuWindow>

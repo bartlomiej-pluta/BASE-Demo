@@ -2,10 +2,13 @@ package com.bartlomiejpluta.demo.gui;
 
 import com.bartlomiejpluta.base.api.context.Context;
 import com.bartlomiejpluta.base.api.gui.Color;
+import com.bartlomiejpluta.base.api.gui.Component;
 import com.bartlomiejpluta.base.api.gui.GUI;
 import com.bartlomiejpluta.base.api.screen.Screen;
 import com.bartlomiejpluta.base.lib.gui.BaseComponent;
 import lombok.Setter;
+
+import java.util.Map;
 
 public class Bar extends BaseComponent {
 
@@ -16,8 +19,8 @@ public class Bar extends BaseComponent {
    private float actualValue = 1.0f;
    private final float speed = 0.05f;
 
-   public Bar(Context context, GUI gui) {
-      super(context, gui);
+   public Bar(Context context, GUI gui, Map<String, Component> refs) {
+      super(context, gui, refs);
 
       this.stroke = gui.createColor();
       this.fill = gui.createColor();

@@ -2,13 +2,17 @@ package com.bartlomiejpluta.demo.gui;
 
 import com.bartlomiejpluta.base.api.context.Context;
 import com.bartlomiejpluta.base.api.gui.Color;
+import com.bartlomiejpluta.base.api.gui.Component;
 import com.bartlomiejpluta.base.api.gui.GUI;
 import com.bartlomiejpluta.base.api.input.Key;
 import com.bartlomiejpluta.base.api.input.KeyAction;
 import com.bartlomiejpluta.base.api.input.KeyEvent;
 import com.bartlomiejpluta.base.api.screen.Screen;
 import com.bartlomiejpluta.base.lib.gui.Label;
+import com.bartlomiejpluta.base.lib.gui.TextAlignment;
 import lombok.Setter;
+
+import java.util.Map;
 
 public class Button extends Label {
    private final Color color;
@@ -16,14 +20,14 @@ public class Button extends Label {
    @Setter
    private Runnable action;
 
-   public Button(Context context, GUI gui) {
-      super(context, gui);
+   public Button(Context context, GUI gui, Map<String, Component> refs) {
+      super(context, gui, refs);
       this.color = gui.createColor();
       this.color.setRGBA(1, 1, 1, 0);
 
       setText("");
       setFontSize(17f);
-      setAlignment(GUI.ALIGN_TOP | GUI.ALIGN_CENTER);
+      setAlignment(TextAlignment.TOP, TextAlignment.CENTER);
       setColor(0.4f, 0.7f, 0.0f, 1f);
       setPadding(10f);
       addEventListener(KeyEvent.TYPE, this::handleKeyEvent);

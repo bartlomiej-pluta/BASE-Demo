@@ -2,18 +2,21 @@ package com.bartlomiejpluta.demo.gui;
 
 import com.bartlomiejpluta.base.api.context.Context;
 import com.bartlomiejpluta.base.api.gui.Color;
+import com.bartlomiejpluta.base.api.gui.Component;
 import com.bartlomiejpluta.base.api.gui.GUI;
 import com.bartlomiejpluta.base.api.gui.Paint;
 import com.bartlomiejpluta.base.api.screen.Screen;
 import com.bartlomiejpluta.base.lib.gui.BaseWindow;
 
-public abstract class DecoratedWindow extends BaseWindow {
+import java.util.Map;
+
+public class DecoratedWindow extends BaseWindow {
    private final Paint paint;
    private final Color inner;
    private final Color outer;
 
-   public DecoratedWindow(Context context, GUI gui) {
-      super(context, gui);
+   public DecoratedWindow(Context context, GUI gui, Map<String, Component> refs) {
+      super(context, gui, refs);
 
       this.inner = gui.createColor();
       this.outer = gui.createColor();
