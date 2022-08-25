@@ -79,12 +79,8 @@ public class HUD extends BorderLayout {
          logVisibilityDuration = 0;
       }
 
-      if (player.getWeapon() != null && player.getWeapon() != currentWeapon) {
-         weapon.setIcon(player.getWeapon().getIcon());
-         this.currentWeapon = player.getWeapon();
-      } else if (player.getWeapon() == null) {
-         this.currentWeapon = null;
-      }
+
+      this.currentWeapon = player.getWeapon();
    }
 
    @Override

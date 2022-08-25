@@ -9,16 +9,14 @@ import com.bartlomiejpluta.base.api.move.Movable;
 import com.bartlomiejpluta.base.lib.animation.AnimationRunner;
 import com.bartlomiejpluta.base.lib.animation.BulletAnimationRunner;
 import com.bartlomiejpluta.base.lib.animation.SimpleAnimationRunner;
+import com.bartlomiejpluta.base.lib.icon.IconDelegate;
 import com.bartlomiejpluta.base.util.random.DiceRoller;
 import com.bartlomiejpluta.demo.entity.Creature;
 import com.bartlomiejpluta.demo.event.HitEvent;
 import lombok.Getter;
 import lombok.NonNull;
 
-import java.util.Random;
-
-public class RangedWeapon implements Weapon {
-   private final Random random = new Random();
+public class RangedWeapon extends IconDelegate implements Weapon {
    private final Context context;
    private final DiceRoller dmgRoller;
    private final DiceRoller rangeRoller;
@@ -29,8 +27,6 @@ public class RangedWeapon implements Weapon {
    private final AnimationRunner missAnimation;
    private final String missSound;
    @Getter
-   private final Icon icon;
-   @Getter
    private final String name;
    @Getter
    private final int cooldown;
@@ -40,6 +36,8 @@ public class RangedWeapon implements Weapon {
    }
 
    public RangedWeapon(@NonNull DB.model.RangedWeaponModel template) {
+      super(createIcon(template));
+
       this.context = ContextHolder.INSTANCE.getContext();
       this.name = template.getName();
       this.dmgRoller = DiceRoller.of(template.getDamage());
@@ -51,14 +49,11 @@ public class RangedWeapon implements Weapon {
       this.punchSound = A.sounds.get(template.getPunchSound()).uid;
       this.missAnimation = new SimpleAnimationRunner(A.animations.get(template.getMissAnimation()).uid).scale(0.4f);
       this.missSound = A.sounds.get(template.getMissSound()).uid;
-      var icons = template.getIcon().split(",");
-      this.icon = context.createIcon(A.iconsets.get(icons[0]).uid, Integer.valueOf(icons[1]), Integer.valueOf(icons[2]));
    }
 
    private void onHit(Movable attacker, Entity target) {
-      if (target.isBlocking() && target instanceof Creature) {
+      if (target.isBlocking() && target instanceof Creature character) {
          var namedAttacker = (Creature) attacker;
-         var character = (Creature) target;
          var damage = dmgRoller.roll();
          character.hit(namedAttacker, damage);
          punchAnimation.run(context, character.getLayer(), character);
@@ -78,5 +73,10 @@ public class RangedWeapon implements Weapon {
       context.playSound(sound);
       animation.range(rangeRoller.roll()).direction(direction).rotation(direction.xAngle - 180).run(context, attacker.getLayer(), attacker);
       return true;
+   }
+
+   private static Icon createIcon(DB.model.RangedWeaponModel template) {
+      var icons = template.getIcon().split(",");
+      return ContextHolder.INSTANCE.getContext().createIcon(A.iconsets.get(icons[0]).uid, Integer.parseInt(icons[1]), Integer.parseInt(icons[2]));
    }
 }
