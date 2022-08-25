@@ -8,9 +8,9 @@ import com.bartlomiejpluta.base.lib.gui.VOptionChoice;
 import com.bartlomiejpluta.demo.entity.Player;
 import com.bartlomiejpluta.demo.runner.DemoRunner;
 import com.bartlomiejpluta.demo.world.item.Item;
+import com.bartlomiejpluta.demo.world.item.Useable;
 import com.bartlomiejpluta.demo.world.weapon.MeleeWeapon;
 import com.bartlomiejpluta.demo.world.weapon.RangedWeapon;
-import com.bartlomiejpluta.demo.world.weapon.Weapon;
 
 import java.util.Map;
 import java.util.function.Consumer;
@@ -30,6 +30,12 @@ public class EquipmentWindow extends DecoratedWindow {
 
    @Ref("eq")
    private VGridOptionChoice eqGrid;
+
+   @Ref("weapon")
+   private ItemIconView weapon;
+
+   @Ref("ammo")
+   private ItemIconView ammo;
 
    @Ref("item-name")
    private Label nameLbl;
@@ -55,6 +61,13 @@ public class EquipmentWindow extends DecoratedWindow {
       cancelBtn.setAction(manager::close);
       eqGrid.setOnSelect(this::updateItemDetails);
 
+      updateEquipment();
+
+      eqGrid.select(0, 0);
+      eqGrid.focus();
+   }
+
+   private void updateEquipment() {
       var i = 0;
       for (var child : eqGrid.getChildren()) {
          var slot = (ItemIconView) child;
@@ -62,8 +75,8 @@ public class EquipmentWindow extends DecoratedWindow {
          slot.setAction(handleItem(slot));
       }
 
-      eqGrid.select(0, 0);
-      eqGrid.focus();
+      weapon.setItem(player.getWeapon());
+      ammo.setItem(player.getAmmunition());
    }
 
    private Consumer<Item> handleItem(ItemIconView slot) {
@@ -74,10 +87,13 @@ public class EquipmentWindow extends DecoratedWindow {
 
          manager.open(eqItemMenuWindow);
 
-         useBtn.setAction(() -> {
-            player.useEquipmentItem(item);
-            manager.close();
-         });
+         if (item instanceof Useable useable) {
+            useBtn.setAction(() -> {
+               useable.use(player);
+               updateEquipment();
+               manager.close();
+            });
+         }
 
          dropBtn.setAction(() -> {
             player.dropItemFromEquipment(item);
@@ -110,8 +126,8 @@ public class EquipmentWindow extends DecoratedWindow {
    }
 
    private String getButtonTitle(Item item) {
-      if (item instanceof Weapon) {
-         return "Equip";
+      if (item instanceof Useable useable) {
+         return useable.usageName();
       }
 
       return "Use";

@@ -2,6 +2,8 @@ package com.bartlomiejpluta.demo.entity;
 
 import com.bartlomiejpluta.base.api.character.Character;
 import com.bartlomiejpluta.demo.world.item.Item;
+import com.bartlomiejpluta.demo.world.weapon.Ammunition;
+import com.bartlomiejpluta.demo.world.weapon.RangedWeapon;
 import com.bartlomiejpluta.demo.world.weapon.Weapon;
 import lombok.Getter;
 import lombok.NonNull;
@@ -31,6 +33,10 @@ public abstract class Creature extends NamedCharacter {
    private Weapon weapon;
 
    @Getter
+   @Setter
+   private Ammunition ammunition;
+
+   @Getter
    private NamedCharacter lastAttacker;
 
    public Creature(@NonNull Character entity) {
@@ -44,6 +50,14 @@ public abstract class Creature extends NamedCharacter {
 
       if (attackCooldown >= weapon.getCooldown()) {
          if (weapon.attack(this)) {
+            if(weapon instanceof RangedWeapon) {
+               ammunition.decrease();
+
+               if(ammunition.getCount() == 0) {
+                  ammunition = null;
+               }
+            }
+
             attackCooldown = 0;
          }
       }
@@ -62,6 +76,11 @@ public abstract class Creature extends NamedCharacter {
    public void useEquipmentItem(Item item) {
       if (item instanceof Weapon weapon) {
          setWeapon(weapon);
+         return;
+      }
+
+      if (item instanceof Ammunition ammunition) {
+         setAmmunition(ammunition);
       }
    }
 

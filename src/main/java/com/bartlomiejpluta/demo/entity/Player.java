@@ -2,6 +2,7 @@ package com.bartlomiejpluta.demo.entity;
 
 import com.bartlomiejpluta.base.api.character.Character;
 import com.bartlomiejpluta.demo.world.item.Item;
+import com.bartlomiejpluta.demo.world.weapon.Ammunition;
 import com.bartlomiejpluta.demo.world.weapon.Weapon;
 import lombok.NonNull;
 import org.joml.Vector2i;
@@ -63,9 +64,49 @@ public class Player extends Creature {
       item.setCoordinates(getCoordinates());
       getLayer().addEntity(item);
 
-      if(item == getWeapon()) {
+      if (item == getWeapon()) {
          setWeapon(null);
       }
+
+      if (item == getAmmunition()) {
+         setAmmunition(null);
+      }
+   }
+
+   @Override
+   public void setWeapon(Weapon weapon) {
+      var currentWeapon = getWeapon();
+
+      if (weapon != null) {
+         removeItemFromEquipment(weapon);
+      }
+
+      if (currentWeapon != null) {
+         pushItemToEquipment(currentWeapon);
+      }
+
+      super.setWeapon(weapon);
+   }
+
+   @Override
+   public void setAmmunition(Ammunition ammunition) {
+      var currentAmmo = getAmmunition();
+
+      if (currentAmmo != null && currentAmmo.getId().equals(ammunition.getId())) {
+         currentAmmo.increase(ammunition.getCount());
+         removeItemFromEquipment(ammunition);
+         return;
+      }
+
+      if (ammunition != null) {
+         removeItemFromEquipment(ammunition);
+      }
+
+      if (currentAmmo != null) {
+         pushItemToEquipment(currentAmmo);
+      }
+
+      super.setAmmunition(ammunition);
    }
 
    @Override

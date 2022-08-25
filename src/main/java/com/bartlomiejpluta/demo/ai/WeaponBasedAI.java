@@ -40,8 +40,7 @@ public class WeaponBasedAI implements AI {
    @Override
    public void nextActivity(ObjectLayer layer, float dt) {
       var lastAttacker = enemy.getLastAttacker();
-      if (lastAttacker != null && lastAttacker instanceof Creature) {
-         var attacker = (Creature) lastAttacker;
+      if (lastAttacker instanceof Creature attacker) {
          if (attacker.isAlive()) {
             runawayAI.setDanger(attacker);
             meleeAI.setTarget(attacker);
@@ -61,7 +60,7 @@ public class WeaponBasedAI implements AI {
          return;
       }
 
-      if (rangedWeapon == null || enemy.manhattanDistance(target) == 1) {
+      if (rangedWeapon == null || enemy.manhattanDistance(target) == 1 || enemy.getAmmunition() == null) {
          enemy.setWeapon(meleeWeapon);
          meleeAI.nextActivity(layer, dt);
          return;

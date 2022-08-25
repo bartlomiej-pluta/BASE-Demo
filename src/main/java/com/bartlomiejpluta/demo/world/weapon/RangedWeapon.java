@@ -29,6 +29,9 @@ public class RangedWeapon extends IconDelegate implements Weapon {
    private final String name;
 
    @Getter
+   private final String type;
+
+   @Getter
    private final DiceRoller dmgRoller;
 
    @Getter
@@ -46,6 +49,7 @@ public class RangedWeapon extends IconDelegate implements Weapon {
 
       this.context = ContextHolder.INSTANCE.getContext();
       this.name = template.getName();
+      this.type = template.getType();
       this.dmgRoller = DiceRoller.of(template.getDamage());
       this.rangeRoller = DiceRoller.of(template.getRange());
       this.cooldown = template.getCooldown();
@@ -75,10 +79,26 @@ public class RangedWeapon extends IconDelegate implements Weapon {
 
    @Override
    public boolean attack(Creature attacker) {
+      var ammunition = attacker.getAmmunition();
+
+      if(ammunition == null || !ammunition.getAppliesTo().equals(type)) {
+         return false;
+      }
+
       var direction = attacker.getFaceDirection();
       context.playSound(sound);
       animation.range(rangeRoller.roll()).direction(direction).rotation(direction.xAngle - 180).run(context, attacker.getLayer(), attacker);
       return true;
+   }
+
+   @Override
+   public void use(Creature creature) {
+      creature.setWeapon(this);
+   }
+
+   @Override
+   public String usageName() {
+      return "Equip";
    }
 
    private static Icon createIcon(DB.model.RangedWeaponModel template) {

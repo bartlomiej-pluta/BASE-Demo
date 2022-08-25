@@ -102,7 +102,7 @@ public class ItemIconView extends IconView {
          gui.beginPath();
          gui.setFontFace(fonts.roboto_regular.uid);
          gui.setFontSize(17);
-         gui.putText(x + 15, y + 5, String.valueOf(stack.count()));
+         gui.putText(x + 15, y + 5, String.valueOf(stack.getCount()));
          gui.setFillColor(textColor);
          gui.fill();
          gui.closePath();

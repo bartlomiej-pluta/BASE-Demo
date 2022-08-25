@@ -59,6 +59,16 @@ public class MeleeWeapon extends IconDelegate implements Weapon {
       return false;
    }
 
+   @Override
+   public void use(Creature creature) {
+      creature.setWeapon(this);
+   }
+
+   @Override
+   public String usageName() {
+      return "Equip";
+   }
+
    private static Icon createIcon(DB.model.MeleeWeaponModel template) {
       var icons = template.getIcon().split(",");
       return ContextHolder.INSTANCE.getContext().createIcon(A.iconsets.get(icons[0]).uid, Integer.parseInt(icons[1]), Integer.parseInt(icons[2]));

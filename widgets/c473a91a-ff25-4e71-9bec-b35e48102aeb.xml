@@ -21,6 +21,11 @@
         </base:Label>
 
         <base:HLayout>
+            <base:VGridLayout columns="2" padding="20f" width="250f">
+                <demo:ItemIconView ref="weapon" margin="5f"/>
+                <demo:ItemIconView ref="ammo" margin="5f"/>
+            </base:VGridLayout>
+
             <base:VGridOptionChoice ref="eq" columns="4" width="auto" height="auto">
                 <demo:ItemIconView margin="5f"/>
                 <demo:ItemIconView margin="5f"/>
