@@ -114,6 +114,7 @@ public class EquipmentWindow extends DecoratedWindow {
       }
 
       nameLbl.setText(item.getName());
+      detailsLbl.setText("");
 
       if (item instanceof MeleeWeapon weapon) {
          detailsLbl.setText(format("Damage: %s\nCooldown: %s\n", weapon.getDmgRoller(), weapon.getCooldown()));

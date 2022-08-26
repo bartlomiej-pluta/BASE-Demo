@@ -14,6 +14,7 @@ import com.bartlomiejpluta.base.util.random.DiceRoller;
 import com.bartlomiejpluta.demo.ai.*;
 import com.bartlomiejpluta.demo.event.EnemyDiedEvent;
 import com.bartlomiejpluta.demo.world.item.Item;
+import com.bartlomiejpluta.demo.world.junk.Junk;
 import com.bartlomiejpluta.demo.world.weapon.Ammunition;
 import com.bartlomiejpluta.demo.world.weapon.MeleeWeapon;
 import com.bartlomiejpluta.demo.world.weapon.RangedWeapon;
@@ -114,6 +115,7 @@ public class Enemy extends Creature implements NPC {
             case "melee_weapon" -> new MeleeWeapon(split[1]);
             case "ranged_weapon" -> new RangedWeapon(split[1]);
             case "ammo" -> new Ammunition(split[1], DiceRoller.of(d.getAmount()).roll());
+            case "junk" -> new Junk(split[1]);
             default -> throw new IllegalArgumentException("Unsupported item type");
          };
       }

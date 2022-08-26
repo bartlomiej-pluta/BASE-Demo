@@ -1,13 +1,10 @@
 package com.bartlomiejpluta.demo.gui;
 
-import DB.EnemyDAO;
-import DB.dao;
 import com.bartlomiejpluta.base.api.context.Context;
 import com.bartlomiejpluta.base.api.gui.Component;
 import com.bartlomiejpluta.base.api.gui.GUI;
 import com.bartlomiejpluta.base.api.gui.Inflatable;
 import com.bartlomiejpluta.base.api.gui.Ref;
-import com.bartlomiejpluta.base.lib.db.Relop;
 import com.bartlomiejpluta.base.lib.gui.VOptionChoice;
 import lombok.Getter;
 

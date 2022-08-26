@@ -16,7 +16,6 @@ import com.bartlomiejpluta.base.util.world.CharacterSpawner;
 import com.bartlomiejpluta.base.util.world.Warp;
 import com.bartlomiejpluta.demo.entity.Chest;
 import com.bartlomiejpluta.demo.entity.Enemy;
-import com.bartlomiejpluta.demo.entity.MapObject;
 import com.bartlomiejpluta.demo.entity.Player;
 import com.bartlomiejpluta.demo.event.EnemyDiedEvent;
 import com.bartlomiejpluta.demo.runner.DemoRunner;
