@@ -82,8 +82,8 @@ public class DemoRunner implements GameRunner {
       menu.closeAll();
       menu.enableGameMenu();
       resetPlayer();
-      context.openMap(A.maps.forrest.uid);
-      context.getMap().getObjectLayer(A.maps.forrest.layers.main).addEntity(this.player);
+//      context.openMap(A.maps.forrest.uid);
+//      context.getMap().getObjectLayer(A.maps.forrest.layers.main).addEntity(this.player);
       player.setCoordinates(5, 36);
       context.resume();
       hud.show();

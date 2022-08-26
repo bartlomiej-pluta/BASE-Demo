@@ -28,7 +28,6 @@ public abstract class BaseMapHandler implements MapHandler {
    protected Camera camera;
    protected GameMap map;
    protected Player player;
-   protected ObjectLayer mainLayer;
    protected CameraController cameraController;
 
    @Override
