@@ -1,5 +1,6 @@
 package com.bartlomiejpluta.demo.menu;
 
+import A.widgets;
 import com.bartlomiejpluta.base.api.context.Context;
 import com.bartlomiejpluta.base.api.gui.DisplayMode;
 import com.bartlomiejpluta.base.api.gui.GUI;
@@ -8,8 +9,10 @@ import com.bartlomiejpluta.base.api.gui.WindowManager;
 import com.bartlomiejpluta.base.api.input.Key;
 import com.bartlomiejpluta.base.api.input.KeyAction;
 import com.bartlomiejpluta.base.api.input.KeyEvent;
+import com.bartlomiejpluta.demo.entity.Enemy;
 import com.bartlomiejpluta.demo.gui.EquipmentWindow;
 import com.bartlomiejpluta.demo.gui.GameMenuWindow;
+import com.bartlomiejpluta.demo.gui.LootWindow;
 import com.bartlomiejpluta.demo.gui.StartMenuWindow;
 import com.bartlomiejpluta.demo.runner.DemoRunner;
 import lombok.NonNull;
@@ -25,7 +28,7 @@ public class MenuManager {
    private final StartMenuWindow startMenu;
    private final GameMenuWindow gameMenu;
    private final EquipmentWindow equipment;
-
+   private final LootWindow loot;
    private final Consumer<KeyEvent> gameMenuHandler = this::handleGameMenuKeyEvent;
 
    public MenuManager(@NonNull DemoRunner runner, @NonNull Context context) {
@@ -36,16 +39,17 @@ public class MenuManager {
 
       this.gui.setRoot(this.manager);
 
-      this.startMenu = (StartMenuWindow) gui.inflateWindow(A.widgets.start_menu.uid);
+      this.startMenu = gui.inflateWindow(A.widgets.start_menu.uid, StartMenuWindow.class);
       this.startMenu.getNewGameBtn().setAction(runner::newGame);
       this.startMenu.getExitBtn().setAction(runner::exit);
 
-      this.gameMenu = (GameMenuWindow) gui.inflateWindow(A.widgets.game_menu.uid);
+      this.gameMenu = gui.inflateWindow(A.widgets.game_menu.uid, GameMenuWindow.class);
       this.gameMenu.getResumeGameBtn().setAction(this::resumeGame);
       this.gameMenu.getStartMenuBtn().setAction(runner::returnToStartMenu);
       this.gameMenu.getExitBtn().setAction(runner::exit);
 
-      this.equipment = (EquipmentWindow) gui.inflateWindow(A.widgets.equipment.uid);
+      this.equipment = gui.inflateWindow(A.widgets.equipment.uid, EquipmentWindow.class);
+      this.loot = gui.inflateWindow(widgets.loot_menu.uid, LootWindow.class);
    }
 
    private void handleGameMenuKeyEvent(KeyEvent event) {
@@ -95,6 +99,12 @@ public class MenuManager {
    public void disableGameMenu() {
       context.getInput().removeKeyEventHandler(gameMenuHandler);
       manager.setDisplayMode(DisplayMode.DISPLAY_TOP);
+   }
+
+   public void openLootWindow(@NonNull Enemy enemy) {
+      manager.closeAll();
+
+      manager.open(loot, enemy);
    }
 
    public void closeAll() {

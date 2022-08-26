@@ -7,9 +7,11 @@ import com.bartlomiejpluta.demo.world.weapon.Weapon;
 import lombok.NonNull;
 import org.joml.Vector2i;
 
+import java.util.List;
+
 public class Player extends Creature {
    private final Item[] equipment = new Item[4 * 4];
-   private int pickingItemToEquipmentCooldown = 0;
+   private int interactionCooldown = 0;
 
    public Player(@NonNull Character entity) {
       super(entity);
@@ -18,32 +20,50 @@ public class Player extends Creature {
    }
 
    public void interact() {
+      if (interactionCooldown > 0) {
+         return;
+      }
+
       var coords = getCoordinates().add(getFaceDirection().vector, new Vector2i());
       var entities = getLayer().getEntities();
       for (var i = 0; i < entities.size(); ++i) {
          var entity = entities.get(i);
 
+         // Use some map object which player is looking at
          if (entity.getCoordinates().equals(coords) && entity instanceof MapObject object) {
             object.interact(this);
             return;
          }
 
-         if (pickingItemToEquipmentCooldown == 0 && entity.getCoordinates().equals(getCoordinates()) && entity instanceof Item item) {
-            pushItemToEquipment(item);
-            getLayer().removeEntity(item);
-            pickingItemToEquipmentCooldown = PICKING_ITEM_TO_EQUIPMENT_COOLDOWN;
-            return;
+         if (entity.getCoordinates().equals(getCoordinates())) {
+
+            // Pick some item from the ground
+            if (entity instanceof Item item) {
+               pushItemToEquipment(item);
+               getLayer().removeEntity(item);
+               interactionCooldown = INTERACTION_COOLDOWN;
+               return;
+            }
+
+            // Search the enemy corpse
+            if (entity instanceof Enemy enemy && !enemy.isAlive()) {
+               runner.openLootWindow(enemy);
+               interactionCooldown = INTERACTION_COOLDOWN;
+               return;
+            }
          }
       }
    }
 
-   private void pushItemToEquipment(@NonNull Item item) {
+   public boolean pushItemToEquipment(@NonNull Item item) {
       for (int i = 0; i < equipment.length; ++i) {
          if (equipment[i] == null) {
             equipment[i] = item;
-            return;
+            return true;
          }
       }
+
+      return false;
    }
 
    public Item getEquipmentItem(int index) {
@@ -124,10 +144,10 @@ public class Player extends Creature {
    public void update(float dt) {
       super.update(dt);
 
-      if (pickingItemToEquipmentCooldown > 0) {
-         pickingItemToEquipmentCooldown = (int) Math.max(0, pickingItemToEquipmentCooldown - dt * 1000);
+      if (interactionCooldown > 0) {
+         interactionCooldown = (int) Math.max(0, interactionCooldown - dt * 1000);
       }
    }
 
-   private static final int PICKING_ITEM_TO_EQUIPMENT_COOLDOWN = 300;
+   private static final int INTERACTION_COOLDOWN = 300;
 }

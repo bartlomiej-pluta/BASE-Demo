@@ -55,8 +55,8 @@ public class EquipmentWindow extends DecoratedWindow {
    }
 
    @Override
-   public void onOpen(WindowManager manager) {
-      super.onOpen(manager);
+   public void onOpen(WindowManager manager, Object... args) {
+      super.onOpen(manager, args);
 
       cancelBtn.setAction(manager::close);
       eqGrid.setOnSelect(this::updateItemDetails);
@@ -72,14 +72,14 @@ public class EquipmentWindow extends DecoratedWindow {
       for (var child : eqGrid.getChildren()) {
          var slot = (ItemIconView) child;
          slot.setItem(player.getEquipmentItem(i++));
-         slot.setAction(handleItem(slot));
+         slot.setAction(handleClick(slot));
       }
 
       weapon.setItem(player.getWeapon());
       ammo.setItem(player.getAmmunition());
    }
 
-   private Consumer<Item> handleItem(ItemIconView slot) {
+   private Consumer<Item> handleClick(ItemIconView slot) {
       return item -> {
          useBtn.setText(getButtonTitle(item));
          eqItemMenu.select(0);

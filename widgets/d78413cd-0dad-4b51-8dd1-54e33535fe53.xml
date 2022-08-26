@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<demo:LootWindow
+        xmlns:base="com.bartlomiejpluta.base.lib.gui"
+        xmlns:demo="com.bartlomiejpluta.demo.gui"
+        windowPosition="center"
+        padding="20f"
+        width="auto"
+        height="auto">
+
+    <base:VLayout width="auto" height="auto">
+        <base:Label
+                font="A.fonts.roboto_regular.uid"
+                width="relative"
+                alignment="top|center"
+                red="1f"
+                green="1f"
+                blue="1f"
+                alpha="0.5f"
+                fontSize="30f">Loot
+        </base:Label>
+
+        <base:VGridOptionChoice ref="loot" columns="4" width="auto" height="auto"/>
+
+    </base:VLayout>
+
+</demo:LootWindow>

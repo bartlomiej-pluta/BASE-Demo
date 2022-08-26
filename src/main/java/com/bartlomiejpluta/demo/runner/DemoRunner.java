@@ -5,6 +5,7 @@ import com.bartlomiejpluta.base.api.gui.GUI;
 import com.bartlomiejpluta.base.api.runner.GameRunner;
 import com.bartlomiejpluta.base.api.screen.Screen;
 import com.bartlomiejpluta.base.util.profiler.FPSProfiler;
+import com.bartlomiejpluta.demo.entity.Enemy;
 import com.bartlomiejpluta.demo.entity.Player;
 import com.bartlomiejpluta.demo.menu.MenuManager;
 import com.bartlomiejpluta.demo.world.weapon.RangedWeapon;
@@ -94,6 +95,10 @@ public class DemoRunner implements GameRunner {
       context.closeMap();
       menu.disableGameMenu();
       menu.showStartMenu();
+   }
+
+   public void openLootWindow(Enemy enemy) {
+      menu.openLootWindow(enemy);
    }
 
    public void exit() {
