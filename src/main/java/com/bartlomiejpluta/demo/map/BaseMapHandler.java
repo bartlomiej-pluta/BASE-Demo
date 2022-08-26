@@ -14,6 +14,7 @@ import com.bartlomiejpluta.base.lib.camera.CameraController;
 import com.bartlomiejpluta.base.lib.camera.FollowingCameraController;
 import com.bartlomiejpluta.base.util.world.CharacterSpawner;
 import com.bartlomiejpluta.base.util.world.Warp;
+import com.bartlomiejpluta.demo.entity.Chest;
 import com.bartlomiejpluta.demo.entity.Enemy;
 import com.bartlomiejpluta.demo.entity.MapObject;
 import com.bartlomiejpluta.demo.entity.Player;
@@ -101,11 +102,11 @@ public abstract class BaseMapHandler implements MapHandler {
       return enemy;
    }
 
-   public MapObject object(ObjectLayer layer, int x, int y, @NonNull String id) {
-      var object = new MapObject(id);
-      object.setCoordinates(x, y);
-      layer.addEntity(object);
-      return object;
+   public Chest chest(ObjectLayer layer, int x, int y, @NonNull String id) {
+      var chest = new Chest(id);
+      chest.setCoordinates(x, y);
+      layer.addEntity(chest);
+      return chest;
    }
 
    public CharacterSpawner spawner(ObjectLayer layer, int x, int y) {

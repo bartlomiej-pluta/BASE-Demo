@@ -9,6 +9,7 @@ import com.bartlomiejpluta.base.api.gui.WindowManager;
 import com.bartlomiejpluta.base.api.input.Key;
 import com.bartlomiejpluta.base.api.input.KeyAction;
 import com.bartlomiejpluta.base.api.input.KeyEvent;
+import com.bartlomiejpluta.demo.entity.Chest;
 import com.bartlomiejpluta.demo.entity.Enemy;
 import com.bartlomiejpluta.demo.gui.EquipmentWindow;
 import com.bartlomiejpluta.demo.gui.GameMenuWindow;
@@ -104,7 +105,13 @@ public class MenuManager {
    public void openLootWindow(@NonNull Enemy enemy) {
       manager.closeAll();
 
-      manager.open(loot, enemy);
+      manager.open(loot, enemy.getLoot(), "Loot");
+   }
+
+   public void openChestWindow(@NonNull Chest chest) {
+      manager.closeAll();
+
+      manager.open(loot, chest.getContent(), chest.getName());
    }
 
    public void closeAll() {

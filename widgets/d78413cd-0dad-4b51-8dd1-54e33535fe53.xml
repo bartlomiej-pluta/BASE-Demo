@@ -10,6 +10,7 @@
 
     <base:VLayout width="auto" height="auto">
         <base:Label
+                ref="title"
                 font="A.fonts.roboto_regular.uid"
                 width="relative"
                 alignment="top|center"
@@ -17,8 +18,7 @@
                 green="1f"
                 blue="1f"
                 alpha="0.5f"
-                fontSize="30f">Loot
-        </base:Label>
+                fontSize="30f"/>
 
         <base:VGridOptionChoice ref="loot" columns="4" width="auto" height="auto"/>
 

@@ -7,7 +7,7 @@ import com.bartlomiejpluta.base.util.path.PathExecutor;
 import lombok.Getter;
 import lombok.NonNull;
 
-public class MapObject extends NamedCharacter {
+public abstract class MapObject extends NamedCharacter {
    private final PathExecutor<MapObject> pathExecutor = new PathExecutor<>(this);
    private final DB.model.MapObjectModel template;
    private final Short frame;
@@ -46,6 +46,7 @@ public class MapObject extends NamedCharacter {
                       .wait(0.05f)
                       .turn(Direction.UP, frame)
                       .wait(0.5f)
+                      .suspend(this::shouldGoFurther)
                       .turn(Direction.RIGHT, frame)
                       .wait(0.05f)
                       .turn(Direction.LEFT, frame)
@@ -53,21 +54,25 @@ public class MapObject extends NamedCharacter {
                       .turn(Direction.DOWN, frame)
                       .wait(0.5f)
                       .run(this::finishInteraction)
-                      : new CharacterPath<MapObject>()
+                      : new CharacterPath<>()
       );
+   }
+
+   protected boolean shouldGoFurther(MapObject object) {
+      return true;
    }
 
    public void interact(Creature creature) {
       interacting = true;
    }
 
-   private void startInteraction() {
+   protected void startInteraction() {
       if (interactSound != null) {
          context.playSound(interactSound);
       }
    }
 
-   private void finishInteraction() {
+   protected void finishInteraction() {
       interacting = false;
    }
 

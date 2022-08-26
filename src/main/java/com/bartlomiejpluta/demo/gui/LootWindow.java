@@ -2,6 +2,7 @@ package com.bartlomiejpluta.demo.gui;
 
 import com.bartlomiejpluta.base.api.context.Context;
 import com.bartlomiejpluta.base.api.gui.*;
+import com.bartlomiejpluta.base.lib.gui.Label;
 import com.bartlomiejpluta.base.lib.gui.VGridOptionChoice;
 import com.bartlomiejpluta.demo.entity.Enemy;
 import com.bartlomiejpluta.demo.entity.Player;
@@ -12,6 +13,9 @@ import java.util.Map;
 
 public class LootWindow extends DecoratedWindow implements Inflatable {
    private final Player player;
+
+   @Ref("title")
+   private Label titleLbl;
 
    @Ref("loot")
    private VGridOptionChoice lootMenu;
@@ -40,8 +44,8 @@ public class LootWindow extends DecoratedWindow implements Inflatable {
    public void onOpen(WindowManager manager, Object[] args) {
       super.onOpen(manager, args);
 
-      var creature = (Enemy) args[0];
-      this.loot = creature.getLoot();
+      this.loot = (Item[]) args[0];
+      this.titleLbl.setText((String) args[1]);
       updateSlots();
    }
 

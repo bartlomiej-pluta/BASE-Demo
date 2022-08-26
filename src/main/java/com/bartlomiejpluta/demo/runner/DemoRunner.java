@@ -5,6 +5,7 @@ import com.bartlomiejpluta.base.api.gui.GUI;
 import com.bartlomiejpluta.base.api.runner.GameRunner;
 import com.bartlomiejpluta.base.api.screen.Screen;
 import com.bartlomiejpluta.base.util.profiler.FPSProfiler;
+import com.bartlomiejpluta.demo.entity.Chest;
 import com.bartlomiejpluta.demo.entity.Enemy;
 import com.bartlomiejpluta.demo.entity.Player;
 import com.bartlomiejpluta.demo.menu.MenuManager;
@@ -99,6 +100,10 @@ public class DemoRunner implements GameRunner {
 
    public void openLootWindow(Enemy enemy) {
       menu.openLootWindow(enemy);
+   }
+
+   public void openChestWindow(Chest chest) {
+      menu.openChestWindow(chest);
    }
 
    public void exit() {
