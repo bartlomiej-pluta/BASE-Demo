@@ -27,7 +27,27 @@
                     <demo:ItemIconView ref="ammo" placeholder="Generic,8,10" margin="5f"/>
                 </base:VGridOptionChoice>
 
-                <base:VGridOptionChoice ref="inventory" columns="4" width="auto" height="auto">
+                <base:VGridOptionChoice ref="inventory" columns="6" width="auto" height="auto">
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
                     <demo:ItemIconView margin="5f"/>
                     <demo:ItemIconView margin="5f"/>
                     <demo:ItemIconView margin="5f"/>

@@ -8,7 +8,8 @@ import lombok.NonNull;
 import org.joml.Vector2i;
 
 public class Player extends Creature {
-   private final Item[] equipment = new Item[4 * 4];
+   public static final int EQUIPMENT_SIZE = 6 * 6;
+   private final Item[] equipment = new Item[EQUIPMENT_SIZE];
    private int interactionCooldown = 0;
 
    public Player(@NonNull Character entity) {
