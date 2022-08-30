@@ -82,9 +82,9 @@ public class DemoRunner implements GameRunner {
       menu.closeAll();
       menu.enableGameMenu();
       resetPlayer();
-//      context.openMap(A.maps.home.uid);
-//      context.getMap().getObjectLayer(A.maps.home.layers.main).addEntity(this.player);
-      player.setCoordinates(17, 9);
+      context.openMap(A.maps.hero_home.uid);
+      context.getMap().getObjectLayer(A.maps.hero_home.layers.main).addEntity(this.player);
+      player.setCoordinates(11, 14);
       context.resume();
       hud.show();
    }
