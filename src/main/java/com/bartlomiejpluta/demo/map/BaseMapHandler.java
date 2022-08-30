@@ -15,6 +15,7 @@ import com.bartlomiejpluta.base.lib.camera.FollowingCameraController;
 import com.bartlomiejpluta.base.util.world.CharacterSpawner;
 import com.bartlomiejpluta.base.util.world.Warp;
 import com.bartlomiejpluta.demo.entity.Chest;
+import com.bartlomiejpluta.demo.entity.Door;
 import com.bartlomiejpluta.demo.entity.Enemy;
 import com.bartlomiejpluta.demo.entity.Player;
 import com.bartlomiejpluta.demo.event.EnemyDiedEvent;
@@ -37,7 +38,7 @@ public abstract class BaseMapHandler implements MapHandler {
       this.runner = (DemoRunner) context.getGameRunner();
       this.camera = context.getCamera();
       this.map = map;
-      this.player = runner.getPlayer();
+      this.player = context.getGlobal("player", Player.class);
       this.cameraController = FollowingCameraController
               .on(screen, camera, map)
               .follow(player.getPosition());
@@ -105,6 +106,13 @@ public abstract class BaseMapHandler implements MapHandler {
       chest.setCoordinates(x, y);
       layer.addEntity(chest);
       return chest;
+   }
+
+   public Door door(ObjectLayer layer, int x, int y, @NonNull String mapName, @NonNull String layerName, int targetX, int targetY, @NonNull String id) {
+      var door = new Door(mapName, layerName, targetX, targetY, id);
+      door.setCoordinates(x, y);
+      layer.addEntity(door);
+      return door;
    }
 
    public CharacterSpawner spawner(ObjectLayer layer, int x, int y) {

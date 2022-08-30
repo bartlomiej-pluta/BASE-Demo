@@ -18,9 +18,7 @@ public class Chest extends MapObject {
    }
 
    @Override
-   public void interact(Creature creature) {
-      super.interact(creature);
-
+   protected void interact() {
       runner.openChestWindow(this);
    }
 

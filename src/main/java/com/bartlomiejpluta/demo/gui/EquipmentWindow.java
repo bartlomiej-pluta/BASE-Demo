@@ -19,7 +19,6 @@ import static java.lang.String.format;
 
 
 public class EquipmentWindow extends DecoratedWindow {
-   private final DemoRunner runner;
    private final Player player;
 
    private final Window eqItemMenuWindow;
@@ -45,8 +44,7 @@ public class EquipmentWindow extends DecoratedWindow {
 
    public EquipmentWindow(Context context, GUI gui, Map<String, Component> refs) {
       super(context, gui, refs);
-      this.runner = (DemoRunner) context.getGameRunner();
-      this.player = runner.getPlayer();
+      this.player = context.getGlobal("player", Player.class);
       this.eqItemMenuWindow = gui.inflateWindow(A.widgets.eq_item_menu.uid);
       this.eqItemMenu = eqItemMenuWindow.reference("menu", VOptionChoice.class);
       this.useBtn = eqItemMenuWindow.reference("use", Button.class);

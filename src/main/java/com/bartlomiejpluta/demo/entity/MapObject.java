@@ -45,8 +45,10 @@ public abstract class MapObject extends NamedCharacter {
                       .turn(Direction.RIGHT, frame)
                       .wait(0.05f)
                       .turn(Direction.UP, frame)
-                      .wait(0.5f)
+                      .wait(0.25f)
+                      .run(this::interact)
                       .suspend(this::shouldGoFurther)
+                      .wait(0.25f)
                       .turn(Direction.RIGHT, frame)
                       .wait(0.05f)
                       .turn(Direction.LEFT, frame)
@@ -62,9 +64,11 @@ public abstract class MapObject extends NamedCharacter {
       return true;
    }
 
-   public void interact(Creature creature) {
+   public void triggerInteraction() {
       interacting = true;
    }
+
+   protected abstract void interact();
 
    protected void startInteraction() {
       if (interactSound != null) {

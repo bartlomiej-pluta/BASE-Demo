@@ -7,8 +7,6 @@ import com.bartlomiejpluta.demo.world.weapon.Weapon;
 import lombok.NonNull;
 import org.joml.Vector2i;
 
-import java.util.List;
-
 public class Player extends Creature {
    private final Item[] equipment = new Item[4 * 4];
    private int interactionCooldown = 0;
@@ -31,7 +29,7 @@ public class Player extends Creature {
 
          // Use some map object which player is looking at
          if (entity.getCoordinates().equals(coords) && entity instanceof MapObject object) {
-            object.interact(this);
+            object.triggerInteraction();
             return;
          }
 

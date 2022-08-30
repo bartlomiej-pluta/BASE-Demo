@@ -157,7 +157,7 @@ public class Enemy extends Creature implements NPC {
    }
 
    public Enemy defaultAI() {
-      var ai = new WeaponBasedAI(this, runner.getPlayer());
+      var ai = new WeaponBasedAI(this, context.getGlobal("player", Player.class));
 
       addEventListener(MoveEvent.TYPE, ai::recomputePath);
       addEventListener(EnemyDiedEvent.TYPE, e -> ai.recomputePath());

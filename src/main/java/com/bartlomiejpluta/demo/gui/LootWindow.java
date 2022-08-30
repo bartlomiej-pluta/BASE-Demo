@@ -26,7 +26,7 @@ public class LootWindow extends DecoratedWindow implements Inflatable {
 
    public LootWindow(Context context, GUI gui, Map<String, Component> refs) {
       super(context, gui, refs);
-      this.player = ((DemoRunner) context.getGameRunner()).getPlayer();
+      this.player = context.getGlobal("player", Player.class);
    }
 
    @Override

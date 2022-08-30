@@ -9,8 +9,6 @@ import com.bartlomiejpluta.demo.entity.Chest;
 import com.bartlomiejpluta.demo.entity.Enemy;
 import com.bartlomiejpluta.demo.entity.Player;
 import com.bartlomiejpluta.demo.menu.MenuManager;
-import com.bartlomiejpluta.demo.world.weapon.RangedWeapon;
-import lombok.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,13 +20,14 @@ public class DemoRunner implements GameRunner {
    private Context context;
    private MenuManager menu;
    private GUI hud;
-   @Getter
    private Player player;
 
    @Override
    public void init(Context context) {
       this.context = context;
       this.screen = context.getScreen();
+
+      context.putGlobal("fps-profiler", fpsProfiler);
 
       configureScreen();
       configureCamera();
@@ -68,6 +67,7 @@ public class DemoRunner implements GameRunner {
 
    private void initPlayer() {
       this.player = new Player(context.createCharacter(A.charsets.luna.uid));
+      context.putGlobal("player", player);
    }
 
    private void resetPlayer() {
@@ -82,9 +82,9 @@ public class DemoRunner implements GameRunner {
       menu.closeAll();
       menu.enableGameMenu();
       resetPlayer();
-//      context.openMap(A.maps.forrest.uid);
-//      context.getMap().getObjectLayer(A.maps.forrest.layers.main).addEntity(this.player);
-      player.setCoordinates(5, 36);
+//      context.openMap(A.maps.home.uid);
+//      context.getMap().getObjectLayer(A.maps.home.layers.main).addEntity(this.player);
+      player.setCoordinates(17, 9);
       context.resume();
       hud.show();
    }
@@ -108,10 +108,6 @@ public class DemoRunner implements GameRunner {
 
    public void exit() {
       context.close();
-   }
-
-   public double instantFPS() {
-      return fpsProfiler.getInstantFPS();
    }
 
    @Override
