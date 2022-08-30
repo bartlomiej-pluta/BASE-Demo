@@ -4,19 +4,18 @@ import com.bartlomiejpluta.base.api.animation.Animation;
 import com.bartlomiejpluta.base.api.context.Context;
 import com.bartlomiejpluta.base.api.context.ContextHolder;
 import com.bartlomiejpluta.base.api.entity.Entity;
-import com.bartlomiejpluta.base.api.icon.Icon;
 import com.bartlomiejpluta.base.api.move.Movable;
 import com.bartlomiejpluta.base.lib.animation.AnimationRunner;
 import com.bartlomiejpluta.base.lib.animation.BulletAnimationRunner;
 import com.bartlomiejpluta.base.lib.animation.SimpleAnimationRunner;
-import com.bartlomiejpluta.base.lib.icon.IconDelegate;
 import com.bartlomiejpluta.base.util.random.DiceRoller;
 import com.bartlomiejpluta.demo.entity.Creature;
 import com.bartlomiejpluta.demo.event.HitEvent;
+import com.bartlomiejpluta.demo.world.item.BaseItem;
 import lombok.Getter;
 import lombok.NonNull;
 
-public class RangedWeapon extends IconDelegate implements Weapon {
+public class RangedWeapon extends BaseItem implements Weapon {
    private final Context context;
    private final BulletAnimationRunner animation;
    private final String sound;
@@ -45,7 +44,7 @@ public class RangedWeapon extends IconDelegate implements Weapon {
    }
 
    public RangedWeapon(@NonNull DB.model.RangedWeaponModel template) {
-      super(createIcon(template));
+      super(template.getIcon());
 
       this.context = ContextHolder.INSTANCE.getContext();
       this.name = template.getName();
@@ -81,7 +80,7 @@ public class RangedWeapon extends IconDelegate implements Weapon {
    public boolean attack(Creature attacker) {
       var ammunition = attacker.getAmmunition();
 
-      if(ammunition == null || !ammunition.getAppliesTo().equals(type)) {
+      if (ammunition == null || !ammunition.getAppliesTo().equals(type)) {
          return false;
       }
 
@@ -99,10 +98,5 @@ public class RangedWeapon extends IconDelegate implements Weapon {
    @Override
    public String usageName() {
       return "Equip";
-   }
-
-   private static Icon createIcon(DB.model.RangedWeaponModel template) {
-      var icons = template.getIcon().split(",");
-      return ContextHolder.INSTANCE.getContext().createIcon(A.iconsets.get(icons[0]).uid, Integer.parseInt(icons[1]), Integer.parseInt(icons[2]));
    }
 }

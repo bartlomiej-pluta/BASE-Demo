@@ -10,7 +10,7 @@ import com.bartlomiejpluta.demo.world.weapon.MeleeWeapon;
 import lombok.NonNull;
 
 public class WeaponBasedAI implements AI {
-   private static final int RANGE = 10;
+   private static final int RANGE = 20;
    private static final int MIN_RANGE = 3;
    private static final int MAX_RANGE = 12;
    private final Enemy enemy;

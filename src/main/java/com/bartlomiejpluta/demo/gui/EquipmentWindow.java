@@ -9,6 +9,7 @@ import com.bartlomiejpluta.demo.entity.Player;
 import com.bartlomiejpluta.demo.runner.DemoRunner;
 import com.bartlomiejpluta.demo.world.item.Item;
 import com.bartlomiejpluta.demo.world.item.Useable;
+import com.bartlomiejpluta.demo.world.potion.Medicament;
 import com.bartlomiejpluta.demo.world.weapon.MeleeWeapon;
 import com.bartlomiejpluta.demo.world.weapon.RangedWeapon;
 
@@ -121,6 +122,11 @@ public class EquipmentWindow extends DecoratedWindow {
 
       if (item instanceof RangedWeapon weapon) {
          detailsLbl.setText(format("Damage: %s\nRange: %s\nCooldown: %s\n", weapon.getDmgRoller(), weapon.getRangeRoller(), weapon.getCooldown()));
+         return;
+      }
+
+      if (item instanceof Medicament medicament) {
+         detailsLbl.setText(format("Restores: %s HP\n", medicament.getRoller()));
       }
    }
 

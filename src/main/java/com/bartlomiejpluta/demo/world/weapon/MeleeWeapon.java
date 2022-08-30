@@ -2,18 +2,17 @@ package com.bartlomiejpluta.demo.world.weapon;
 
 import com.bartlomiejpluta.base.api.context.Context;
 import com.bartlomiejpluta.base.api.context.ContextHolder;
-import com.bartlomiejpluta.base.api.icon.Icon;
 import com.bartlomiejpluta.base.lib.animation.AnimationRunner;
 import com.bartlomiejpluta.base.lib.animation.RandomAnimationsRunner;
-import com.bartlomiejpluta.base.lib.icon.IconDelegate;
 import com.bartlomiejpluta.base.util.random.DiceRoller;
 import com.bartlomiejpluta.demo.entity.Creature;
 import com.bartlomiejpluta.demo.event.HitEvent;
+import com.bartlomiejpluta.demo.world.item.BaseItem;
 import lombok.Getter;
 import lombok.NonNull;
 import org.joml.Vector2i;
 
-public class MeleeWeapon extends IconDelegate implements Weapon {
+public class MeleeWeapon extends BaseItem implements Weapon {
    private final Context context;
    private final AnimationRunner animation;
    private final String sound;
@@ -32,7 +31,7 @@ public class MeleeWeapon extends IconDelegate implements Weapon {
    }
 
    public MeleeWeapon(@NonNull DB.model.MeleeWeaponModel template) {
-      super(createIcon(template));
+      super(template.getIcon());
 
       this.context = ContextHolder.INSTANCE.getContext();
       this.name = template.getName();
@@ -67,10 +66,5 @@ public class MeleeWeapon extends IconDelegate implements Weapon {
    @Override
    public String usageName() {
       return "Equip";
-   }
-
-   private static Icon createIcon(DB.model.MeleeWeaponModel template) {
-      var icons = template.getIcon().split(",");
-      return ContextHolder.INSTANCE.getContext().createIcon(A.iconsets.get(icons[0]).uid, Integer.parseInt(icons[1]), Integer.parseInt(icons[2]));
    }
 }

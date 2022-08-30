@@ -51,9 +51,9 @@ public class Enemy extends Creature implements NPC {
       super(ContextHolder.INSTANCE.getContext().createCharacter(A.charsets.get(template.getCharset()).uid));
       this.template = template;
       name = template.getName();
-      maxHp = DiceRoller.of(template.getHp()).roll();
+      maxHp = DiceRoller.roll(template.getHp());
       hp = maxHp;
-      var speed = DiceRoller.of(template.getSpeed()).roll() / 10f;
+      var speed = DiceRoller.roll(template.getSpeed()) / 10f;
       setSpeed(speed);
       setAnimationSpeed(speed / 2.0f);
       setBlocking(template.isBlocking());
@@ -68,7 +68,7 @@ public class Enemy extends Creature implements NPC {
          var split = rangedWeaponTemplate.split(",");
 
          this.rangedWeapon = new RangedWeapon(split[0]);
-         setAmmunition(new Ammunition(split[1], DiceRoller.of(split[2]).roll()));
+         setAmmunition(new Ammunition(split[1], DiceRoller.roll(split[2])));
       }
 
       this.dieAnimation = new SimpleAnimationRunner(A.animations.get(template.getDieAnimation()).uid);
@@ -77,6 +77,11 @@ public class Enemy extends Creature implements NPC {
    @Override
    public AI getStrategy() {
       return ai;
+   }
+
+   @Override
+   public void removeItemFromEquipment(Item item) {
+      // noop
    }
 
    @Override
@@ -114,7 +119,7 @@ public class Enemy extends Creature implements NPC {
          loot[index] = switch (split[0]) {
             case "melee_weapon" -> new MeleeWeapon(split[1]);
             case "ranged_weapon" -> new RangedWeapon(split[1]);
-            case "ammo" -> new Ammunition(split[1], DiceRoller.of(d.getAmount()).roll());
+            case "ammo" -> new Ammunition(split[1], DiceRoller.roll(d.getAmount()));
             case "junk" -> new Junk(split[1]);
             default -> throw new IllegalArgumentException("Unsupported item type");
          };

@@ -50,10 +50,10 @@ public abstract class Creature extends NamedCharacter {
 
       if (attackCooldown >= weapon.getCooldown()) {
          if (weapon.attack(this)) {
-            if(weapon instanceof RangedWeapon) {
+            if (weapon instanceof RangedWeapon) {
                ammunition.decrease();
 
-               if(ammunition.getCount() == 0) {
+               if (ammunition.getCount() == 0) {
                   ammunition = null;
                }
             }
@@ -84,6 +84,10 @@ public abstract class Creature extends NamedCharacter {
       }
    }
 
+   public void heal(int hp) {
+      this.hp = Math.min(this.hp + hp, this.maxHp);
+   }
+
    @Override
    public void update(float dt) {
       super.update(dt);
@@ -105,4 +109,6 @@ public abstract class Creature extends NamedCharacter {
    }
 
    public abstract String getName();
+
+   public abstract void removeItemFromEquipment(Item item);
 }

@@ -13,8 +13,8 @@ public class Player extends Creature {
 
    public Player(@NonNull Character entity) {
       super(entity);
-      this.hp = 500;
-      this.maxHp = 500;
+      this.hp = 20;
+      this.maxHp = 20;
    }
 
    public void interact() {
@@ -68,6 +68,7 @@ public class Player extends Creature {
       return equipment[index];
    }
 
+   @Override
    public void removeItemFromEquipment(@NonNull Item item) {
       for (int i = 0; i < equipment.length; ++i) {
          if (equipment[i] == item) {

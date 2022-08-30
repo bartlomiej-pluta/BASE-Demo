@@ -1,13 +1,10 @@
 package com.bartlomiejpluta.demo.world.junk;
 
-import com.bartlomiejpluta.base.api.context.ContextHolder;
-import com.bartlomiejpluta.base.api.icon.Icon;
-import com.bartlomiejpluta.base.lib.icon.IconDelegate;
-import com.bartlomiejpluta.demo.world.item.Item;
+import com.bartlomiejpluta.demo.world.item.BaseItem;
 import lombok.Getter;
 import lombok.NonNull;
 
-public class Junk extends IconDelegate implements Item {
+public class Junk extends BaseItem {
 
    @Getter
    private final String name;
@@ -17,12 +14,7 @@ public class Junk extends IconDelegate implements Item {
    }
 
    public Junk(@NonNull DB.model.JunkModel template) {
-      super(createIcon(template));
+      super(template.getIcon());
       this.name = template.getName();
-   }
-
-   private static Icon createIcon(DB.model.JunkModel template) {
-      var icons = template.getIcon().split(",");
-      return ContextHolder.INSTANCE.getContext().createIcon(A.iconsets.get(icons[0]).uid, Integer.parseInt(icons[1]), Integer.parseInt(icons[2]));
    }
 }

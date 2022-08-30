@@ -20,6 +20,7 @@ import com.bartlomiejpluta.demo.entity.Enemy;
 import com.bartlomiejpluta.demo.entity.Player;
 import com.bartlomiejpluta.demo.event.EnemyDiedEvent;
 import com.bartlomiejpluta.demo.runner.DemoRunner;
+import com.bartlomiejpluta.demo.world.potion.Medicament;
 import lombok.NonNull;
 
 public abstract class BaseMapHandler implements MapHandler {
@@ -120,6 +121,17 @@ public abstract class BaseMapHandler implements MapHandler {
       spawner.setCoordinates(x, y);
       layer.addEntity(spawner);
       return spawner;
+   }
+
+   public Medicament medicament(@NonNull String id, int count) {
+      return new Medicament(id, count);
+   }
+
+   public Medicament medicament(ObjectLayer layer, int x, int y, @NonNull String id, int count) {
+      var medicament = new Medicament(id, count);
+      medicament.setCoordinates(x, y);
+      layer.addEntity(medicament);
+      return medicament;
    }
 
    public Icon icon(ObjectLayer layer, int x, int y, String iconSetUid, int row, int column) {
