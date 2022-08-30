@@ -97,6 +97,6 @@ public class RangedWeapon extends BaseItem implements Weapon {
 
    @Override
    public String usageName() {
-      return "Equip";
+      return "Arm";
    }
 }

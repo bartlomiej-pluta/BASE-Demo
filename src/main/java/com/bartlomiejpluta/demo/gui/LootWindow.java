@@ -46,6 +46,8 @@ public class LootWindow extends DecoratedWindow implements Inflatable {
 
       this.loot = (Item[]) args[0];
       this.titleLbl.setText((String) args[1]);
+      this.lootMenu.select(0, 0);
+      this.lootMenu.focus();
       updateSlots();
    }
 
@@ -57,7 +59,7 @@ public class LootWindow extends DecoratedWindow implements Inflatable {
       this.loot = null;
    }
 
-   private void handleClick(Item item) {
+   private void handleClick(ItemIconView slot, Item item) {
       if (item == null) {
          return;
       }
@@ -66,7 +68,7 @@ public class LootWindow extends DecoratedWindow implements Inflatable {
          for (int i = 0; i < Enemy.MAX_LOOT; i++) {
             if (loot[i] == item) {
                loot[i] = null;
-               slots[i].setItem(null);
+               slot.setItem(null);
                break;
             }
          }

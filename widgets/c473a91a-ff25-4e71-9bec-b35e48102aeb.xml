@@ -12,38 +12,40 @@
         <base:Label
                 font="A.fonts.roboto_regular.uid"
                 width="relative"
-                alignment="top|center"
+                alignment="top|left"
                 red="1f"
                 green="1f"
                 blue="1f"
                 alpha="0.5f"
-                fontSize="30f">Equipment
+                fontSize="30f">Inventory &amp; Equipment
         </base:Label>
 
-        <base:HLayout>
-            <base:VGridLayout columns="2" padding="20f" width="250f">
-                <demo:ItemIconView ref="weapon" margin="5f"/>
-                <demo:ItemIconView ref="ammo" margin="5f"/>
-            </base:VGridLayout>
+        <base:HLayout margin="0f" padding="0f">
+            <base:HOptionChoice ref="layout">
+                <base:VGridOptionChoice ref="equipment" columns="2" width="auto">
+                    <demo:ItemIconView ref="weapon" placeholder="Generic,5,10" margin="5f"/>
+                    <demo:ItemIconView ref="ammo" placeholder="Generic,8,10" margin="5f"/>
+                </base:VGridOptionChoice>
 
-            <base:VGridOptionChoice ref="eq" columns="4" width="auto" height="auto">
-                <demo:ItemIconView margin="5f"/>
-                <demo:ItemIconView margin="5f"/>
-                <demo:ItemIconView margin="5f"/>
-                <demo:ItemIconView margin="5f"/>
-                <demo:ItemIconView margin="5f"/>
-                <demo:ItemIconView margin="5f"/>
-                <demo:ItemIconView margin="5f"/>
-                <demo:ItemIconView margin="5f"/>
-                <demo:ItemIconView margin="5f"/>
-                <demo:ItemIconView margin="5f"/>
-                <demo:ItemIconView margin="5f"/>
-                <demo:ItemIconView margin="5f"/>
-                <demo:ItemIconView margin="5f"/>
-                <demo:ItemIconView margin="5f"/>
-                <demo:ItemIconView margin="5f"/>
-                <demo:ItemIconView margin="5f"/>
-            </base:VGridOptionChoice>
+                <base:VGridOptionChoice ref="inventory" columns="4" width="auto" height="auto">
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                    <demo:ItemIconView margin="5f"/>
+                </base:VGridOptionChoice>
+            </base:HOptionChoice>
 
             <base:VLayout height="relative" padding="20f" width="250f">
                 <base:Label ref="item-name"
@@ -63,7 +65,6 @@
                             margin="5f"/>
 
             </base:VLayout>
-
         </base:HLayout>
     </base:VLayout>
 

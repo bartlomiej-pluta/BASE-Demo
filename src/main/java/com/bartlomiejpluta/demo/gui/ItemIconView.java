@@ -2,15 +2,14 @@ package com.bartlomiejpluta.demo.gui;
 
 import A.fonts;
 import com.bartlomiejpluta.base.api.context.Context;
-import com.bartlomiejpluta.base.api.gui.Color;
-import com.bartlomiejpluta.base.api.gui.Component;
-import com.bartlomiejpluta.base.api.gui.GUI;
+import com.bartlomiejpluta.base.api.gui.*;
 import com.bartlomiejpluta.base.api.icon.Icon;
 import com.bartlomiejpluta.base.api.input.Key;
 import com.bartlomiejpluta.base.api.input.KeyAction;
 import com.bartlomiejpluta.base.api.input.KeyEvent;
 import com.bartlomiejpluta.base.api.screen.Screen;
 import com.bartlomiejpluta.base.lib.gui.IconView;
+import com.bartlomiejpluta.demo.util.IconUtil;
 import com.bartlomiejpluta.demo.world.item.Item;
 import com.bartlomiejpluta.demo.world.item.ItemStack;
 import lombok.Getter;
@@ -18,9 +17,10 @@ import lombok.NonNull;
 import lombok.Setter;
 
 import java.util.Map;
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 
 public class ItemIconView extends IconView {
+   private final GUI gui;
    private final Color normal;
    private final Color hover;
    private final Color textColor;
@@ -28,11 +28,18 @@ public class ItemIconView extends IconView {
    @Getter
    private Item item;
 
+   private IconSet placeholderIconSet;
+   private Paint placeholderIconPaint;
+
+   private int placeholderIconSetRow;
+   private int placeholderIconSetColumn;
+
    @Setter
-   private Consumer<Item> action;
+   private BiConsumer<ItemIconView, Item> action;
 
    public ItemIconView(Context context, GUI gui, Map<String, Component> refs) {
       super(context, gui, refs);
+      this.gui = gui;
       this.normal = gui.createColor();
       this.hover = gui.createColor();
       this.textColor = gui.createColor();
@@ -71,10 +78,19 @@ public class ItemIconView extends IconView {
       throw new UnsupportedOperationException();
    }
 
+   @Attribute("placeholder")
+   public void setPlaceholderIcon(String icon) {
+      this.placeholderIconPaint = gui.createPaint();
+      var parts = icon.split(",");
+      this.placeholderIconSet = gui.getIconSet(A.iconsets.get(parts[0]).uid);
+      this.placeholderIconSetRow = Integer.parseInt(parts[1]);
+      this.placeholderIconSetColumn = Integer.parseInt(parts[2]);
+   }
+
    private void handleKeyEvent(KeyEvent event) {
       if (event.getKey() == Key.KEY_ENTER && event.getAction() == KeyAction.PRESS && item != null && action != null) {
          event.consume();
-         action.accept(item);
+         action.accept(this, item);
       }
    }
 
@@ -95,6 +111,12 @@ public class ItemIconView extends IconView {
       gui.setFillColor(focused ? hover : normal);
       gui.fill();
       gui.closePath();
+
+      if (item == null && placeholderIconSet != null) {
+         gui.icon(this.x, this.y, 2, 2, 0, 0.2f, placeholderIconSet, placeholderIconSetRow, placeholderIconSetColumn, placeholderIconPaint);
+
+         return;
+      }
 
       super.draw(screen, gui);
 

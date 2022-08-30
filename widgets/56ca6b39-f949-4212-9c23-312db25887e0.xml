@@ -20,7 +20,7 @@
                 fontSize="30f">Game Menu
         </base:Label>
 
-        <base:VOptionChoice width="relative">
+        <base:VOptionChoice ref="menu" width="relative">
             <demo:Button
                     ref="resume_game"
                     font="A.fonts.roboto_regular.uid"

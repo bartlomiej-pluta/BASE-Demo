@@ -2,11 +2,14 @@ package com.bartlomiejpluta.demo.gui;
 
 import com.bartlomiejpluta.base.api.context.Context;
 import com.bartlomiejpluta.base.api.gui.*;
+import com.bartlomiejpluta.base.api.input.Key;
+import com.bartlomiejpluta.base.api.input.KeyAction;
+import com.bartlomiejpluta.base.api.input.KeyEvent;
+import com.bartlomiejpluta.base.lib.gui.HOptionChoice;
 import com.bartlomiejpluta.base.lib.gui.Label;
 import com.bartlomiejpluta.base.lib.gui.VGridOptionChoice;
 import com.bartlomiejpluta.base.lib.gui.VOptionChoice;
 import com.bartlomiejpluta.demo.entity.Player;
-import com.bartlomiejpluta.demo.runner.DemoRunner;
 import com.bartlomiejpluta.demo.world.item.Item;
 import com.bartlomiejpluta.demo.world.item.Useable;
 import com.bartlomiejpluta.demo.world.potion.Medicament;
@@ -14,7 +17,7 @@ import com.bartlomiejpluta.demo.world.weapon.MeleeWeapon;
 import com.bartlomiejpluta.demo.world.weapon.RangedWeapon;
 
 import java.util.Map;
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 
 import static java.lang.String.format;
 
@@ -22,20 +25,26 @@ import static java.lang.String.format;
 public class EquipmentWindow extends DecoratedWindow {
    private final Player player;
 
-   private final Window eqItemMenuWindow;
+   private final Window popupMenuWindow;
    private final Button useBtn;
    private final Button dropBtn;
    private final Button cancelBtn;
-   private final VOptionChoice eqItemMenu;
+   private final VOptionChoice popupMenu;
 
-   @Ref("eq")
-   private VGridOptionChoice eqGrid;
+   @Ref("layout")
+   private HOptionChoice layout;
+
+   @Ref("equipment")
+   private VGridOptionChoice equipment;
+
+   @Ref("inventory")
+   private VGridOptionChoice inventory;
 
    @Ref("weapon")
-   private ItemIconView weapon;
+   private ItemIconView weaponSlot;
 
    @Ref("ammo")
-   private ItemIconView ammo;
+   private ItemIconView ammoSlot;
 
    @Ref("item-name")
    private Label nameLbl;
@@ -43,14 +52,26 @@ public class EquipmentWindow extends DecoratedWindow {
    @Ref("item-details")
    private Label detailsLbl;
 
+
    public EquipmentWindow(Context context, GUI gui, Map<String, Component> refs) {
       super(context, gui, refs);
       this.player = context.getGlobal("player", Player.class);
-      this.eqItemMenuWindow = gui.inflateWindow(A.widgets.eq_item_menu.uid);
-      this.eqItemMenu = eqItemMenuWindow.reference("menu", VOptionChoice.class);
-      this.useBtn = eqItemMenuWindow.reference("use", Button.class);
-      this.dropBtn = eqItemMenuWindow.reference("drop", Button.class);
-      this.cancelBtn = eqItemMenuWindow.reference("cancel", Button.class);
+      this.popupMenuWindow = gui.inflateWindow(A.widgets.eq_item_menu.uid);
+      this.popupMenu = popupMenuWindow.reference("menu", VOptionChoice.class);
+      this.useBtn = popupMenuWindow.reference("use", Button.class);
+      this.dropBtn = popupMenuWindow.reference("drop", Button.class);
+      this.cancelBtn = popupMenuWindow.reference("cancel", Button.class);
+
+      addEventListener(KeyEvent.TYPE, this::handleKey);
+   }
+
+   private void handleKey(KeyEvent event) {
+      if (event.getKey() == Key.KEY_TAB && event.getAction() == KeyAction.PRESS) {
+         layout.selectNext();
+         layout.focus();
+         updateItemDetails(((VGridOptionChoice) layout.getSelectedComponent()).getSelectedComponent());
+         event.consume();
+      }
    }
 
    @Override
@@ -58,41 +79,53 @@ public class EquipmentWindow extends DecoratedWindow {
       super.onOpen(manager, args);
 
       cancelBtn.setAction(manager::close);
-      eqGrid.setOnSelect(this::updateItemDetails);
+      inventory.setOnSelect(this::updateItemDetails);
+      equipment.setOnSelect(this::updateItemDetails);
 
       updateEquipment();
 
-      eqGrid.select(0, 0);
-      eqGrid.focus();
+      layout.select(1);
+      layout.focus();
+   }
+
+   @Override
+   public void onClose(WindowManager manager) {
+      super.onClose(manager);
+      layout.blur();
    }
 
    private void updateEquipment() {
       var i = 0;
-      for (var child : eqGrid.getChildren()) {
+      for (var child : inventory.getChildren()) {
          var slot = (ItemIconView) child;
          slot.setItem(player.getEquipmentItem(i++));
-         slot.setAction(handleClick(slot));
+         slot.setAction(this::handleInventoryClick);
       }
 
-      weapon.setItem(player.getWeapon());
-      ammo.setItem(player.getAmmunition());
+      weaponSlot.setItem(player.getWeapon());
+      weaponSlot.setAction(handleEquipmentClick(() -> {
+         player.setWeapon(null);
+         updateEquipment();
+         manager.close();
+      }));
+
+      ammoSlot.setItem(player.getAmmunition());
+      ammoSlot.setAction(handleEquipmentClick(() -> {
+         player.setAmmunition(null);
+         updateEquipment();
+         manager.close();
+      }));
    }
 
-   private Consumer<Item> handleClick(ItemIconView slot) {
-      return item -> {
-         useBtn.setText(getButtonTitle(item));
-         eqItemMenu.select(0);
-         eqItemMenu.focus();
+   private BiConsumer<ItemIconView, Item> handleEquipmentClick(Runnable deequip) {
+      return (slot, item) -> {
+         useBtn.setText("Disarm");
+         popupMenu.select(0);
+         popupMenu.focus();
 
-         manager.open(eqItemMenuWindow);
+         manager.open(popupMenuWindow);
 
-         if (item instanceof Useable useable) {
-            useBtn.setAction(() -> {
-               useable.use(player);
-               updateEquipment();
-               manager.close();
-            });
-         }
+         useBtn.setAction(deequip);
 
          dropBtn.setAction(() -> {
             player.dropItemFromEquipment(item);
@@ -101,6 +134,29 @@ public class EquipmentWindow extends DecoratedWindow {
             manager.close();
          });
       };
+   }
+
+   private void handleInventoryClick(ItemIconView slot, Item item) {
+      useBtn.setText(getButtonTitle(item));
+      popupMenu.select(0);
+      popupMenu.focus();
+
+      manager.open(popupMenuWindow);
+
+      if (item instanceof Useable useable) {
+         useBtn.setAction(() -> {
+            useable.use(player);
+            updateEquipment();
+            manager.close();
+         });
+      }
+
+      dropBtn.setAction(() -> {
+         player.dropItemFromEquipment(item);
+         slot.setItem(null);
+         updateItemDetails(slot);
+         manager.close();
+      });
    }
 
    private void updateItemDetails(Component slot) {

@@ -39,6 +39,6 @@ public class Ammunition extends StackableItem implements Useable {
 
    @Override
    public String usageName() {
-      return "Equip";
+      return "Arm";
    }
 }
