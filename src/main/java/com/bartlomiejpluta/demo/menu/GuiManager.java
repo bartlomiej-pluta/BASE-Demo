@@ -67,11 +67,10 @@ public class GuiManager {
             manager.close();
          } else {
             manager.open(gameMenu);
+            context.pause();
          }
 
-         if (manager.size() > 0) {
-            context.pause();
-         } else {
+         if (manager.isEmpty()) {
             context.resume();
          }
 
@@ -83,9 +82,9 @@ public class GuiManager {
       return manager.size();
    }
 
-   public void showStartMenu() {
+   public CompletableFuture<Window> showStartMenu() {
       manager.closeAll();
-      manager.open(startMenu);
+      return manager.open(startMenu);
    }
 
    public void enableGameMenu() {
@@ -101,20 +100,19 @@ public class GuiManager {
    }
 
    public CompletableFuture<Window> showDialog(@NonNull String message, @NonNull WindowPosition position) {
-      manager.closeAll();
       return manager.open(dialog, message, position);
    }
 
-   public void openLootWindow(@NonNull Enemy enemy) {
-      manager.closeAll();
-
-      manager.open(loot, enemy.getLoot(), "Loot");
+   public CompletableFuture<Window> openLootWindow(@NonNull Enemy enemy) {
+      return manager.open(loot, enemy.getLoot(), "Loot");
    }
 
-   public void openChestWindow(@NonNull Chest chest) {
-      manager.closeAll();
+   public CompletableFuture<Window> openChestWindow(@NonNull Chest chest) {
+      return manager.open(loot, chest.getContent(), chest.getName());
+   }
 
-      manager.open(loot, chest.getContent(), chest.getName());
+   public CompletableFuture<Window> openGameMenu() {
+      return manager.open(gameMenu);
    }
 
    public void closeAll() {
