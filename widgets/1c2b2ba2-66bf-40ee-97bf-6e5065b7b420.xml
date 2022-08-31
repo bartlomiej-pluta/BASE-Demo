@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<demo:DialogWindow
+        xmlns:base="com.bartlomiejpluta.base.lib.gui"
+        xmlns:demo="com.bartlomiejpluta.demo.gui"
+        windowPosition="bottom"
+        padding="20f"
+        margin="20f"
+        width="900f"
+        height="auto">
+    <base:TextView ref="message" alignment="top|left" font="A.fonts.roboto_regular.uid" fontSize="40f" width="relative"
+                   rows="4" color="0xFFFFFF"/>
+
+</demo:DialogWindow>

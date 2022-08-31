@@ -98,6 +98,14 @@ public abstract class BaseMapHandler implements MapHandler {
       cameraController.update();
    }
 
+   public CompletableFuture<Window> dialog(String message, WindowPosition position) {
+      return guiManager.showDialog(message, position);
+   }
+
+   public CompletableFuture<Window> dialog(String message) {
+      return guiManager.showDialog(message, WindowPosition.BOTTOM);
+   }
+
    public Enemy enemy(@NonNull String id) {
       return new Enemy(id);
    }
