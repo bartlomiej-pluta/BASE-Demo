@@ -10,6 +10,7 @@ import com.bartlomiejpluta.base.lib.gui.Label;
 import com.bartlomiejpluta.base.lib.gui.VGridOptionChoice;
 import com.bartlomiejpluta.base.lib.gui.VOptionChoice;
 import com.bartlomiejpluta.demo.entity.Player;
+import com.bartlomiejpluta.demo.runner.DemoRunner;
 import com.bartlomiejpluta.demo.world.item.Item;
 import com.bartlomiejpluta.demo.world.item.Useable;
 import com.bartlomiejpluta.demo.world.potion.Medicament;
@@ -55,7 +56,7 @@ public class EquipmentWindow extends DecoratedWindow {
 
    public EquipmentWindow(Context context, GUI gui, Map<String, Component> refs) {
       super(context, gui, refs);
-      this.player = context.getGlobal("player", Player.class);
+      this.player = DemoRunner.instance().getPlayer();
       this.popupMenuWindow = gui.inflateWindow(A.widgets.eq_item_menu.uid);
       this.popupMenu = popupMenuWindow.reference("menu", VOptionChoice.class);
       this.useBtn = popupMenuWindow.reference("use", Button.class);

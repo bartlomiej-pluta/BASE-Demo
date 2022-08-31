@@ -47,7 +47,7 @@ public class Player extends Creature {
 
             // Search the enemy corpse
             if (entity instanceof Enemy enemy && !enemy.isAlive()) {
-               guiManager.openLootWindow(enemy);
+               runner.getGuiManager().openLootWindow(enemy);
                interactionCooldown = INTERACTION_COOLDOWN;
                return;
             }
@@ -57,7 +57,7 @@ public class Player extends Creature {
 
    public boolean pushItemToEquipment(@NonNull Item item) {
       if (item instanceof Ammunition ammo) {
-         if (ammo.getId().equals(getAmmunition().getId())) {
+         if (getAmmunition() != null && ammo.getId().equals(getAmmunition().getId())) {
             getAmmunition().increase(ammo.getCount());
             return true;
          }

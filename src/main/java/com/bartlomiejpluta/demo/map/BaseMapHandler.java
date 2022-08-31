@@ -42,11 +42,11 @@ public abstract class BaseMapHandler implements MapHandler {
    public void onCreate(Context context, GameMap map) {
       this.context = context;
       this.screen = context.getScreen();
-      this.runner = (DemoRunner) context.getGameRunner();
-      this.guiManager = context.getGlobal("gui", GuiManager.class);
+      this.runner = DemoRunner.instance();
+      this.guiManager = runner.getGuiManager();
       this.camera = context.getCamera();
       this.map = map;
-      this.player = context.getGlobal("player", Player.class);
+      this.player = runner.getPlayer();
       this.cameraController = FollowingCameraController
               .on(screen, camera, map)
               .follow(player.getPosition());

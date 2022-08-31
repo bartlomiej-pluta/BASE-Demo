@@ -7,35 +7,29 @@ import com.bartlomiejpluta.base.api.screen.Screen;
 import com.bartlomiejpluta.base.util.profiler.FPSProfiler;
 import com.bartlomiejpluta.demo.entity.Player;
 import com.bartlomiejpluta.demo.menu.GuiManager;
+import lombok.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
 public class DemoRunner implements GameRunner {
    private static final Logger log = LoggerFactory.getLogger(DemoRunner.class);
-   private final FPSProfiler fpsProfiler = FPSProfiler.create(20);
+   private static DemoRunner INSTANCE;
+
    private Screen screen;
    private Context context;
-   private GuiManager guiManager;
    private GUI hud;
+
+   @Getter
+   private final FPSProfiler fpsProfiler = FPSProfiler.create(20);
+   @Getter
+   private GuiManager guiManager;
+
+   @Getter
    private Player player;
 
-   @Override
-   public void init(Context context) {
-      this.context = context;
-      this.screen = context.getScreen();
-
-      context.putGlobal("fps-profiler", fpsProfiler);
-
-      configureScreen();
-      configureCamera();
-      initPlayer();
-      initHUD();
-      initMenu();
-
-      guiManager.showStartMenu();
-
-      screen.show();
+   public static DemoRunner instance() {
+      return INSTANCE;
    }
 
    private void configureScreen() {
@@ -50,7 +44,6 @@ public class DemoRunner implements GameRunner {
 
    private void initMenu() {
       this.guiManager = new GuiManager(this, context);
-      context.putGlobal("gui", guiManager);
    }
 
    private void initHUD() {
@@ -62,7 +55,6 @@ public class DemoRunner implements GameRunner {
 
    private void initPlayer() {
       this.player = new Player(context.createCharacter(A.charsets.luna.uid));
-      context.putGlobal("player", player);
    }
 
    private void resetPlayer() {
@@ -105,5 +97,23 @@ public class DemoRunner implements GameRunner {
    @Override
    public void dispose() {
       // Do something after game loop is end
+   }
+
+   @Override
+   public void init(Context context) {
+      DemoRunner.INSTANCE = this;
+
+      this.context = context;
+      this.screen = context.getScreen();
+
+      configureScreen();
+      configureCamera();
+      initPlayer();
+      initHUD();
+      initMenu();
+
+      guiManager.showStartMenu();
+
+      screen.show();
    }
 }

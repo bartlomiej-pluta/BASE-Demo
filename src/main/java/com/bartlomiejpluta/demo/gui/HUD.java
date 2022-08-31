@@ -12,6 +12,7 @@ import com.bartlomiejpluta.base.util.profiler.FPSProfiler;
 import com.bartlomiejpluta.demo.entity.Player;
 import com.bartlomiejpluta.demo.event.EnemyDiedEvent;
 import com.bartlomiejpluta.demo.event.HitEvent;
+import com.bartlomiejpluta.demo.runner.DemoRunner;
 import com.bartlomiejpluta.demo.util.LimitedQueue;
 import com.bartlomiejpluta.demo.world.weapon.Weapon;
 import lombok.extern.slf4j.Slf4j;
@@ -48,8 +49,8 @@ public class HUD extends BorderLayout {
 
    public HUD(Context context, GUI gui, Map<String, Component> refs) {
       super(context, gui, refs);
-      this.player = context.getGlobal("player", Player.class);
-      this.fpsProfiler = context.getGlobal("fps-profiler", FPSProfiler.class);
+      this.player = DemoRunner.instance().getPlayer();
+      this.fpsProfiler = DemoRunner.instance().getFpsProfiler();
       this.runtime = Runtime.getRuntime();
       context.addEventListener(HitEvent.TYPE, this::logHitEvent);
       context.addEventListener(EnemyDiedEvent.TYPE, this::logEnemyDiedEvent);

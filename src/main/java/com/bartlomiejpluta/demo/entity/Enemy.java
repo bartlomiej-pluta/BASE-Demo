@@ -13,6 +13,7 @@ import com.bartlomiejpluta.base.lib.db.Relop;
 import com.bartlomiejpluta.base.util.random.DiceRoller;
 import com.bartlomiejpluta.demo.ai.*;
 import com.bartlomiejpluta.demo.event.EnemyDiedEvent;
+import com.bartlomiejpluta.demo.runner.DemoRunner;
 import com.bartlomiejpluta.demo.world.item.Item;
 import com.bartlomiejpluta.demo.world.junk.Junk;
 import com.bartlomiejpluta.demo.world.weapon.Ammunition;
@@ -162,7 +163,7 @@ public class Enemy extends Creature implements NPC {
    }
 
    public Enemy defaultAI() {
-      var ai = new WeaponBasedAI(this, context.getGlobal("player", Player.class));
+      var ai = new WeaponBasedAI(this, DemoRunner.instance().getPlayer());
 
       addEventListener(MoveEvent.TYPE, ai::recomputePath);
       addEventListener(EnemyDiedEvent.TYPE, e -> ai.recomputePath());

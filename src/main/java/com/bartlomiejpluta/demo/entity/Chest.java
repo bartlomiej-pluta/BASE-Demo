@@ -14,12 +14,12 @@ public class Chest extends MapObject {
 
    @Override
    protected void interact() {
-      guiManager.openChestWindow(this);
+      runner.getGuiManager().openChestWindow(this);
    }
 
    @Override
    protected boolean shouldGoFurther(MapObject object) {
-      return guiManager.openedWindows() == 0;
+      return runner.getGuiManager().openedWindows() == 0;
    }
 
    public Chest addItem(Item item) {

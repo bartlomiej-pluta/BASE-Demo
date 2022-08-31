@@ -1,7 +1,6 @@
 package com.bartlomiejpluta.demo.entity;
 
 import A.maps;
-import com.bartlomiejpluta.base.api.context.ContextHolder;
 import com.bartlomiejpluta.demo.runner.DemoRunner;
 import lombok.NonNull;
 
@@ -18,7 +17,7 @@ public class Door extends MapObject {
       this.targetX = targetX;
       this.targetY = targetY;
       this.layerId = maps.getLayer(mapName, layerName);
-      player = ContextHolder.INSTANCE.getContext().getGlobal("player", Player.class);
+      player = DemoRunner.instance().getPlayer();
       setPositionOffset(0, 16);
    }
 
