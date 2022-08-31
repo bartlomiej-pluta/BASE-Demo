@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
 
+import static java.lang.String.format;
+
 @ToString
 public class Ammunition extends StackableItem implements Useable {
 
@@ -26,7 +28,7 @@ public class Ammunition extends StackableItem implements Useable {
    public Ammunition(@NonNull DB.model.AmmunitionModel template, int count) {
       super(template.getIcon(), count);
 
-      this.id = template.getId();
+      this.id = format("ammo:%s", template.getId());
       this.name = template.getName();
       this.appliesTo = template.getAppliesTo();
    }

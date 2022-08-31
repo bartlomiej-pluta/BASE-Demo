@@ -3,12 +3,16 @@ package com.bartlomiejpluta.demo.world.potion;
 import DB.dao;
 import com.bartlomiejpluta.base.util.random.DiceRoller;
 import com.bartlomiejpluta.demo.entity.Creature;
-import com.bartlomiejpluta.demo.world.item.StackableItem;
 import com.bartlomiejpluta.demo.world.item.Useable;
+import com.bartlomiejpluta.demo.world.item.UseableStackableItem;
 import lombok.Getter;
 import lombok.NonNull;
 
-public class Medicament extends StackableItem implements Useable {
+import static java.lang.String.format;
+
+public class Medicament extends UseableStackableItem implements Useable {
+   @Getter
+   private final String id;
 
    @Getter
    private final String name;
@@ -24,14 +28,12 @@ public class Medicament extends StackableItem implements Useable {
       super(template.getIcon(), count);
       this.name = template.getName();
       this.roller = DiceRoller.of(template.getHp());
+      this.id = format("med:%s", template.getId());
    }
 
    @Override
    public void use(Creature creature) {
-      if(--count == 0) {
-         creature.removeItemFromEquipment(this);
-      }
-
+      super.use(creature);
       creature.heal(roller.roll());
    }
 }

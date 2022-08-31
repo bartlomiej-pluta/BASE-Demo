@@ -55,6 +55,42 @@ public class Player extends Creature {
    }
 
    public boolean pushItemToEquipment(@NonNull Item item) {
+      if (item instanceof Ammunition ammo) {
+         if (ammo.getId().equals(getAmmunition().getId())) {
+            getAmmunition().increase(ammo.getCount());
+            return true;
+         }
+      }
+
+      if (item instanceof ItemStack stack) {
+         return pushItemStackToEquipment(stack);
+      }
+
+      return pushSingleItemToEquipment(item);
+   }
+
+   private boolean pushItemStackToEquipment(@NonNull ItemStack items) {
+      var availableSlot = -1;
+      for (int i = 0; i < equipment.length; ++i) {
+         if (equipment[i] instanceof ItemStack stack && stack.getId().equals(items.getId())) {
+            stack.increase(items.getCount());
+            return true;
+         }
+
+         if (availableSlot == -1 && equipment[i] == null) {
+            availableSlot = i;
+         }
+      }
+
+      if (availableSlot > -1) {
+         equipment[availableSlot] = items;
+         return true;
+      }
+
+      return false;
+   }
+
+   private boolean pushSingleItemToEquipment(@NonNull Item item) {
       for (int i = 0; i < equipment.length; ++i) {
          if (equipment[i] == null) {
             equipment[i] = item;
