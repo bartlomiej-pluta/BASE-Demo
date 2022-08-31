@@ -4,6 +4,8 @@ import A.maps;
 import com.bartlomiejpluta.demo.runner.DemoRunner;
 import lombok.NonNull;
 
+import java.util.concurrent.CompletableFuture;
+
 public class Door extends MapObject {
    private final String mapUid;
    private final int targetX;
@@ -22,14 +24,13 @@ public class Door extends MapObject {
    }
 
    @Override
-   protected void interact() {
+   protected CompletableFuture<?> interact() {
       context.openMap(mapUid);
       context.getMap().getObjectLayer(layerId).addEntity(player);
       player.setCoordinates(targetX, targetY);
-   }
 
-   @Override
-   protected boolean shouldGoFurther(MapObject object) {
-      return true;
+      reset();
+
+      return CompletableFuture.completedFuture(null);
    }
 }

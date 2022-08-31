@@ -4,6 +4,8 @@ import com.bartlomiejpluta.demo.world.item.Item;
 import lombok.Getter;
 import lombok.NonNull;
 
+import java.util.concurrent.CompletableFuture;
+
 public class Chest extends MapObject {
    @Getter
    private final Item[] content = new Item[Enemy.MAX_LOOT];
@@ -13,13 +15,8 @@ public class Chest extends MapObject {
    }
 
    @Override
-   protected void interact() {
-      runner.getGuiManager().openChestWindow(this);
-   }
-
-   @Override
-   protected boolean shouldGoFurther(MapObject object) {
-      return runner.getGuiManager().openedWindows() == 0;
+   protected CompletableFuture<?> interact() {
+      return runner.getGuiManager().openChestWindow(this);
    }
 
    public Chest addItem(Item item) {

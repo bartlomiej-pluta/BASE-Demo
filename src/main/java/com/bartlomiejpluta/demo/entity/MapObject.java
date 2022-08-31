@@ -7,16 +7,29 @@ import com.bartlomiejpluta.base.util.path.PathExecutor;
 import lombok.Getter;
 import lombok.NonNull;
 
+import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
+
+import static java.util.Objects.requireNonNull;
+import static java.util.concurrent.CompletableFuture.completedFuture;
+
 public abstract class MapObject extends NamedCharacter {
-   private final PathExecutor<MapObject> pathExecutor = new PathExecutor<>(this);
-   private final DB.model.MapObjectModel template;
-   private final Short frame;
+   private static final float INTERVAL = 0.05f;
+   private static final float COOLDOWN = 0.5f;
+   protected final PathExecutor<MapObject> pathExecutor = new PathExecutor<>(this);
    private final String interactSound;
 
+   protected boolean interacting = false;
+
+   private Supplier<CompletableFuture<?>> beforeAll;
+   private Supplier<CompletableFuture<?>> before;
+   private Supplier<CompletableFuture<?>> after;
+   private Supplier<CompletableFuture<?>> afterAll;
+
+   private CompletableFuture<?> future;
    @Getter
    private final String name;
 
-   private boolean interacting = false;
 
    public MapObject(@NonNull String id) {
       this(DB.dao.map_object.find(id));
@@ -24,59 +37,90 @@ public abstract class MapObject extends NamedCharacter {
 
    public MapObject(@NonNull DB.model.MapObjectModel template) {
       super(ContextHolder.INSTANCE.getContext().createCharacter(A.charsets.get(template.getCharset()).uid));
-      this.template = template;
-      this.frame = template.getFrame();
+      short frame = requireNonNull(template.getFrame());
       this.name = template.getName();
       this.interactSound = A.sounds.get(template.getInteractSound()).uid;
 
       setBlocking(true);
       disableAnimation();
 
-      if (frame != null) {
-         setAnimationFrame(frame);
-      }
+      setAnimationFrame(frame);
+      pathExecutor.setRepeat(1);
 
-      pathExecutor.setPath(
-              frame != null
-                      ? new CharacterPath<MapObject>()
-                      .run(this::startInteraction)
-                      .turn(Direction.LEFT, frame)
-                      .wait(0.05f)
-                      .turn(Direction.RIGHT, frame)
-                      .wait(0.05f)
-                      .turn(Direction.UP, frame)
-                      .wait(0.25f)
-                      .run(this::interact)
-                      .suspend(this::shouldGoFurther)
-                      .wait(0.25f)
-                      .turn(Direction.RIGHT, frame)
-                      .wait(0.05f)
-                      .turn(Direction.LEFT, frame)
-                      .wait(0.05f)
-                      .turn(Direction.DOWN, frame)
-                      .wait(0.5f)
-                      .run(this::finishInteraction)
-                      : new CharacterPath<>()
+      pathExecutor.setPath(new CharacterPath<MapObject>()
+              .run(this::startInteraction)
+              .turn(Direction.LEFT, frame)
+              .wait(INTERVAL)
+              .turn(Direction.RIGHT, frame)
+              .wait(INTERVAL)
+              .turn(Direction.UP, frame)
+              .wait(INTERVAL)
+              .run(this::runInteraction)
+              .suspend(() -> future)
+              .wait(INTERVAL)
+              .turn(Direction.RIGHT, frame)
+              .wait(INTERVAL)
+              .turn(Direction.LEFT, frame)
+              .wait(INTERVAL)
+              .turn(Direction.DOWN, frame)
+              .run(this::finishInteraction)
+              .suspend(() -> future)
+              .wait(COOLDOWN)
+              .run(this::completeInteraction)
       );
    }
 
-   protected boolean shouldGoFurther(MapObject object) {
-      return true;
+   public MapObject beforeAll(@NonNull Supplier<CompletableFuture<?>> action) {
+      this.beforeAll = action;
+      return this;
+   }
+
+   public MapObject before(@NonNull Supplier<CompletableFuture<?>> action) {
+      this.before = action;
+      return this;
+   }
+
+   public MapObject after(@NonNull Supplier<CompletableFuture<?>> action) {
+      this.after = action;
+      return this;
+   }
+
+   public MapObject afterAll(@NonNull Supplier<CompletableFuture<?>> action) {
+      this.afterAll = action;
+      return this;
    }
 
    public void triggerInteraction() {
-      interacting = true;
+      if (interacting) {
+         return;
+      }
+
+      pathExecutor.reset();
+
+      if (beforeAll != null) {
+         beforeAll.get().thenRun(() -> interacting = true);
+      } else {
+         interacting = true;
+      }
    }
 
-   protected abstract void interact();
+   private void runInteraction() {
+      this.future = (before != null ? before.get() : completedFuture(null))
+              .thenCompose(v -> interact())
+              .thenCompose(v -> (after != null ? after.get() : completedFuture(null)));
+   }
 
-   protected void startInteraction() {
+   private void startInteraction() {
       if (interactSound != null) {
          context.playSound(interactSound);
       }
    }
 
-   protected void finishInteraction() {
+   private void finishInteraction() {
+      this.future = afterAll != null ? afterAll.get() : completedFuture(null);
+   }
+
+   private void completeInteraction() {
       interacting = false;
    }
 
@@ -86,4 +130,12 @@ public abstract class MapObject extends NamedCharacter {
          pathExecutor.execute(getLayer(), dt);
       }
    }
+
+   protected final void reset() {
+      setFaceDirection(Direction.DOWN);
+      pathExecutor.reset();
+      interacting = false;
+   }
+
+   protected abstract CompletableFuture<?> interact();
 }
