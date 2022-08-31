@@ -2,6 +2,7 @@ package com.bartlomiejpluta.demo.entity;
 
 import com.bartlomiejpluta.base.api.character.Character;
 import com.bartlomiejpluta.demo.world.item.Item;
+import com.bartlomiejpluta.demo.world.item.ItemStack;
 import com.bartlomiejpluta.demo.world.weapon.Ammunition;
 import com.bartlomiejpluta.demo.world.weapon.Weapon;
 import lombok.NonNull;
@@ -46,7 +47,7 @@ public class Player extends Creature {
 
             // Search the enemy corpse
             if (entity instanceof Enemy enemy && !enemy.isAlive()) {
-               runner.openLootWindow(enemy);
+               guiManager.openLootWindow(enemy);
                interactionCooldown = INTERACTION_COOLDOWN;
                return;
             }

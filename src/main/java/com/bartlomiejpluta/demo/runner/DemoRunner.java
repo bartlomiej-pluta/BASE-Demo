@@ -5,10 +5,8 @@ import com.bartlomiejpluta.base.api.gui.GUI;
 import com.bartlomiejpluta.base.api.runner.GameRunner;
 import com.bartlomiejpluta.base.api.screen.Screen;
 import com.bartlomiejpluta.base.util.profiler.FPSProfiler;
-import com.bartlomiejpluta.demo.entity.Chest;
-import com.bartlomiejpluta.demo.entity.Enemy;
 import com.bartlomiejpluta.demo.entity.Player;
-import com.bartlomiejpluta.demo.menu.MenuManager;
+import com.bartlomiejpluta.demo.menu.GuiManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +16,7 @@ public class DemoRunner implements GameRunner {
    private final FPSProfiler fpsProfiler = FPSProfiler.create(20);
    private Screen screen;
    private Context context;
-   private MenuManager menu;
+   private GuiManager guiManager;
    private GUI hud;
    private Player player;
 
@@ -35,7 +33,7 @@ public class DemoRunner implements GameRunner {
       initHUD();
       initMenu();
 
-      menu.showStartMenu();
+      guiManager.showStartMenu();
 
       screen.show();
    }
@@ -51,11 +49,8 @@ public class DemoRunner implements GameRunner {
    }
 
    private void initMenu() {
-      this.menu = new MenuManager(this, context);
-   }
-
-   public int openedWindows() {
-      return this.menu.openedWindows();
+      this.guiManager = new GuiManager(this, context);
+      context.putGlobal("gui", guiManager);
    }
 
    private void initHUD() {
@@ -79,8 +74,8 @@ public class DemoRunner implements GameRunner {
    }
 
    public void newGame() {
-      menu.closeAll();
-      menu.enableGameMenu();
+      guiManager.closeAll();
+      guiManager.enableGameMenu();
       resetPlayer();
       context.openMap(A.maps.hero_home.uid);
       context.getMap().getObjectLayer(A.maps.hero_home.layers.main).addEntity(this.player);
@@ -90,20 +85,12 @@ public class DemoRunner implements GameRunner {
    }
 
    public void returnToStartMenu() {
-      menu.closeAll();
+      guiManager.closeAll();
       hud.hide();
       context.pause();
       context.closeMap();
-      menu.disableGameMenu();
-      menu.showStartMenu();
-   }
-
-   public void openLootWindow(Enemy enemy) {
-      menu.openLootWindow(enemy);
-   }
-
-   public void openChestWindow(Chest chest) {
-      menu.openChestWindow(chest);
+      guiManager.disableGameMenu();
+      guiManager.showStartMenu();
    }
 
    public void exit() {

@@ -2,6 +2,8 @@ package com.bartlomiejpluta.demo.map;
 
 import com.bartlomiejpluta.base.api.camera.Camera;
 import com.bartlomiejpluta.base.api.context.Context;
+import com.bartlomiejpluta.base.api.gui.Window;
+import com.bartlomiejpluta.base.api.gui.WindowPosition;
 import com.bartlomiejpluta.base.api.icon.Icon;
 import com.bartlomiejpluta.base.api.input.Input;
 import com.bartlomiejpluta.base.api.input.Key;
@@ -19,14 +21,18 @@ import com.bartlomiejpluta.demo.entity.Door;
 import com.bartlomiejpluta.demo.entity.Enemy;
 import com.bartlomiejpluta.demo.entity.Player;
 import com.bartlomiejpluta.demo.event.EnemyDiedEvent;
+import com.bartlomiejpluta.demo.menu.GuiManager;
 import com.bartlomiejpluta.demo.runner.DemoRunner;
 import com.bartlomiejpluta.demo.world.potion.Medicament;
 import lombok.NonNull;
+
+import java.util.concurrent.CompletableFuture;
 
 public abstract class BaseMapHandler implements MapHandler {
    protected Screen screen;
    protected Context context;
    protected DemoRunner runner;
+   protected GuiManager guiManager;
    protected Camera camera;
    protected GameMap map;
    protected Player player;
@@ -37,6 +43,7 @@ public abstract class BaseMapHandler implements MapHandler {
       this.context = context;
       this.screen = context.getScreen();
       this.runner = (DemoRunner) context.getGameRunner();
+      this.guiManager = context.getGlobal("gui", GuiManager.class);
       this.camera = context.getCamera();
       this.map = map;
       this.player = context.getGlobal("player", Player.class);
@@ -51,7 +58,7 @@ public abstract class BaseMapHandler implements MapHandler {
          return;
       }
 
-      if (runner.openedWindows() > 0) {
+      if (guiManager.openedWindows() > 0) {
          return;
       }
 
