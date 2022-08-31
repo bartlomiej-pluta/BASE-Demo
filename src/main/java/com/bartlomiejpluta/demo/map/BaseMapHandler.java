@@ -14,6 +14,7 @@ import com.bartlomiejpluta.base.api.move.Direction;
 import com.bartlomiejpluta.base.api.screen.Screen;
 import com.bartlomiejpluta.base.lib.camera.CameraController;
 import com.bartlomiejpluta.base.lib.camera.FollowingCameraController;
+import com.bartlomiejpluta.base.util.input.InputUtil;
 import com.bartlomiejpluta.base.util.world.CharacterSpawner;
 import com.bartlomiejpluta.base.util.world.Warp;
 import com.bartlomiejpluta.demo.entity.Chest;
@@ -70,27 +71,7 @@ public abstract class BaseMapHandler implements MapHandler {
          player.interact();
       }
 
-      if (input.isKeyPressed(Key.KEY_LEFT_CONTROL)) {
-         if (input.isKeyPressed(Key.KEY_DOWN)) {
-            player.setFaceDirection(Direction.DOWN);
-         } else if (input.isKeyPressed(Key.KEY_UP)) {
-            player.setFaceDirection(Direction.UP);
-         } else if (input.isKeyPressed(Key.KEY_LEFT)) {
-            player.setFaceDirection(Direction.LEFT);
-         } else if (input.isKeyPressed(Key.KEY_RIGHT)) {
-            player.setFaceDirection(Direction.RIGHT);
-         }
-      } else {
-         if (input.isKeyPressed(Key.KEY_DOWN)) {
-            player.getLayer().pushMovement(player.prepareMovement(Direction.DOWN));
-         } else if (input.isKeyPressed(Key.KEY_UP)) {
-            player.getLayer().pushMovement(player.prepareMovement(Direction.UP));
-         } else if (input.isKeyPressed(Key.KEY_LEFT)) {
-            player.getLayer().pushMovement(player.prepareMovement(Direction.LEFT));
-         } else if (input.isKeyPressed(Key.KEY_RIGHT)) {
-            player.getLayer().pushMovement(player.prepareMovement(Direction.RIGHT));
-         }
-      }
+      InputUtil.handleBasicControl(player, input);
    }
 
    @Override
