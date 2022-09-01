@@ -57,18 +57,11 @@ public class DemoRunner implements GameRunner {
       this.player = new Player(context.createCharacter(A.charsets.luna.uid));
    }
 
-   private void resetPlayer() {
-      this.player.changeCharacterSet(A.charsets.luna.uid);
-      this.player.setScale(1f);
-      this.player.setSpeed(4f);
-      this.player.setAnimationSpeed(1f);
-      this.player.setBlocking(true);
-   }
-
    public void newGame() {
+      context.resetMaps();
       guiManager.closeAll();
       guiManager.enableGameMenu();
-      resetPlayer();
+      player.reset();
       context.openMap(A.maps.hero_home.uid);
       context.getMap().getObjectLayer(A.maps.hero_home.layers.main).addEntity(this.player);
       player.setCoordinates(11, 14);

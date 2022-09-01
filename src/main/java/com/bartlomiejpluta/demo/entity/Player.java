@@ -1,12 +1,15 @@
 package com.bartlomiejpluta.demo.entity;
 
 import com.bartlomiejpluta.base.api.character.Character;
+import com.bartlomiejpluta.base.util.random.DiceRoller;
 import com.bartlomiejpluta.demo.world.item.Item;
 import com.bartlomiejpluta.demo.world.item.ItemStack;
 import com.bartlomiejpluta.demo.world.weapon.Ammunition;
 import com.bartlomiejpluta.demo.world.weapon.Weapon;
 import lombok.NonNull;
 import org.joml.Vector2i;
+
+import java.util.Arrays;
 
 public class Player extends Creature {
    public static final int EQUIPMENT_SIZE = 6 * 6;
@@ -15,8 +18,22 @@ public class Player extends Creature {
 
    public Player(@NonNull Character entity) {
       super(entity);
-      this.hp = 20;
-      this.maxHp = 20;
+      reset();
+   }
+
+   public void reset() {
+      var data = DB.dao.levels.find(1);
+      this.maxHp = DiceRoller.roll(data.getMaxHp());
+      this.hp = this.maxHp;
+
+      alive = true;
+      changeCharacterSet(A.charsets.luna.uid);
+      setScale(1f);
+      setSpeed(4f);
+      setAnimationSpeed(1f);
+      setBlocking(true);
+
+      Arrays.fill(equipment, null);
    }
 
    public void interact() {
