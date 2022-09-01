@@ -32,6 +32,16 @@
             </demo:Button>
 
             <demo:Button
+                    ref="equipment"
+                    font="A.fonts.roboto_regular.uid"
+                    width="relative"
+                    red="1f"
+                    green="1f"
+                    blue="1f"
+                    fontSize="17f">Equipment
+            </demo:Button>
+
+            <demo:Button
                     ref="start_menu"
                     font="A.fonts.roboto_regular.uid"
                     width="relative"

@@ -1,21 +1,15 @@
 package com.bartlomiejpluta.demo.gui;
 
 import com.bartlomiejpluta.base.api.context.Context;
-import com.bartlomiejpluta.base.api.gui.*;
+import com.bartlomiejpluta.base.api.gui.Component;
+import com.bartlomiejpluta.base.api.gui.GUI;
+import com.bartlomiejpluta.base.api.gui.Ref;
+import com.bartlomiejpluta.base.api.gui.WindowManager;
 import com.bartlomiejpluta.base.lib.gui.VOptionChoice;
-import lombok.Getter;
 
 import java.util.Map;
 
 public class StartMenuWindow extends DecoratedWindow {
-
-   @Ref("new_game")
-   @Getter
-   private Button newGameBtn;
-
-   @Ref("exit")
-   @Getter
-   private Button exitBtn;
 
    @Ref("menu")
    private VOptionChoice menu;
