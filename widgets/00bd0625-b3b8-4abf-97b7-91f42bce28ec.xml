@@ -3,6 +3,7 @@
 <demo:HUD
         xmlns:base="com.bartlomiejpluta.base.lib.gui"
         xmlns:demo="com.bartlomiejpluta.demo.gui"
+        padding="20f"
         height="relative"
         width="relative">
 
@@ -15,10 +16,6 @@
                 height="20f"/>
     </base:BorderLayout-TopLeft>
 
-    <base:BorderLayout-TopRight>
-        <base:IconView ref="weapon" scale="2f"/>
-    </base:BorderLayout-TopRight>
-
     <base:BorderLayout-BottomLeft>
         <base:Label
                 ref="log"
@@ -30,13 +27,11 @@
                 fontSize="15f"/>
     </base:BorderLayout-BottomLeft>
 
-    <base:BorderLayout-BottomRight>
-        <base:Label
+    <base:BorderLayout-BottomRight width="auto" height="auto">
+        <base:TextView
                 ref="debug"
                 font="A.fonts.roboto_regular.uid"
-                width="200f"
-                height="25f"
-                alignment="bottom|right"
+                alignment="top|right"
                 color="0xFFFFFF"
                 fontSize="15f"/>
     </base:BorderLayout-BottomRight>
