@@ -1,5 +1,6 @@
 package com.bartlomiejpluta.demo.runner;
 
+import DB.dao;
 import com.bartlomiejpluta.base.api.context.Context;
 import com.bartlomiejpluta.base.api.gui.GUI;
 import com.bartlomiejpluta.base.api.runner.GameRunner;
@@ -9,6 +10,8 @@ import com.bartlomiejpluta.demo.menu.GuiManager;
 import lombok.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static java.lang.Integer.parseInt;
 
 
 public class DemoRunner implements GameRunner {
@@ -36,7 +39,7 @@ public class DemoRunner implements GameRunner {
    }
 
    private void configureCamera() {
-      context.getCamera().setScale(2f);
+      context.getCamera().setScale(1.5f);
    }
 
    private void initMenu() {
@@ -59,9 +62,11 @@ public class DemoRunner implements GameRunner {
       guiManager.closeAll();
       guiManager.enableGameMenu();
       player.reset();
-      context.openMap(A.maps.hero_home.uid);
-      context.getMap().getObjectLayer(A.maps.hero_home.layers.main).addEntity(this.player);
-      player.setCoordinates(11, 14);
+      var start = dao.start_game.find((short) 1);
+      var startPoint = start.getStartPoint().split(",");
+      context.openMap(A.maps.get(startPoint[0]).uid);
+      context.getMap().getObjectLayer(A.maps.getLayer(startPoint[0], startPoint[1])).addEntity(this.player);
+      player.setCoordinates(parseInt(startPoint[2]), parseInt(startPoint[3]));
       context.resume();
       hud.show();
    }
