@@ -1,7 +1,5 @@
 package com.bartlomiejpluta.demo.entity;
 
-import DB.EnemyDropDAO;
-import DB.dao;
 import com.bartlomiejpluta.base.api.ai.AI;
 import com.bartlomiejpluta.base.api.ai.NPC;
 import com.bartlomiejpluta.base.api.context.ContextHolder;
@@ -9,13 +7,12 @@ import com.bartlomiejpluta.base.api.move.MoveEvent;
 import com.bartlomiejpluta.base.lib.ai.NoopAI;
 import com.bartlomiejpluta.base.lib.animation.AnimationRunner;
 import com.bartlomiejpluta.base.lib.animation.SimpleAnimationRunner;
-import com.bartlomiejpluta.base.lib.db.Relop;
 import com.bartlomiejpluta.base.util.random.DiceRoller;
 import com.bartlomiejpluta.demo.ai.*;
 import com.bartlomiejpluta.demo.event.EnemyDiedEvent;
 import com.bartlomiejpluta.demo.runner.DemoRunner;
+import com.bartlomiejpluta.demo.util.LootGenerator;
 import com.bartlomiejpluta.demo.world.item.Item;
-import com.bartlomiejpluta.demo.world.junk.Junk;
 import com.bartlomiejpluta.demo.world.weapon.Ammunition;
 import com.bartlomiejpluta.demo.world.weapon.MeleeWeapon;
 import com.bartlomiejpluta.demo.world.weapon.RangedWeapon;
@@ -23,8 +20,6 @@ import lombok.Getter;
 import lombok.NonNull;
 
 import java.util.Random;
-
-import static com.bartlomiejpluta.demo.util.ListUtil.randomIntSequence;
 
 
 public class Enemy extends Creature implements NPC {
@@ -99,34 +94,8 @@ public class Enemy extends Creature implements NPC {
       context.playSound(A.sounds.get(template.getDieSound()).uid);
       context.fireEvent(new EnemyDiedEvent(this));
 
-      drawLoot();
+      LootGenerator.generate(template.getId(), loot);
    }
-
-   private void drawLoot() {
-      var def = dao.enemy_drop.query()
-              .where(EnemyDropDAO.Column.ENEMY, Relop.EQ, template.getId())
-              .orderBy("rand()")
-              .find();
-
-      var indexesIterator = randomIntSequence(0, loot.length).iterator();
-      for (var d : def) {
-         if (!indexesIterator.hasNext()) {
-            break;
-         }
-
-         var index = indexesIterator.next();
-
-         var split = d.getItem().split(":");
-         loot[index] = switch (split[0]) {
-            case "melee_weapon" -> new MeleeWeapon(split[1]);
-            case "ranged_weapon" -> new RangedWeapon(split[1]);
-            case "ammo" -> new Ammunition(split[1], DiceRoller.roll(d.getAmount()));
-            case "junk" -> new Junk(split[1]);
-            default -> throw new IllegalArgumentException("Unsupported item type");
-         };
-      }
-   }
-
 
    public Enemy followAndAttack(Creature target, int range) {
       var ai = new SimpleEnemyAI(this, target, range);
