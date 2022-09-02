@@ -6,7 +6,6 @@ import com.bartlomiejpluta.base.api.move.MoveEvent;
 import com.bartlomiejpluta.base.lib.ai.RunawayAI;
 import com.bartlomiejpluta.demo.entity.Creature;
 import com.bartlomiejpluta.demo.entity.Enemy;
-import com.bartlomiejpluta.demo.world.weapon.MeleeWeapon;
 import lombok.NonNull;
 
 public class WeaponBasedAI implements AI {
@@ -54,23 +53,32 @@ public class WeaponBasedAI implements AI {
 
       var meleeWeapon = enemy.getMeleeWeapon();
       var rangedWeapon = enemy.getRangedWeapon();
+      var throwingWeapon = enemy.getThrowingWeapon();
 
-      if (meleeWeapon == null && rangedWeapon == null) {
+      if (meleeWeapon == null && rangedWeapon == null && throwingWeapon == null) {
          runawayAI.nextActivity(layer, dt);
          return;
       }
 
-      if (rangedWeapon == null || enemy.manhattanDistance(target) == 1 || enemy.getAmmunition() == null) {
+      if ((rangedWeapon == null && throwingWeapon == null) || (rangedWeapon != null && enemy.getAmmunition() == null && throwingWeapon == null) || enemy.manhattanDistance(target) == 1) {
          enemy.setWeapon(meleeWeapon);
          meleeAI.nextActivity(layer, dt);
          return;
       }
 
-      if (enemy.getWeapon() instanceof MeleeWeapon) {
-         meleeAI.nextActivity(layer, dt);
+      if (throwingWeapon != null) {
+         enemy.setWeapon(throwingWeapon);
+         archerAI.nextActivity(layer, dt);
+         return;
       }
 
       enemy.setWeapon(rangedWeapon);
       archerAI.nextActivity(layer, dt);
+
+//      if (enemy.getWeapon() instanceof MeleeWeapon) {
+//         meleeAI.nextActivity(layer, dt);
+//      }
+
+
    }
 }

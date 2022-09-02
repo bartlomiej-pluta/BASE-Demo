@@ -5,6 +5,7 @@ import com.bartlomiejpluta.base.util.random.DiceRoller;
 import com.bartlomiejpluta.demo.world.item.Item;
 import com.bartlomiejpluta.demo.world.item.ItemStack;
 import com.bartlomiejpluta.demo.world.weapon.Ammunition;
+import com.bartlomiejpluta.demo.world.weapon.ThrowingWeapon;
 import com.bartlomiejpluta.demo.world.weapon.Weapon;
 import lombok.NonNull;
 import org.joml.Vector2i;
@@ -80,6 +81,13 @@ public class Player extends Creature {
          }
       }
 
+      if (item instanceof ThrowingWeapon weapons) {
+         if (getWeapon() instanceof ThrowingWeapon currentWeapons && currentWeapons.getId().equals(weapons.getId())) {
+            currentWeapons.increase(weapons.getCount());
+            return true;
+         }
+      }
+
       if (item instanceof ItemStack stack) {
          return pushItemStackToEquipment(stack);
       }
@@ -148,18 +156,42 @@ public class Player extends Creature {
    }
 
    @Override
-   public void setWeapon(Weapon weapon) {
+   public void setWeapon(Weapon newWeapon) {
       var currentWeapon = getWeapon();
 
-      if (weapon != null) {
-         removeItemFromEquipment(weapon);
+      if (newWeapon == null) {
+         disarmWeapon(currentWeapon);
+         return;
       }
+
+      if (currentWeapon instanceof ThrowingWeapon currentWeapons && newWeapon instanceof ThrowingWeapon weapons && currentWeapons.getId().equals(weapons.getId())) {
+         updateStackableWeapon(currentWeapons, weapons);
+         return;
+      }
+
+      changeWeaponForWeapon(currentWeapon, newWeapon);
+   }
+
+   private void disarmWeapon(Weapon currentWeapon) {
+      if (!(currentWeapon instanceof ThrowingWeapon)) {
+         pushItemToEquipment(currentWeapon);
+      }
+
+      super.setWeapon(null);
+   }
+
+   private void updateStackableWeapon(ThrowingWeapon currentWeapon, ThrowingWeapon newWeapon) {
+      currentWeapon.increase(newWeapon.getCount());
+      removeItemFromEquipment(newWeapon);
+   }
+
+   private void changeWeaponForWeapon(Weapon currentWeapon, Weapon newWeapon) {
+      super.setWeapon(newWeapon);
+      removeItemFromEquipment(newWeapon);
 
       if (currentWeapon != null) {
          pushItemToEquipment(currentWeapon);
       }
-
-      super.setWeapon(weapon);
    }
 
    @Override

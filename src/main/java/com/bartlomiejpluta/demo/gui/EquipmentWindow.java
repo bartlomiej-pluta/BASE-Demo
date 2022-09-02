@@ -16,6 +16,7 @@ import com.bartlomiejpluta.demo.world.item.Useable;
 import com.bartlomiejpluta.demo.world.potion.Medicament;
 import com.bartlomiejpluta.demo.world.weapon.MeleeWeapon;
 import com.bartlomiejpluta.demo.world.weapon.RangedWeapon;
+import com.bartlomiejpluta.demo.world.weapon.ThrowingWeapon;
 
 import java.util.Map;
 import java.util.function.BiConsumer;
@@ -180,6 +181,10 @@ public class EquipmentWindow extends DecoratedWindow {
       if (item instanceof RangedWeapon weapon) {
          detailsLbl.setText(format("Damage: %s\nRange: %s\nCooldown: %s\n", weapon.getDmgRoller(), weapon.getRangeRoller(), weapon.getCooldown()));
          return;
+      }
+
+      if (item instanceof ThrowingWeapon weapon) {
+         detailsLbl.setText(format("Damage: %s\nRange: %s\nCooldown: %s\n", weapon.getDmgRoller(), weapon.getRangeRoller(), weapon.getCooldown()));
       }
 
       if (item instanceof Medicament medicament) {

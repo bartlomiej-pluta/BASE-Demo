@@ -10,6 +10,7 @@ import com.bartlomiejpluta.demo.world.potion.Medicament;
 import com.bartlomiejpluta.demo.world.weapon.Ammunition;
 import com.bartlomiejpluta.demo.world.weapon.MeleeWeapon;
 import com.bartlomiejpluta.demo.world.weapon.RangedWeapon;
+import com.bartlomiejpluta.demo.world.weapon.ThrowingWeapon;
 import lombok.NonNull;
 
 import java.util.Map;
@@ -29,6 +30,7 @@ public class LootGenerator {
    );
    private static final Map<String, BiFunction<String, Integer, ItemStack>> stackableGenerator = Map.of(
            "ammo", Ammunition::new,
+           "throwing", ThrowingWeapon::new,
            "med", Medicament::new
    );
 

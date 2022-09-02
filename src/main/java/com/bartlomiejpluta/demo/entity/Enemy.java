@@ -16,8 +16,10 @@ import com.bartlomiejpluta.demo.world.item.Item;
 import com.bartlomiejpluta.demo.world.weapon.Ammunition;
 import com.bartlomiejpluta.demo.world.weapon.MeleeWeapon;
 import com.bartlomiejpluta.demo.world.weapon.RangedWeapon;
+import com.bartlomiejpluta.demo.world.weapon.ThrowingWeapon;
 import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 
 import java.util.Random;
 
@@ -38,6 +40,9 @@ public class Enemy extends Creature implements NPC {
    private MeleeWeapon meleeWeapon;
    @Getter
    private RangedWeapon rangedWeapon;
+   @Getter
+   @Setter
+   private ThrowingWeapon throwingWeapon;
 
    public Enemy(@NonNull String id) {
       this(DB.dao.enemy.find(id));
@@ -55,6 +60,7 @@ public class Enemy extends Creature implements NPC {
       setBlocking(template.isBlocking());
       var meleeWeaponTemplate = template.getMeleeWeapon();
       var rangedWeaponTemplate = template.getRangedWeapon();
+      var throwingWeaponTemplate = template.getThrowingWeapon();
 
       if (meleeWeaponTemplate != null) {
          this.meleeWeapon = new MeleeWeapon(meleeWeaponTemplate);
@@ -65,6 +71,11 @@ public class Enemy extends Creature implements NPC {
 
          this.rangedWeapon = new RangedWeapon(split[0]);
          setAmmunition(new Ammunition(split[1], DiceRoller.roll(split[2])));
+      }
+
+      if (throwingWeaponTemplate != null) {
+         var split = throwingWeaponTemplate.split(",");
+         this.throwingWeapon = new ThrowingWeapon(split[0], DiceRoller.roll(split[1]));
       }
 
       this.dieAnimation = new SimpleAnimationRunner(A.animations.get(template.getDieAnimation()).uid);
