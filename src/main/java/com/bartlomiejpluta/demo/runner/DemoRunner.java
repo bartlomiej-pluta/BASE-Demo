@@ -4,7 +4,6 @@ import com.bartlomiejpluta.base.api.context.Context;
 import com.bartlomiejpluta.base.api.gui.GUI;
 import com.bartlomiejpluta.base.api.runner.GameRunner;
 import com.bartlomiejpluta.base.api.screen.Screen;
-import com.bartlomiejpluta.base.util.profiler.FPSProfiler;
 import com.bartlomiejpluta.demo.entity.Player;
 import com.bartlomiejpluta.demo.menu.GuiManager;
 import lombok.Getter;
@@ -20,8 +19,6 @@ public class DemoRunner implements GameRunner {
    private Context context;
    private GUI hud;
 
-   @Getter
-   private final FPSProfiler fpsProfiler = FPSProfiler.create(20);
    @Getter
    private GuiManager guiManager;
 
@@ -82,10 +79,6 @@ public class DemoRunner implements GameRunner {
       context.close();
    }
 
-   @Override
-   public void update(float dt) {
-      fpsProfiler.update(dt);
-   }
 
    @Override
    public void dispose() {

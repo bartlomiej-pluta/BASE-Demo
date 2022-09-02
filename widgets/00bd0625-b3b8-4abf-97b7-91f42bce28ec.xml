@@ -17,7 +17,7 @@
     </base:BorderLayout-TopLeft>
 
     <base:BorderLayout-TopRight>
-        <demo:FPSMonitor monitor="5|40" padding="15f" width="150" height="100f"/>
+        <base:FPSMonitor monitor="5|40" padding="15f" width="150" height="100f"/>
     </base:BorderLayout-TopRight>
 
     <base:BorderLayout-BottomLeft>
