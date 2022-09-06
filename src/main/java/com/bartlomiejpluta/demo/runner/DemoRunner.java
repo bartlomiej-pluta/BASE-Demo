@@ -34,12 +34,12 @@ public class DemoRunner implements GameRunner {
 
    private void configureScreen() {
       var resolution = screen.getCurrentResolution();
-      screen.setSize(1800, 1000);
+      screen.setSize(800, 600);
       screen.setPosition((resolution.x() - 1800) / 2, (resolution.y() - 1000) / 2);
    }
 
    private void configureCamera() {
-      context.getCamera().setScale(1.5f);
+      context.getCamera().setScale(2.5f);
    }
 
    private void initMenu() {
