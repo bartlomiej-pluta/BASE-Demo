@@ -78,13 +78,12 @@ public class ItemIconView extends IconView {
       throw new UnsupportedOperationException();
    }
 
-   @Attribute("placeholder")
-   public void setPlaceholderIcon(String icon) {
+   @Attribute(value = "placeholder", separator = ",")
+   public void setPlaceholderIcon(String icon, int row, int column) {
       this.placeholderIconPaint = gui.createPaint();
-      var parts = icon.split(",");
-      this.placeholderIconSet = gui.getIconSet(A.iconsets.get(parts[0]).uid);
-      this.placeholderIconSetRow = Integer.parseInt(parts[1]);
-      this.placeholderIconSetColumn = Integer.parseInt(parts[2]);
+      this.placeholderIconSet = gui.getIconSet(A.iconsets.get(icon).uid);
+      this.placeholderIconSetRow = row;
+      this.placeholderIconSetColumn = column;
    }
 
    private void handleKeyEvent(KeyEvent event) {
