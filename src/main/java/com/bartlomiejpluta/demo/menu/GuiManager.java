@@ -36,20 +36,20 @@ public class GuiManager {
 
       this.gui.setRoot(this.manager);
 
-      this.startMenu = gui.inflateWindow(A.widgets.start_menu.uid, StartMenuWindow.class);
+      this.startMenu = gui.inflateWindow(A.widgets.start_menu.$, StartMenuWindow.class);
       this.startMenu.reference("new_game", Button.class).setAction(runner::newGame);
       this.startMenu.reference("exit", Button.class).setAction(runner::exit);
 
-      this.equipment = gui.inflateWindow(A.widgets.equipment.uid, EquipmentWindow.class);
+      this.equipment = gui.inflateWindow(A.widgets.equipment.$, EquipmentWindow.class);
 
-      this.gameMenu = gui.inflateWindow(A.widgets.game_menu.uid, GameMenuWindow.class);
+      this.gameMenu = gui.inflateWindow(A.widgets.game_menu.$, GameMenuWindow.class);
       this.gameMenu.reference("resume_game", Button.class).setAction(this::resumeGame);
       this.gameMenu.reference("equipment", Button.class).setAction(() -> manager.open(equipment));
       this.gameMenu.reference("start_menu", Button.class).setAction(runner::returnToStartMenu);
       this.gameMenu.reference("exit", Button.class).setAction(runner::exit);
 
-      this.dialog = gui.inflateWindow(A.widgets.dialog.uid, DialogWindow.class);
-      this.loot = gui.inflateWindow(widgets.loot_menu.uid, LootWindow.class);
+      this.dialog = gui.inflateWindow(A.widgets.dialog.$, DialogWindow.class);
+      this.loot = gui.inflateWindow(widgets.loot_menu.$, LootWindow.class);
    }
 
    private void handleGameMenuKeyEvent(KeyEvent event) {

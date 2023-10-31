@@ -9,7 +9,7 @@
 
     <base:VLayout width="200f">
         <base:Label
-                font="A.fonts.roboto_regular.uid"
+                font="A.fonts.roboto_regular.$"
                 width="relative"
                 alignment="top|center"
                 red="1f"
@@ -22,7 +22,7 @@
         <base:VOptionChoice ref="menu" width="relative">
             <demo:Button
                     ref="new_game"
-                    font="A.fonts.roboto_regular.uid"
+                    font="A.fonts.roboto_regular.$"
                     width="relative"
                     red="1f"
                     green="1f"
@@ -32,7 +32,7 @@
 
             <demo:Button
                     ref="exit"
-                    font="A.fonts.roboto_regular.uid"
+                    font="A.fonts.roboto_regular.$"
                     width="relative"
                     red="1f"
                     green="1f"

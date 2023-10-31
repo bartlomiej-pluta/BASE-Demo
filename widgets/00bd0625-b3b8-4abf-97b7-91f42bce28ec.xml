@@ -23,7 +23,7 @@
     <base:BorderLayout-BottomLeft>
         <base:Label
                 ref="log"
-                font="A.fonts.roboto_regular.uid"
+                font="A.fonts.roboto_regular.$"
                 width="400f"
                 height="25f"
                 alignment="bottom|left"
@@ -34,7 +34,7 @@
     <base:BorderLayout-BottomRight width="auto" height="auto">
         <base:TextView
                 ref="debug"
-                font="A.fonts.roboto_regular.uid"
+                font="A.fonts.roboto_regular.$"
                 alignment="top|right"
                 color="0xFFFFFF"
                 fontSize="15f"/>

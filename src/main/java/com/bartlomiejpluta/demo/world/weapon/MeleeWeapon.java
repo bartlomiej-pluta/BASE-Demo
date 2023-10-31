@@ -37,8 +37,8 @@ public class MeleeWeapon extends BaseItem implements Weapon {
       this.name = template.getName();
       this.dmgRoller = DiceRoller.of(template.getDamage());
       this.cooldown = template.getCooldown();
-      this.animation = new RandomAnimationsRunner(2).nRange(0, 2f).nScale(0.2f, 0.15f).uAnimationSpeed(0.5f, 1f).nRotation(0, 10).offset(0, -10).uDelay(250, 500).with(A.animations.get(template.getAnimation()).uid);
-      this.sound = A.sounds.get(template.getSound()).uid;
+      this.animation = new RandomAnimationsRunner(2).nRange(0, 2f).nScale(0.2f, 0.15f).uAnimationSpeed(0.5f, 1f).nRotation(0, 10).offset(0, -10).uDelay(250, 500).with(A.animations.byName(template.getAnimation()).$);
+      this.sound = A.sounds.byName(template.getSound()).$;
    }
 
    @Override

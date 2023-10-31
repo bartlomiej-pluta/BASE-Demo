@@ -57,12 +57,12 @@ public class ThrowingWeapon extends StackableItem implements Weapon {
       this.dmgRoller = DiceRoller.of(template.getDamage());
       this.rangeRoller = DiceRoller.of(template.getRange());
       this.cooldown = template.getCooldown();
-      this.animation = new BulletAnimationRunner(A.animations.get(template.getAnimation()).uid).infinite().offset(0, -15).onHit(this::onHit).onMiss(this::onMiss).speed(7f).animationSpeed(4f).scale(0.6f);
-      this.sound = A.sounds.get(template.getSound()).uid;
-      this.punchAnimation = new SimpleAnimationRunner(A.animations.get(template.getPunchAnimation()).uid);
-      this.punchSound = A.sounds.get(template.getPunchSound()).uid;
-      this.missAnimation = new SimpleAnimationRunner(A.animations.get(template.getMissAnimation()).uid).scale(0.4f);
-      this.missSound = A.sounds.get(template.getMissSound()).uid;
+      this.animation = new BulletAnimationRunner(A.animations.byName(template.getAnimation()).$).infinite().offset(0, -15).onHit(this::onHit).onMiss(this::onMiss).speed(7f).animationSpeed(4f).scale(0.6f);
+      this.sound = A.sounds.byName(template.getSound()).$;
+      this.punchAnimation = new SimpleAnimationRunner(A.animations.byName(template.getPunchAnimation()).$);
+      this.punchSound = A.sounds.byName(template.getPunchSound()).$;
+      this.missAnimation = new SimpleAnimationRunner(A.animations.byName(template.getMissAnimation()).$).scale(0.4f);
+      this.missSound = A.sounds.byName(template.getMissSound()).$;
    }
 
    private void onHit(Movable attacker, Entity target) {

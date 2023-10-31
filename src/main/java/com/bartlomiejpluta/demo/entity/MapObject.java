@@ -22,11 +22,11 @@ public abstract class MapObject extends com.bartlomiejpluta.base.util.world.MapO
    }
 
    public MapObject(@NonNull DB.model.ObjectModel template) {
-      super(ContextHolder.INSTANCE.getContext().createCharacter(A.charsets.get(template.getCharset()).uid), template.getFrame());
+      super(ContextHolder.INSTANCE.getContext().createCharacter(A.charsets.byName(template.getCharset()).$), template.getFrame());
       this.context = ContextHolder.INSTANCE.getContext();
       this.runner = DemoRunner.instance();
       this.name = template.getName();
-      this.interactSound = A.sounds.get(template.getInteractSound()).uid;
+      this.interactSound = A.sounds.byName(template.getInteractSound()).$;
    }
 
    @Override

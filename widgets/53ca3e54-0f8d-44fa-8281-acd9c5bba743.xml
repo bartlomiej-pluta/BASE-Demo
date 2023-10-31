@@ -10,7 +10,7 @@
 
         <demo:Button
                 ref="use"
-                font="A.fonts.roboto_regular.uid"
+                font="A.fonts.roboto_regular.$"
                 width="relative"
                 red="1f"
                 green="1f"
@@ -20,7 +20,7 @@
 
         <demo:Button
                 ref="drop"
-                font="A.fonts.roboto_regular.uid"
+                font="A.fonts.roboto_regular.$"
                 width="relative"
                 red="1f"
                 green="1f"
@@ -30,7 +30,7 @@
 
         <demo:Button
                 ref="cancel"
-                font="A.fonts.roboto_regular.uid"
+                font="A.fonts.roboto_regular.$"
                 width="relative"
                 red="1f"
                 green="1f"

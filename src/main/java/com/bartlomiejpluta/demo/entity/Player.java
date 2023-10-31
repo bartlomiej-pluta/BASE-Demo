@@ -28,7 +28,7 @@ public class Player extends Creature {
       this.hp = this.maxHp;
 
       alive = true;
-      changeCharacterSet(A.charsets.luna.uid);
+      changeCharacterSet(A.charsets.luna.$);
       setScale(1f);
       setSpeed(4f);
       setAnimationSpeed(1f);

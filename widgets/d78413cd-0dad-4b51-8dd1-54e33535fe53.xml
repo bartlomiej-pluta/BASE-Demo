@@ -11,7 +11,7 @@
     <base:VLayout width="auto" height="auto">
         <base:Label
                 ref="title"
-                font="A.fonts.roboto_regular.uid"
+                font="A.fonts.roboto_regular.$"
                 width="relative"
                 alignment="top|center"
                 red="1f"

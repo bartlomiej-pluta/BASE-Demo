@@ -1,5 +1,7 @@
 package com.bartlomiejpluta.demo.runner;
 
+import A.maps;
+import DB.ConfigDAO;
 import DB.dao;
 import com.bartlomiejpluta.base.api.context.Context;
 import com.bartlomiejpluta.base.api.gui.GUI;
@@ -34,12 +36,15 @@ public class DemoRunner implements GameRunner {
 
    private void configureScreen() {
       var resolution = screen.getCurrentResolution();
-      screen.setSize(800, 600);
-      screen.setPosition((resolution.x() - 1800) / 2, (resolution.y() - 1000) / 2);
+      var config = dao.config.find("screen").getValue().split("x");
+      var width = Integer.parseInt(config[0]);
+      var height = Integer.parseInt(config[1]);
+      screen.setSize(width, height);
+      screen.setPosition((resolution.x() - width) / 2, (resolution.y() - height) / 2);
    }
 
    private void configureCamera() {
-      context.getCamera().setScale(2.5f);
+      context.getCamera().setScale(Float.parseFloat(dao.config.find("camera_scale").getValue()));
    }
 
    private void initMenu() {
@@ -49,12 +54,12 @@ public class DemoRunner implements GameRunner {
    private void initHUD() {
       hud = context.newGUI();
       hud.hide();
-      var hudComponent = hud.inflateComponent(A.widgets.hud.uid);
+      var hudComponent = hud.inflateComponent(A.widgets.hud.$);
       hud.setRoot(hudComponent);
    }
 
    private void initPlayer() {
-      this.player = new Player(context.createCharacter(A.charsets.luna.uid));
+      this.player = new Player(context.createCharacter(A.charsets.luna.$));
    }
 
    public void newGame() {
@@ -62,13 +67,19 @@ public class DemoRunner implements GameRunner {
       guiManager.closeAll();
       guiManager.enableGameMenu();
       player.reset();
-      var start = dao.start_game.find((short) 1);
-      var startPoint = start.getStartPoint().split(",");
-      context.openMap(A.maps.get(startPoint[0]).uid);
-      context.getMap().getObjectLayer(A.maps.getLayer(startPoint[0], startPoint[1])).addEntity(this.player);
-      player.setCoordinates(parseInt(startPoint[2]), parseInt(startPoint[3]));
+      var start = dao.config.find("start_game").getValue().split(",");
+
+      var map = A.maps.byName(start[0]);
+      var layer = map.layer(start[1]);
+      var label = layer.label(start[2]);
+
+      context.openMap(map.$);
+      context.getMap().getObjectLayer(layer.$).addEntity(this.player);
+      player.setCoordinates(label.getX(), label.getY());
       context.resume();
       hud.show();
+
+      var x = A.maps.hero_home.main.entry;
    }
 
    public void returnToStartMenu() {

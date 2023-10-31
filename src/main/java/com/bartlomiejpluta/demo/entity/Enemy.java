@@ -49,7 +49,7 @@ public class Enemy extends Creature implements NPC {
    }
 
    public Enemy(@NonNull DB.model.EnemyModel template) {
-      super(ContextHolder.INSTANCE.getContext().createCharacter(A.charsets.get(template.getCharset()).uid));
+      super(ContextHolder.INSTANCE.getContext().createCharacter(A.charsets.byName(template.getCharset()).$));
       this.template = template;
       name = template.getName();
       maxHp = DiceRoller.roll(template.getHp());
@@ -78,7 +78,7 @@ public class Enemy extends Creature implements NPC {
          this.throwingWeapon = new ThrowingWeapon(split[0], DiceRoller.roll(split[1]));
       }
 
-      this.dieAnimation = new SimpleAnimationRunner(A.animations.get(template.getDieAnimation()).uid);
+      this.dieAnimation = new SimpleAnimationRunner(A.animations.byName(template.getDieAnimation()).$);
    }
 
    @Override
@@ -94,7 +94,7 @@ public class Enemy extends Creature implements NPC {
    @Override
    public void die() {
       super.die();
-      changeCharacterSet(A.charsets.get(template.getDeadCharset()).uid);
+      changeCharacterSet(A.charsets.byName(template.getDeadCharset()).$);
       setScale(0.5f);
       setBlocking(false);
       setZIndex(-1);
@@ -102,7 +102,7 @@ public class Enemy extends Creature implements NPC {
       ai = NoopAI.INSTANCE;
 
       dieAnimation.run(context, getLayer(), this);
-      context.playSound(A.sounds.get(template.getDieSound()).uid);
+      context.playSound(A.sounds.byName(template.getDieSound()).$);
       context.fireEvent(new EnemyDiedEvent(this));
 
       LootGenerator.generate(template.getId(), loot);

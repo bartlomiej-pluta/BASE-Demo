@@ -81,7 +81,7 @@ public class ItemIconView extends IconView {
    @Attribute(value = "placeholder", separator = ",")
    public void setPlaceholderIcon(String icon, int row, int column) {
       this.placeholderIconPaint = gui.createPaint();
-      this.placeholderIconSet = gui.getIconSet(A.iconsets.get(icon).uid);
+      this.placeholderIconSet = gui.getIconSet(A.iconsets.byName(icon).$);
       this.placeholderIconSetRow = row;
       this.placeholderIconSetColumn = column;
    }
@@ -121,7 +121,7 @@ public class ItemIconView extends IconView {
 
       if (item != null && item instanceof ItemStack stack) {
          gui.beginPath();
-         gui.setFontFace(fonts.roboto_regular.uid);
+         gui.setFontFace(fonts.roboto_regular.$);
          gui.setFontSize(17);
          gui.putText(x + 15, y + 5, String.valueOf(stack.getCount()));
          gui.setFillColor(textColor);

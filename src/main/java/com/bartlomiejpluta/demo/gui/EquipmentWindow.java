@@ -58,7 +58,7 @@ public class EquipmentWindow extends DecoratedWindow {
    public EquipmentWindow(Context context, GUI gui, Map<String, Component> refs) {
       super(context, gui, refs);
       this.player = DemoRunner.instance().getPlayer();
-      this.popupMenuWindow = gui.inflateWindow(A.widgets.eq_item_menu.uid);
+      this.popupMenuWindow = gui.inflateWindow(A.widgets.eq_item_menu.$);
       this.popupMenu = popupMenuWindow.reference("menu", VOptionChoice.class);
       this.useBtn = popupMenuWindow.reference("use", Button.class);
       this.dropBtn = popupMenuWindow.reference("drop", Button.class);

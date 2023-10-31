@@ -1,13 +1,16 @@
 package com.bartlomiejpluta.demo.map;
 
+import A.maps;
 import com.bartlomiejpluta.base.api.camera.Camera;
 import com.bartlomiejpluta.base.api.context.Context;
+import com.bartlomiejpluta.base.api.entity.Entity;
 import com.bartlomiejpluta.base.api.gui.Window;
 import com.bartlomiejpluta.base.api.gui.WindowPosition;
 import com.bartlomiejpluta.base.api.icon.Icon;
 import com.bartlomiejpluta.base.api.input.Input;
 import com.bartlomiejpluta.base.api.input.Key;
 import com.bartlomiejpluta.base.api.map.handler.MapHandler;
+import com.bartlomiejpluta.base.api.map.layer.object.MapPin;
 import com.bartlomiejpluta.base.api.map.layer.object.ObjectLayer;
 import com.bartlomiejpluta.base.api.map.model.GameMap;
 import com.bartlomiejpluta.base.api.move.Direction;
@@ -87,63 +90,42 @@ public abstract class BaseMapHandler implements MapHandler {
       return guiManager.showDialog(message, WindowPosition.BOTTOM);
    }
 
-   public Enemy enemy(@NonNull String id) {
-      return new Enemy(id);
+   protected <T extends Entity> T addEntity(T entity, MapPin tile) {
+      entity.setCoordinates(tile.getX(), tile.getY());
+      map.getObjectLayer(tile.getLayer()).addEntity(entity);
+      return entity;
    }
 
-   public Enemy enemy(ObjectLayer layer, int x, int y, @NonNull String id) {
-      var enemy = new Enemy(id);
-      enemy.setCoordinates(x, y);
-      layer.addEntity(enemy);
-      return enemy;
+   public Enemy enemy(@NonNull MapPin tile, @NonNull String id) {
+      return addEntity(new Enemy(id), tile);
    }
 
-   public Chest chest(ObjectLayer layer, int x, int y, @NonNull String id) {
-      var chest = new Chest(id);
-      chest.setCoordinates(x, y);
-      layer.addEntity(chest);
-      return chest;
+   public Chest chest(@NonNull MapPin tile, @NonNull String id) {
+      return addEntity(new Chest(id), tile);
    }
 
-   public Door door(ObjectLayer layer, int x, int y, @NonNull String mapName, @NonNull String layerName, int targetX, int targetY, @NonNull String id) {
-      var door = new Door(mapName, layerName, targetX, targetY, id);
-      door.setCoordinates(x, y);
-      layer.addEntity(door);
-      return door;
+   public Door door(@NonNull MapPin tile, @NonNull MapPin target, @NonNull String id) {
+      return addEntity(new Door(target, id), tile);
    }
 
-   public CharacterSpawner spawner(ObjectLayer layer, int x, int y) {
-      var spawner = new CharacterSpawner().trackEntities(EnemyDiedEvent.TYPE);
-      spawner.setCoordinates(x, y);
-      layer.addEntity(spawner);
-      return spawner;
+   public CharacterSpawner spawner(@NonNull MapPin tile) {
+      return addEntity(new CharacterSpawner().trackEntities(EnemyDiedEvent.TYPE), tile);
    }
 
-   public Medicament medicament(@NonNull String id, int count) {
-      return new Medicament(id, count);
+   public Medicament medicament(@NonNull MapPin tile, @NonNull String id, int count) {
+      return addEntity(new Medicament(id, count), tile);
    }
 
-   public Medicament medicament(ObjectLayer layer, int x, int y, @NonNull String id, int count) {
-      var medicament = new Medicament(id, count);
-      medicament.setCoordinates(x, y);
-      layer.addEntity(medicament);
-      return medicament;
-   }
-
-   public Icon icon(ObjectLayer layer, int x, int y, String iconSetUid, int row, int column) {
+   public Icon icon(@NonNull MapPin tile, String iconSetUid, int row, int column) {
       var icon = context.createIcon(iconSetUid, row, column);
       icon.setScale(1f);
       icon.setZIndex(-1);
-      icon.setCoordinates(x, y);
-      layer.addEntity(icon);
-      return icon;
+      return addEntity(icon, tile);
    }
 
-   public Warp warp(ObjectLayer layer, int x, int y, String targetMap, String targetLayer, int targetX, int targetY) {
-      var warp = new Warp(A.maps.get(targetMap).uid, A.maps.getLayer(targetMap, targetLayer), targetX, targetY);
+   public Warp warp(@NonNull MapPin tile, MapPin target) {
+      var warp = new Warp(target);
       warp.setEntity(player);
-      warp.setCoordinates(x, y);
-      layer.addEntity(warp);
-      return warp;
+      return addEntity(warp, tile);
    }
 }

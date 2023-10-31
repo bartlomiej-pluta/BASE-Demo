@@ -101,14 +101,16 @@ INSERT INTO "PUBLIC"."ENEMY_DROP" VALUES
 (9, 'skeleton_archer', 'ranged:wooden_bow', 0.3, '1'),
 (10, 'skeleton_archer', 'ammo:wooden_arrow', 0.7, '1d4+3'),
 (11, 'deku', 'junk:eye', 0.7, '1d2');    
-CREATE MEMORY TABLE "PUBLIC"."START_GAME"(
-    "ID" SMALLINT NOT NULL,
-    "START_POINT" VARCHAR NOT NULL
-);   
-ALTER TABLE "PUBLIC"."START_GAME" ADD CONSTRAINT "PUBLIC"."CONSTRAINT_C0" PRIMARY KEY("ID");   
--- 1 +/- SELECT COUNT(*) FROM PUBLIC.START_GAME;               
-INSERT INTO "PUBLIC"."START_GAME" VALUES
-(1, 'Forrest,Main,1,12');             
+CREATE MEMORY TABLE "PUBLIC"."CONFIG"(
+    "KEY" VARCHAR NOT NULL,
+    "VALUE" VARCHAR
+);      
+ALTER TABLE "PUBLIC"."CONFIG" ADD CONSTRAINT "PUBLIC"."CONSTRAINT_7" PRIMARY KEY("KEY");       
+-- 3 +/- SELECT COUNT(*) FROM PUBLIC.CONFIG;   
+INSERT INTO "PUBLIC"."CONFIG" VALUES
+('start_game', 'Hero Home,Main,Start'),
+('screen', '1000x800'),
+('camera_scale', '2');    
 CREATE MEMORY TABLE "PUBLIC"."LEVELS"(
     "LEVEL" INT DEFAULT NEXT VALUE FOR "PUBLIC"."SYSTEM_SEQUENCE_704587BB_DC0E_44AB_A7F0_3DE0CA44FE3F" NOT NULL NULL_TO_DEFAULT SEQUENCE "PUBLIC"."SYSTEM_SEQUENCE_704587BB_DC0E_44AB_A7F0_3DE0CA44FE3F",
     "MAX_HP" VARCHAR NOT NULL
@@ -132,9 +134,10 @@ CREATE MEMORY TABLE "PUBLIC"."THROWING_WEAPON"(
     "ICON" VARCHAR NOT NULL
 );         
 ALTER TABLE "PUBLIC"."THROWING_WEAPON" ADD CONSTRAINT "PUBLIC"."CONSTRAINT_40" PRIMARY KEY("ID");              
--- 1 +/- SELECT COUNT(*) FROM PUBLIC.THROWING_WEAPON;          
+-- 2 +/- SELECT COUNT(*) FROM PUBLIC.THROWING_WEAPON;          
 INSERT INTO "PUBLIC"."THROWING_WEAPON" VALUES
-('deku_arrow', 'Deku''s arrow', 500, '2d4', 'Arrow', 'Arrow', '5d4', 'Punch', 'Arrow punch', 'Poof', 'Arrow punch', 'Generic,8,10');             
+('deku_arrow', 'Deku''s arrow', 500, '2d4', 'Arrow', 'Arrow', '5d4', 'Punch', 'Arrow punch', 'Poof', 'Arrow punch', 'Generic,8,10'),
+('shuriken', 'Shuriken', 100, '3d6', 'Shuriken', 'Arrow', '5d4', 'Punch', 'Arrow punch', 'Poof', 'Arrow punch', 'Generic,9,2');             
 CREATE MEMORY TABLE "PUBLIC"."ENEMY"(
     "ID" VARCHAR NOT NULL,
     "NAME" VARCHAR NOT NULL,

@@ -1,6 +1,7 @@
 package com.bartlomiejpluta.demo.entity;
 
 import A.maps;
+import com.bartlomiejpluta.base.api.map.layer.object.MapPin;
 import com.bartlomiejpluta.demo.runner.DemoRunner;
 import lombok.NonNull;
 
@@ -13,12 +14,23 @@ public class Door extends MapObject {
    private final int layerId;
    private final Player player;
 
+   public Door(@NonNull MapPin label, @NonNull String id) {
+      super(id);
+      this.mapUid = label.getMap();
+      this.layerId = label.getLayer();
+      this.targetX = label.getX();
+      this.targetY = label.getY();
+      player = DemoRunner.instance().getPlayer();
+      setPositionOffset(0, 16);
+   }
+
    public Door(@NonNull String mapName, @NonNull String layerName, int targetX, int targetY, @NonNull String id) {
       super(id);
-      this.mapUid = maps.get(mapName).uid;
+      var map = maps.byName(mapName);
+      this.mapUid = map.$;
       this.targetX = targetX;
       this.targetY = targetY;
-      this.layerId = maps.getLayer(mapName, layerName);
+      this.layerId = map.layer(layerName).$;
       player = DemoRunner.instance().getPlayer();
       setPositionOffset(0, 16);
    }
