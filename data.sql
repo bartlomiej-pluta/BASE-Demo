@@ -163,5 +163,19 @@ INSERT INTO "PUBLIC"."ENEMY" VALUES
 ('eagle', 'Eagle', 'Eagle', 'Corpse', '2d4+2', '10d2', TRUE, 'wooden_sword', NULL, NULL, 'Poof', 'Deku death'),
 ('skeleton', 'Skeleton', 'Skeleton', 'Corpse', '2d6+2', '10d2', TRUE, 'wooden_sword', NULL, NULL, 'Poof', 'Deku death'),
 ('skeleton_archer', 'Skeleton Archer', 'Skeleton', 'Corpse', '2d6+2', '10d2', TRUE, 'wooden_dagger', 'wooden_bow,wooden_arrow,2d4+3', NULL, 'Poof', 'Deku death');    
+CREATE MEMORY TABLE "PUBLIC"."FRIEND"(
+    "ID" VARCHAR NOT NULL,
+    "NAME" VARCHAR NOT NULL,
+    "CHARSET" VARCHAR NOT NULL,
+    "SPEED" VARCHAR NOT NULL,
+    "BLOCKING" BOOLEAN DEFAULT FALSE NOT NULL,
+    "DIALOG_COLOR" VARCHAR DEFAULT '0xFFFFFF' NOT NULL
+);          
+ALTER TABLE "PUBLIC"."FRIEND" ADD CONSTRAINT "PUBLIC"."CONSTRAINT_7C" PRIMARY KEY("ID");       
+-- 3 +/- SELECT COUNT(*) FROM PUBLIC.FRIEND;   
+INSERT INTO "PUBLIC"."FRIEND" VALUES
+('turtle', 'Turtle', 'Turtle', '10d2', TRUE, 'AA00DD'),
+('neko', 'Neko', 'Neko', '14', TRUE, 'AA00DD'),
+('grandma', 'Grandma', 'Grandma', '7', TRUE, 'DD00AA');           
 ALTER TABLE "PUBLIC"."ENEMY_DROP" ADD CONSTRAINT "PUBLIC"."CONSTRAINT_8A" FOREIGN KEY("ENEMY") REFERENCES "PUBLIC"."ENEMY"("ID") NOCHECK;      
 ALTER TABLE "PUBLIC"."ENEMY" ADD CONSTRAINT "PUBLIC"."CONSTRAINT_3F" FOREIGN KEY("MELEE_WEAPON") REFERENCES "PUBLIC"."MELEE_WEAPON"("ID") NOCHECK;             

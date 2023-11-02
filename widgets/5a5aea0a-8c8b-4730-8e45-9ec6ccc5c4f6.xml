@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<demo:DialogWindow
+<demo:DialogChoiceWindow
         xmlns:base="com.bartlomiejpluta.base.lib.gui"
         xmlns:demo="com.bartlomiejpluta.demo.gui"
         windowPosition="bottom"
@@ -10,7 +10,7 @@
 
     <base:VLayout width="relative" height="auto">
     	<base:TextView ref="speaker" alignment="top|left" font="A.fonts.roboto_regular.$" fontSize="40f" width="relative" color="0x00AA00" />
-    	<base:PrintedTextView ref="message" duration="0.01f" alignment="top|left" font="A.fonts.roboto_regular.$" fontSize="40f" width="relative" rows="4" color="0xFFFFFF"/>
+    	<base:VOptionChoice ref="choice" width="relative"  />
     </base:VLayout>
 
-</demo:DialogWindow>
+</demo:DialogChoiceWindow>

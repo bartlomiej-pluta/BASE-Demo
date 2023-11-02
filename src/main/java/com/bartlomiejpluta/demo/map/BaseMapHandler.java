@@ -1,29 +1,22 @@
 package com.bartlomiejpluta.demo.map;
 
-import A.maps;
 import com.bartlomiejpluta.base.api.camera.Camera;
 import com.bartlomiejpluta.base.api.context.Context;
 import com.bartlomiejpluta.base.api.entity.Entity;
-import com.bartlomiejpluta.base.api.gui.Window;
 import com.bartlomiejpluta.base.api.gui.WindowPosition;
 import com.bartlomiejpluta.base.api.icon.Icon;
 import com.bartlomiejpluta.base.api.input.Input;
 import com.bartlomiejpluta.base.api.input.Key;
 import com.bartlomiejpluta.base.api.map.handler.MapHandler;
 import com.bartlomiejpluta.base.api.map.layer.object.MapPin;
-import com.bartlomiejpluta.base.api.map.layer.object.ObjectLayer;
 import com.bartlomiejpluta.base.api.map.model.GameMap;
-import com.bartlomiejpluta.base.api.move.Direction;
 import com.bartlomiejpluta.base.api.screen.Screen;
 import com.bartlomiejpluta.base.lib.camera.CameraController;
 import com.bartlomiejpluta.base.lib.camera.FollowingCameraController;
 import com.bartlomiejpluta.base.util.input.InputUtil;
 import com.bartlomiejpluta.base.util.world.CharacterSpawner;
 import com.bartlomiejpluta.base.util.world.Warp;
-import com.bartlomiejpluta.demo.entity.Chest;
-import com.bartlomiejpluta.demo.entity.Door;
-import com.bartlomiejpluta.demo.entity.Enemy;
-import com.bartlomiejpluta.demo.entity.Player;
+import com.bartlomiejpluta.demo.entity.*;
 import com.bartlomiejpluta.demo.event.EnemyDiedEvent;
 import com.bartlomiejpluta.demo.menu.GuiManager;
 import com.bartlomiejpluta.demo.runner.DemoRunner;
@@ -82,12 +75,16 @@ public abstract class BaseMapHandler implements MapHandler {
       cameraController.update();
    }
 
-   public CompletableFuture<Window> dialog(String message, WindowPosition position) {
-      return guiManager.showDialog(message, position);
+   public CompletableFuture<Object> dialog(NamedCharacter speaker, String message, WindowPosition position) {
+      return guiManager.showDialog(speaker.getName(), speaker.getDialogNameColor(), message, position);
    }
 
-   public CompletableFuture<Window> dialog(String message) {
-      return guiManager.showDialog(message, WindowPosition.BOTTOM);
+   public CompletableFuture<Object> dialog(NamedCharacter speaker, String message) {
+      return guiManager.showDialog(speaker.getName(), speaker.getDialogNameColor(), message, WindowPosition.BOTTOM);
+   }
+
+   public CompletableFuture<Integer> dialogChoice(NamedCharacter speaker, String... choices) {
+      return guiManager.showDialogChoice(speaker.getName(), speaker.getDialogNameColor(), choices);
    }
 
    protected <T extends Entity> T addEntity(T entity, MapPin tile) {
@@ -98,6 +95,10 @@ public abstract class BaseMapHandler implements MapHandler {
 
    public Enemy enemy(@NonNull MapPin tile, @NonNull String id) {
       return addEntity(new Enemy(id), tile);
+   }
+
+   public Friend friend(@NonNull MapPin tile, @NonNull String id) {
+      return addEntity(new Friend(id), tile);
    }
 
    public Chest chest(@NonNull MapPin tile, @NonNull String id) {

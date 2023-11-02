@@ -47,11 +47,21 @@ public class Player extends Creature {
       for (var i = 0; i < entities.size(); ++i) {
          var entity = entities.get(i);
 
-         // Use some map object which player is looking at
-         if (entity.getCoordinates().equals(coords) && entity instanceof MapObject object) {
-            object.triggerInteraction();
-            return;
+         if (entity.getCoordinates().equals(coords)) {
+
+            // Use some map object which player is looking at
+            if(entity instanceof MapObject object) {
+               object.triggerInteraction();
+               return;
+            }
+
+            // Interact with friend creature which player is looking at
+            if(entity instanceof Friend friend) {
+               friend.interact(this).thenApply(o -> interactionCooldown = INTERACTION_COOLDOWN);
+               return;
+            }
          }
+
 
          if (entity.getCoordinates().equals(getCoordinates())) {
 
@@ -223,7 +233,12 @@ public class Player extends Creature {
 
    @Override
    public String getName() {
-      return "Player";
+      return "Luna";
+   }
+
+   @Override
+   public int getDialogNameColor() {
+      return 0x00AA00;
    }
 
    @Override

@@ -5,14 +5,18 @@ import com.bartlomiejpluta.base.api.gui.*;
 import com.bartlomiejpluta.base.api.input.Key;
 import com.bartlomiejpluta.base.api.input.KeyAction;
 import com.bartlomiejpluta.base.api.input.KeyEvent;
+import com.bartlomiejpluta.base.lib.gui.PrintedTextView;
 import com.bartlomiejpluta.base.lib.gui.TextView;
 
 import java.util.Map;
 
 public class DialogWindow extends DecoratedWindow {
 
+   @Ref("speaker")
+   private TextView speaker;
+
    @Ref("message")
-   private TextView text;
+   private PrintedTextView text;
 
    public DialogWindow(Context context, GUI gui, Map<String, Component> refs) {
       super(context, gui, refs);
@@ -26,6 +30,12 @@ public class DialogWindow extends DecoratedWindow {
       }
 
       if (event.getKey() == Key.KEY_ENTER && event.getAction() == KeyAction.PRESS) {
+         if (text.isPrinting()) {
+            text.printAll();
+            event.consume();
+            return;
+         }
+
          manager.close();
          event.consume();
       }
@@ -35,11 +45,16 @@ public class DialogWindow extends DecoratedWindow {
    public void onOpen(WindowManager manager, Object[] args) {
       super.onOpen(manager, args);
 
-      text.setText((String) args[0]);
+      speaker.setText((String) args[0]);
+      speaker.setColor((int) args[1]);
 
-      if (args.length > 1) {
-         setWindowPosition((WindowPosition) args[1]);
+      text.setText((String) args[2]);
+
+      if (args.length > 3) {
+         setWindowPosition((WindowPosition) args[3]);
       }
+
+      text.start();
    }
 
    @Override

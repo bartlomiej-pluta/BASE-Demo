@@ -26,6 +26,7 @@ public class GuiManager {
    private final EquipmentWindow equipment;
    private final LootWindow loot;
    private final DialogWindow dialog;
+   private final DialogChoiceWindow dialogChoice;
    private final Consumer<KeyEvent> gameMenuHandler = this::handleGameMenuKeyEvent;
 
    public GuiManager(@NonNull DemoRunner runner, @NonNull Context context) {
@@ -49,6 +50,7 @@ public class GuiManager {
       this.gameMenu.reference("exit", Button.class).setAction(runner::exit);
 
       this.dialog = gui.inflateWindow(A.widgets.dialog.$, DialogWindow.class);
+      this.dialogChoice = gui.inflateWindow(A.widgets.dialog_choice.$, DialogChoiceWindow.class);
       this.loot = gui.inflateWindow(widgets.loot_menu.$, LootWindow.class);
    }
 
@@ -83,7 +85,7 @@ public class GuiManager {
       return manager.size();
    }
 
-   public CompletableFuture<Window> showStartMenu() {
+   public CompletableFuture<Object> showStartMenu() {
       manager.closeAll();
       return manager.open(startMenu);
    }
@@ -100,19 +102,23 @@ public class GuiManager {
       manager.setDisplayMode(DisplayMode.DISPLAY_TOP);
    }
 
-   public CompletableFuture<Window> showDialog(@NonNull String message, @NonNull WindowPosition position) {
-      return manager.open(dialog, message, position);
+   public CompletableFuture<Object> showDialog(@NonNull String speaker, int color, @NonNull String message, @NonNull WindowPosition position) {
+      return manager.open(dialog, speaker, color, message, position);
    }
 
-   public CompletableFuture<Window> openLootWindow(@NonNull Enemy enemy) {
+   public CompletableFuture<Integer> showDialogChoice(@NonNull String speaker, int color, @NonNull String... choices) {
+      return manager.openForResult(Integer.class, dialogChoice, speaker, color, choices);
+   }
+
+   public CompletableFuture<Object> openLootWindow(@NonNull Enemy enemy) {
       return manager.open(loot, enemy.getLoot(), "Loot");
    }
 
-   public CompletableFuture<Window> openChestWindow(@NonNull Chest chest) {
+   public CompletableFuture<Object> openChestWindow(@NonNull Chest chest) {
       return manager.open(loot, chest.getContent(), chest.getName());
    }
 
-   public CompletableFuture<Window> openGameMenu() {
+   public CompletableFuture<Object> openGameMenu() {
       return manager.open(gameMenu);
    }
 

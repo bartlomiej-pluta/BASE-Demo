@@ -17,4 +17,8 @@ public abstract class NamedCharacter extends CharacterDelegate {
    }
 
    public abstract String getName();
+
+   public int getDialogNameColor() {
+      return 0xFFFFFF;
+   }
 }
