@@ -11,6 +11,7 @@ import com.bartlomiejpluta.base.util.random.DiceRoller;
 import com.bartlomiejpluta.demo.world.item.Item;
 import lombok.Getter;
 import lombok.NonNull;
+import org.joml.Vector2ic;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
@@ -46,8 +47,14 @@ public class Friend extends Creature implements NPC {
    }
 
    public CompletableFuture<Object> interact(Character trigger) {
-      if(interaction != null && !interacting) {
+      if (interaction != null && !interacting) {
          setFaceDirection(getDirectionTowards(trigger));
+
+         var movement = getMovement();
+         if (movement != null) {
+            movement.abort();
+         }
+
          priorStrategy = strategy;
          strategy = NoopAI.INSTANCE;
          interacting = true;
@@ -67,8 +74,13 @@ public class Friend extends Creature implements NPC {
       return this;
    }
 
-   public Friend asAnimal() {
-      this.strategy = new RandomMovementAI<>(this, 4f);
+   public Friend randomMovementAI(float intervalSeconds, Vector2ic origin, int radius) {
+      this.strategy = new RandomMovementAI<>(this, intervalSeconds, origin, radius);
+      return this;
+   }
+
+   public Friend randomMovementAI(float intervalSeconds) {
+      this.strategy = new RandomMovementAI<>(this, intervalSeconds);
       return this;
    }
 }

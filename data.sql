@@ -56,10 +56,11 @@ CREATE MEMORY TABLE "PUBLIC"."OBJECT"(
     "INTERACT_SOUND" VARCHAR
 );           
 ALTER TABLE "PUBLIC"."OBJECT" ADD CONSTRAINT "PUBLIC"."CONSTRAINT_C" PRIMARY KEY("ID");        
--- 2 +/- SELECT COUNT(*) FROM PUBLIC.OBJECT;   
+-- 3 +/- SELECT COUNT(*) FROM PUBLIC.OBJECT;   
 INSERT INTO "PUBLIC"."OBJECT" VALUES
-('plain_chest', 'Plain Chest', 'Chests', 0, 'Arrow punch'),
-('black_fsm_right_doors', 'Doors', 'FSM Doors', 0, 'Arrow punch');            
+('black_fsm_right_doors', 'Doors', 'FSM Doors', 0, 'Arrow punch'),
+('enforced_chest_left', 'Enforced Chest', 'Chests', 3, 'Arrow punch'),
+('plain_chest_down', 'Plain Chest', 'Chests', 0, 'Arrow punch');
 CREATE MEMORY TABLE "PUBLIC"."JUNK"(
     "ID" VARCHAR NOT NULL,
     "NAME" VARCHAR NOT NULL,

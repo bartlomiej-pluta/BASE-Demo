@@ -1,0 +1,90 @@
+{
+  "uid": "d1b85d85-c52a-46f5-b81e-444847f8ddae",
+  "rows": 17,
+  "columns": 20,
+  "tileWidth": 32,
+  "tileHeight": 32,
+  "layers": [{
+    "name": "Floor",
+    "tileLayer": {
+      "tilesetUID": "eb5bbf17-efaa-4213-90c3-2785a32f3c37",
+      "tiles": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 33, 33, 33, 33, 33, 33, 33, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 33, 33, 33, 33, 33, 33, 33, 0, 34, 34, 34, 34, 34, 0, 0, 0, 0, 0, 0, 0, 33, 33, 33, 33, 33, 33, 33, 0, 34, 34, 34, 34, 34, 0, 0, 0, 0, 0, 0, 0, 34, 34, 34, 0, 0, 0, 0, 0, 34, 34, 34, 34, 34, 0, 0, 0, 0, 0, 0, 0, 34, 34, 34, 0, 0, 0, 0, 0, 34, 34, 34, 34, 34, 0, 0, 0, 0, 0, 0, 0, 34, 0, 0, 0, 0, 0, 0, 0, 34, 34, 34, 34, 34, 0, 0, 0, 0, 0, 0, 0, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 0, 0, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 0, 0, 0, 0, 34, 0, 0, 0, 0, 0, 34, 0, 0, 0, 34, 34, 34, 34, 34, 34, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    }
+  }, {
+    "name": "Carpets",
+    "autoTileLayer": {
+      "autotileUID": "f6bcd0ea-f293-4864-bd13-d1c4e8b79080",
+      "tiles": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 7, 7, 7, 7, 7, 0, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 7, 7, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      "animated": false,
+      "animationDuration": 1.0,
+      "connect": false
+    }
+  }, {
+    "name": "Walls",
+    "autoTileLayer": {
+      "autotileUID": "b475367a-7bf8-44ee-b916-6e81a78f97d9",
+      "tiles": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 10, 10, 10, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 10, 10, 10, 10, 0, 10, 10, 10, 10, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 10, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 10, 10, 10, 10, 0, 0, 0, 0, 0, 10, 10, 10, 10, 10, 0, 0, 0, 10, 10, 10, 10, 10, 10, 10, 0, 0, 0, 0, 0, 10, 10, 10, 10, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 10, 10, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 10, 10, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      "animated": false,
+      "animationDuration": 1.0,
+      "connect": false
+    }
+  }, {
+    "name": "Floor objects",
+    "tileLayer": {
+      "tilesetUID": "60362451-85ed-4bbe-8ac1-225056f48b40",
+      "tiles": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 37, 52, 162, 163, 52, 215, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 168, 68, 178, 179, 68, 10, 10, 0, 0, 81, 215, 141, 0, 0, 0, 0, 0, 0, 0, 0, 184, 147, 194, 195, 148, 26, 26, 0, 38, 6, 8, 45, 46, 0, 0, 0, 0, 0, 0, 0, 0, 0, 132, 132, 0, 0, 0, 0, 23, 22, 24, 61, 62, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 145, 212, 145, 0, 0, 0, 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 145, 244, 145, 0, 0, 0, 0, 0, 0, 0, 0, 35, 0, 0, 142, 215, 0, 0, 0, 0, 0, 0, 0, 167, 0, 215, 126, 215, 0, 0, 0, 0, 12, 11, 13, 14, 13, 0, 170, 0, 0, 0, 0, 183, 0, 0, 0, 0, 168, 0, 0, 0, 28, 27, 29, 29, 29, 0, 186, 0, 0, 0, 0, 0, 0, 0, 0, 0, 184, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 139, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 155, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 157, 0, 32, 215, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 42, 0, 0, 77, 0, 0, 0, 0, 153, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 140, 58, 0, 0, 93, 0, 0, 0, 0, 137, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 74, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    }
+  }, {
+    "name": "Main",
+    "objectLayer": {
+      "passageMap": ["ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "BLOCK", "ALLOW", "ALLOW", "BLOCK", "BLOCK", "ALLOW", "ALLOW", "ALLOW", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "BLOCK", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "BLOCK", "ALLOW", "ALLOW", "BLOCK", "ALLOW", "ALLOW", "BLOCK", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "BLOCK", "ALLOW", "BLOCK", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "BLOCK", "BLOCK", "ALLOW", "ALLOW", "BLOCK", "ALLOW", "ALLOW", "BLOCK", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "BLOCK", "ALLOW", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "ALLOW", "BLOCK", "ALLOW", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "ALLOW", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "ALLOW", "BLOCK", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "BLOCK", "BLOCK", "BLOCK", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "BLOCK", "ALLOW", "ALLOW", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "ALLOW", "ALLOW", "ALLOW", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "ALLOW", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "BLOCK", "ALLOW", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "ALLOW", "ALLOW", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "BLOCK", "ALLOW", "ALLOW", "ALLOW", "BLOCK", "BLOCK", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "BLOCK", "BLOCK", "ALLOW", "ALLOW", "ALLOW", "BLOCK", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "BLOCK", "BLOCK", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "BLOCK", "ALLOW", "BLOCK", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "BLOCK", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "BLOCK", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "BLOCK"],
+      "objects": [{
+        "x": 3,
+        "y": 12,
+        "code": "/*  \n *  Following final parameters are available to use:\n *  x: int - the x coordinate of tile the object has been created on\n *  y: int - the y coordinate of tile the object has been created on \n *  layer: ObjectLayer - current object layer\n *  map: GameMap - current map\n */\nwarp(here, A.maps.hero_house.main.home);"
+      }, {
+        "x": 11,
+        "y": 7,
+        "code": "/*  \n *  Following final parameters are available to use:\n *  here: MapPin - the composite object containing current map UID, \n *        layer\u0027s index and x,y coordinates of the current tile          \n *  x: int - the x coordinate of the current tile\n *  y: int - the y coordinate of the current tile \n *  layer: ObjectLayer - current object layer\n *  map: GameMap - current map\n */\nfriend(here, \"grandma\")\n\t.randomMovementAI(4f, here.toCoordinates(), 5)\n\t.interaction(this::triggerGrandmaDialog);"
+      }, {
+        "x": 5,
+        "y": 4,
+        "code": "/*  \n *  Following final parameters are available to use:\n *  here: MapPin - the composite object containing current map UID, \n *        layer\u0027s index and x,y coordinates of the current tile          \n *  x: int - the x coordinate of the current tile\n *  y: int - the y coordinate of the current tile \n *  layer: ObjectLayer - current object layer\n *  map: GameMap - current map\n */\nfriend(here, \"neko\")\n\t.randomMovementAI(4f)\n\t.interaction(this::triggerNekoDialog);"
+      }, {
+        "x": 7,
+        "y": 9,
+        "code": "/*  \n *  Following final parameters are available to use:\n *  x: int - the x coordinate of tile the object has been created on\n *  y: int - the y coordinate of tile the object has been created on \n *  layer: ObjectLayer - current object layer\n *  map: GameMap - current map\n *  handler: HeroHomeHandler - current map handler\n *  runner: DemoRunner - the game runner of the project\n *  context: Context - the game context\n */\nchest(here, \"plain_chest_down\")\n\t.addItem(new MeleeWeapon(\"wooden_sword\"))\n\t.addItem(new Medicament(\"small_life_potion\", 4))\n\t.shuffle();"
+      }, {
+        "x": 18,
+        "y": 12,
+        "code": "/*  \n *  Following final parameters are available to use:\n *  here: MapPin - the composite object containing current map UID, \n *        layer\u0027s index and x,y coordinates of the current tile          \n *  x: int - the x coordinate of the current tile\n *  y: int - the y coordinate of the current tile \n *  layer: ObjectLayer - current object layer\n *  map: GameMap - current map          \n *  handler: HeroHomeHandler - current map handler\n *  runner: DemoRunner - the game runner of the project\n *  context: Context - the game context\n */\nchest(here, \"enforced_chest_left\")\n\t.addItem(new MeleeWeapon(\"wooden_sword\"))\n\t.addItem(new Medicament(\"small_life_potion\", 4))\n\t.shuffle();"
+      }],
+      "labels": [{
+        "label": "entry",
+        "x": 3,
+        "y": 11
+      }, {
+        "label": "Start",
+        "x": 10,
+        "y": 14
+      }]
+    }
+  }, {
+    "name": "Objects above",
+    "tileLayer": {
+      "tilesetUID": "60362451-85ed-4bbe-8ac1-225056f48b40",
+      "tiles": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 168, 0, 0, 0, 0, 168, 0, 0, 0, 173, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 202, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 0, 13, 0, 0, 13, 13, 168, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 58, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 168, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    }
+  }, {
+    "name": "Ceiling",
+    "autoTileLayer": {
+      "autotileUID": "6584a279-e937-497e-a056-b1e77bff2439",
+      "tiles": [10, 10, 10, 10, 10, 10, 10, 10, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 10, 10, 10, 10, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 10, 0, 10, 10, 10, 10, 10, 10, 10, 0, 0, 0, 0, 0, 10, 10, 10, 10, 10, 10, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 10, 10, 10, 10, 0, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 0, 0, 0, 0, 10, 0, 0, 10, 10, 10, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
+      "animated": false,
+      "animationDuration": 1.0,
+      "connect": false
+    }
+  }],
+  "handler": "com.bartlomiejpluta.demo.map.HeroHomeHandler",
+  "javaImports": "import com.bartlomiejpluta.demo.world.weapon.*;\nimport com.bartlomiejpluta.demo.world.potion.*;\nimport com.bartlomiejpluta.base.lib.animation.*;"
+}

@@ -1,0 +1,312 @@
+{
+  "name": "BASE Demo",
+  "runner": "com.bartlomiejpluta.demo.runner.DemoRunner",
+  "maps": [{
+    "uid": "d1b85d85-c52a-46f5-b81e-444847f8ddae",
+    "source": "d1b85d85-c52a-46f5-b81e-444847f8ddae.json",
+    "name": "Hero Home"
+  }, {
+    "uid": "b602601a-e9b0-44bf-bc0d-5f31c9964ba1",
+    "source": "b602601a-e9b0-44bf-bc0d-5f31c9964ba1.json",
+    "name": "Hero House"
+  }, {
+    "uid": "8fbb151f-682a-4357-ba92-157e4097898f",
+    "source": "8fbb151f-682a-4357-ba92-157e4097898f.json",
+    "name": "Forrest"
+  }],
+  "tileSets": [{
+    "uid": "eb5bbf17-efaa-4213-90c3-2785a32f3c37",
+    "source": "eb5bbf17-efaa-4213-90c3-2785a32f3c37.png",
+    "name": "FSM 1",
+    "rows": 16,
+    "columns": 8
+  }, {
+    "uid": "bf5a8b2c-4635-4433-8781-d8fed02c7197",
+    "source": "bf5a8b2c-4635-4433-8781-d8fed02c7197.png",
+    "name": "FSM 2",
+    "rows": 16,
+    "columns": 16
+  }, {
+    "uid": "fa940a9c-aa18-4037-9c20-ca660182d5f4",
+    "source": "fa940a9c-aa18-4037-9c20-ca660182d5f4.png",
+    "name": "FSM 3",
+    "rows": 16,
+    "columns": 16
+  }, {
+    "uid": "60362451-85ed-4bbe-8ac1-225056f48b40",
+    "source": "60362451-85ed-4bbe-8ac1-225056f48b40.png",
+    "name": "FSM 4",
+    "rows": 16,
+    "columns": 16
+  }, {
+    "uid": "6d5672b0-64e6-48a7-8b48-bf73d37ca7d2",
+    "source": "6d5672b0-64e6-48a7-8b48-bf73d37ca7d2.png",
+    "name": "FSM 5",
+    "rows": 16,
+    "columns": 16
+  }, {
+    "uid": "e62eb9ae-5b27-4062-a20e-3076732d450e",
+    "source": "e62eb9ae-5b27-4062-a20e-3076732d450e.png",
+    "name": "Forresta 1",
+    "rows": 16,
+    "columns": 8
+  }, {
+    "uid": "ed448c5f-ab4e-4531-97c6-8fc6c29b3b78",
+    "source": "ed448c5f-ab4e-4531-97c6-8fc6c29b3b78.png",
+    "name": "Forresta 2",
+    "rows": 16,
+    "columns": 16
+  }, {
+    "uid": "70e304dd-c2da-4b5a-8288-a75cc54962ca",
+    "source": "70e304dd-c2da-4b5a-8288-a75cc54962ca.png",
+    "name": "Forresta 3",
+    "rows": 16,
+    "columns": 16
+  }, {
+    "uid": "028377eb-6272-4c70-aa58-2a4b01af52ef",
+    "source": "028377eb-6272-4c70-aa58-2a4b01af52ef.png",
+    "name": "Forresta 4",
+    "rows": 16,
+    "columns": 16
+  }, {
+    "uid": "413e09cf-ba41-4fe8-ac47-9697b5ad0245",
+    "source": "413e09cf-ba41-4fe8-ac47-9697b5ad0245.png",
+    "name": "Candacis Spring",
+    "rows": 35,
+    "columns": 16
+  }],
+  "characterSets": [{
+    "uid": "0dcbaf26-d634-4ca8-9691-7a8ff966f702",
+    "source": "0dcbaf26-d634-4ca8-9691-7a8ff966f702.png",
+    "name": "Garo",
+    "rows": 4,
+    "columns": 4
+  }, {
+    "uid": "61393836-8127-4277-853f-87b48022ae43",
+    "source": "61393836-8127-4277-853f-87b48022ae43.png",
+    "name": "Corpse",
+    "rows": 4,
+    "columns": 4
+  }, {
+    "uid": "e605b2b1-3cab-499f-882d-160ab65b49d8",
+    "source": "e605b2b1-3cab-499f-882d-160ab65b49d8.png",
+    "name": "Skeleton",
+    "rows": 4,
+    "columns": 4
+  }, {
+    "uid": "0ea0fe55-53b2-4eea-8fab-2011e694127b",
+    "source": "0ea0fe55-53b2-4eea-8fab-2011e694127b.png",
+    "name": "Luna",
+    "rows": 4,
+    "columns": 4
+  }, {
+    "uid": "92ac46ff-8cf2-4748-907f-873030c8e378",
+    "source": "92ac46ff-8cf2-4748-907f-873030c8e378.png",
+    "name": "Chests2",
+    "rows": 4,
+    "columns": 4
+  }, {
+    "uid": "fbea4628-e1d3-4acc-800a-ed54c1bb51b6",
+    "source": "fbea4628-e1d3-4acc-800a-ed54c1bb51b6.png",
+    "name": "Blanca",
+    "rows": 4,
+    "columns": 4
+  }, {
+    "uid": "7a723b64-e54a-4fff-852d-108349133111",
+    "source": "7a723b64-e54a-4fff-852d-108349133111.png",
+    "name": "Eagle2",
+    "rows": 4,
+    "columns": 4
+  }, {
+    "uid": "c7ec2341-e5fc-4285-9ecb-a2dfc8a0ed67",
+    "source": "c7ec2341-e5fc-4285-9ecb-a2dfc8a0ed67.png",
+    "name": "Turtle",
+    "rows": 4,
+    "columns": 4
+  }, {
+    "uid": "f1113db3-4a6c-4a07-9b64-32ba8e653e4f",
+    "source": "f1113db3-4a6c-4a07-9b64-32ba8e653e4f.png",
+    "name": "Silver Bat",
+    "rows": 4,
+    "columns": 4
+  }, {
+    "uid": "1779ae2b-474a-4599-8fc3-be34f7d66965",
+    "source": "1779ae2b-474a-4599-8fc3-be34f7d66965.png",
+    "name": "Deku",
+    "rows": 4,
+    "columns": 4
+  }, {
+    "uid": "a6863639-d563-4d88-af8e-c6d087ee2ffb",
+    "source": "a6863639-d563-4d88-af8e-c6d087ee2ffb.png",
+    "name": "FSM Doors",
+    "rows": 4,
+    "columns": 4
+  }, {
+    "uid": "35f770a6-5d94-4ddf-a132-dc3788a3adaf",
+    "source": "35f770a6-5d94-4ddf-a132-dc3788a3adaf.png",
+    "name": "Neko",
+    "rows": 4,
+    "columns": 4
+  }, {
+    "uid": "4a636044-2dbd-4ef3-8bdf-b63501c85ae3",
+    "source": "4a636044-2dbd-4ef3-8bdf-b63501c85ae3.png",
+    "name": "Grandma",
+    "rows": 4,
+    "columns": 4
+  }, {
+    "uid": "f529cbfc-c29d-470b-8804-e50d6a1efc98",
+    "source": "f529cbfc-c29d-470b-8804-e50d6a1efc98.png",
+    "name": "Chests",
+    "rows": 4,
+    "columns": 16
+  }],
+  "fonts": [{
+    "uid": "2261c04f-b02e-4486-b388-8a0fa41622e9",
+    "source": "2261c04f-b02e-4486-b388-8a0fa41622e9.ttf",
+    "name": "Roboto Regular"
+  }],
+  "widgets": [{
+    "uid": "ab9d40b4-eb28-45d7-bff2-9432a05eb41a",
+    "source": "ab9d40b4-eb28-45d7-bff2-9432a05eb41a.xml",
+    "name": "Start Menu"
+  }, {
+    "uid": "56ca6b39-f949-4212-9c23-312db25887e0",
+    "source": "56ca6b39-f949-4212-9c23-312db25887e0.xml",
+    "name": "Game Menu"
+  }, {
+    "uid": "00bd0625-b3b8-4abf-97b7-91f42bce28ec",
+    "source": "00bd0625-b3b8-4abf-97b7-91f42bce28ec.xml",
+    "name": "HUD"
+  }, {
+    "uid": "c473a91a-ff25-4e71-9bec-b35e48102aeb",
+    "source": "c473a91a-ff25-4e71-9bec-b35e48102aeb.xml",
+    "name": "Equipment"
+  }, {
+    "uid": "53ca3e54-0f8d-44fa-8281-acd9c5bba743",
+    "source": "53ca3e54-0f8d-44fa-8281-acd9c5bba743.xml",
+    "name": "Eq Item Menu"
+  }, {
+    "uid": "d78413cd-0dad-4b51-8dd1-54e33535fe53",
+    "source": "d78413cd-0dad-4b51-8dd1-54e33535fe53.xml",
+    "name": "Loot Menu"
+  }, {
+    "uid": "1c2b2ba2-66bf-40ee-97bf-6e5065b7b420",
+    "source": "1c2b2ba2-66bf-40ee-97bf-6e5065b7b420.xml",
+    "name": "Dialog"
+  }, {
+    "uid": "5a5aea0a-8c8b-4730-8e45-9ec6ccc5c4f6",
+    "source": "5a5aea0a-8c8b-4730-8e45-9ec6ccc5c4f6.xml",
+    "name": "Dialog Choice"
+  }],
+  "animations": [{
+    "uid": "e6f067f1-eba0-4e62-99c3-2fd867e6f142",
+    "source": "e6f067f1-eba0-4e62-99c3-2fd867e6f142.png",
+    "name": "Poof",
+    "rows": 4,
+    "columns": 5
+  }, {
+    "uid": "312cc4e6-8c44-43e7-828a-e7e2a77836f3",
+    "source": "312cc4e6-8c44-43e7-828a-e7e2a77836f3.png",
+    "name": "Arrow",
+    "rows": 2,
+    "columns": 2
+  }, {
+    "uid": "54f657bd-8108-464c-9bbe-63944fc14f6b",
+    "source": "54f657bd-8108-464c-9bbe-63944fc14f6b.png",
+    "name": "Punch",
+    "rows": 3,
+    "columns": 5
+  }, {
+    "uid": "0ddac391-4086-4e9c-8310-59db649419ff",
+    "source": "0ddac391-4086-4e9c-8310-59db649419ff.png",
+    "name": "Slash",
+    "rows": 2,
+    "columns": 5
+  }, {
+    "uid": "c8883e76-ae93-4673-8893-d2ec72c1e199",
+    "source": "c8883e76-ae93-4673-8893-d2ec72c1e199.png",
+    "name": "Shuriken",
+    "rows": 2,
+    "columns": 3
+  }, {
+    "uid": "aeb17449-c342-4dab-9057-5fb05183fd03",
+    "source": "aeb17449-c342-4dab-9057-5fb05183fd03.png",
+    "name": "Heart Emoji",
+    "rows": 6,
+    "columns": 4
+  }],
+  "sounds": [{
+    "uid": "1311327d-4b74-4252-94da-23ee4129e357",
+    "source": "1311327d-4b74-4252-94da-23ee4129e357.ogg",
+    "name": "Sword slash"
+  }, {
+    "uid": "e452e215-f581-40fe-a5cf-f555d3db83b8",
+    "source": "e452e215-f581-40fe-a5cf-f555d3db83b8.ogg",
+    "name": "Deku death"
+  }, {
+    "uid": "cd8a40f2-1e2e-4e1d-a13f-b4fe210a04df",
+    "source": "cd8a40f2-1e2e-4e1d-a13f-b4fe210a04df.ogg",
+    "name": "Arrow"
+  }, {
+    "uid": "7c33cfee-e6a8-42b8-8b1d-c801b242dcf0",
+    "source": "7c33cfee-e6a8-42b8-8b1d-c801b242dcf0.ogg",
+    "name": "Arrow punch"
+  }],
+  "iconSets": [{
+    "uid": "ddc1e14f-0d1f-4291-a29d-0dc5d8e9242b",
+    "source": "ddc1e14f-0d1f-4291-a29d-0dc5d8e9242b.png",
+    "name": "Generic",
+    "rows": 35,
+    "columns": 12
+  }],
+  "autoTiles": [{
+    "uid": "f6bcd0ea-f293-4864-bd13-d1c4e8b79080",
+    "source": "f6bcd0ea-f293-4864-bd13-d1c4e8b79080.png",
+    "name": "FSM 1",
+    "rows": 4,
+    "columns": 8,
+    "layout": "LAYOUT_2X3"
+  }, {
+    "uid": "88042125-4c6d-4dfa-ad1d-8e78b6df9ee9",
+    "source": "88042125-4c6d-4dfa-ad1d-8e78b6df9ee9.png",
+    "name": "FSM 2",
+    "rows": 4,
+    "columns": 8,
+    "layout": "LAYOUT_2X2"
+  }, {
+    "uid": "6584a279-e937-497e-a056-b1e77bff2439",
+    "source": "6584a279-e937-497e-a056-b1e77bff2439.png",
+    "name": "FSM 3",
+    "rows": 3,
+    "columns": 8,
+    "layout": "LAYOUT_2X3"
+  }, {
+    "uid": "b475367a-7bf8-44ee-b916-6e81a78f97d9",
+    "source": "b475367a-7bf8-44ee-b916-6e81a78f97d9.png",
+    "name": "FSM 4",
+    "rows": 3,
+    "columns": 8,
+    "layout": "LAYOUT_2X2"
+  }, {
+    "uid": "fb57775d-988d-42c4-85bf-9f415c1f9086",
+    "source": "fb57775d-988d-42c4-85bf-9f415c1f9086.png",
+    "name": "Forresta",
+    "rows": 4,
+    "columns": 8,
+    "layout": "LAYOUT_2X3"
+  }, {
+    "uid": "04ac5ad8-4100-4016-97b3-a51a728ca49d",
+    "source": "04ac5ad8-4100-4016-97b3-a51a728ca49d.png",
+    "name": "Candacis Spring 1",
+    "rows": 3,
+    "columns": 2,
+    "layout": "LAYOUT_2X3"
+  }, {
+    "uid": "fc294b9e-105a-4120-8caa-393d78fdf414",
+    "source": "fc294b9e-105a-4120-8caa-393d78fdf414.png",
+    "name": "Candacis Spring 2",
+    "rows": 1,
+    "columns": 3,
+    "layout": "LAYOUT_2X3"
+  }]
+}
