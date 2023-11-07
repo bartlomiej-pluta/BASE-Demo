@@ -11,6 +11,7 @@ import static com.bartlomiejpluta.base.lib.animation.AnimationRunner.simple;
 public class HeroHomeHandler extends BaseMapHandler {
    @Override
    public void onOpen(Context context, GameMap map) {
+      map.setAmbientColor(0.05f, 0.01f, 0.01f);
       dialog(player, "Ahhh, another beautiful day for an adventure... Let's go!");
    }
 

@@ -7,6 +7,7 @@ import com.bartlomiejpluta.base.api.gui.WindowPosition;
 import com.bartlomiejpluta.base.api.icon.Icon;
 import com.bartlomiejpluta.base.api.input.Input;
 import com.bartlomiejpluta.base.api.input.Key;
+import com.bartlomiejpluta.base.api.light.Light;
 import com.bartlomiejpluta.base.api.map.handler.MapHandler;
 import com.bartlomiejpluta.base.api.map.layer.object.MapPin;
 import com.bartlomiejpluta.base.api.map.model.GameMap;
@@ -20,10 +21,13 @@ import com.bartlomiejpluta.demo.entity.*;
 import com.bartlomiejpluta.demo.event.EnemyDiedEvent;
 import com.bartlomiejpluta.demo.menu.GuiManager;
 import com.bartlomiejpluta.demo.runner.DemoRunner;
+import com.bartlomiejpluta.demo.world.light.Torch;
 import com.bartlomiejpluta.demo.world.potion.Medicament;
 import lombok.NonNull;
 
 import java.util.concurrent.CompletableFuture;
+
+import static java.lang.Math.*;
 
 public abstract class BaseMapHandler implements MapHandler {
    protected Screen screen;
@@ -34,6 +38,8 @@ public abstract class BaseMapHandler implements MapHandler {
    protected GameMap map;
    protected Player player;
    protected CameraController cameraController;
+
+   protected boolean dayNightCycle = false;
 
    @Override
    public void onCreate(Context context, GameMap map) {
@@ -73,6 +79,21 @@ public abstract class BaseMapHandler implements MapHandler {
    @Override
    public void update(Context context, GameMap map, float dt) {
       cameraController.update();
+
+      if(!dayNightCycle) {
+         return;
+      }
+
+      var x = runner.getTime().getProgress();
+      map.setAmbientColor(
+         ambientColor(1.2f, -0.3f, 0, x),
+         ambientColor(1.4f, -0.6f, 0.05f, x),
+         ambientColor(1.7f, -1.1f, 0.2f, x)
+      );
+   }
+
+   private float ambientColor(float a, float b, float offset, float x) {
+      return ((float) max(sin(x * PI * a + b), 0) + offset) / (1 + offset);
    }
 
    public CompletableFuture<Object> dialog(NamedCharacter speaker, String message, WindowPosition position) {
@@ -122,6 +143,22 @@ public abstract class BaseMapHandler implements MapHandler {
       icon.setScale(1f);
       icon.setZIndex(-1);
       return addEntity(icon, tile);
+   }
+
+   public Torch torch(MapPin tile) {
+      var torch = new Torch();
+      map.getLayer(tile.getLayer()).addLight(torch);
+      torch.setCoordinates(tile.toCoordinates());
+      return torch;
+   }
+
+   public Light light(MapPin tile) {
+      var light = context.createLight();
+      map.getLayer(tile.getLayer()).addLight(light);
+      light.setCoordinates(tile.toCoordinates());
+      light.setIntensity(1f, 1f, 1f);
+      light.setAttenuation(0.1f, 0, 0.001f);
+      return light;
    }
 
    public Warp warp(@NonNull MapPin tile, MapPin target) {

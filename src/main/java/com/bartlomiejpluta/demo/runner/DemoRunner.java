@@ -1,7 +1,6 @@
 package com.bartlomiejpluta.demo.runner;
 
-import A.maps;
-import DB.ConfigDAO;
+
 import DB.dao;
 import com.bartlomiejpluta.base.api.context.Context;
 import com.bartlomiejpluta.base.api.gui.GUI;
@@ -9,15 +8,17 @@ import com.bartlomiejpluta.base.api.runner.GameRunner;
 import com.bartlomiejpluta.base.api.screen.Screen;
 import com.bartlomiejpluta.demo.entity.Player;
 import com.bartlomiejpluta.demo.menu.GuiManager;
+import com.bartlomiejpluta.demo.world.time.WorldTime;
 import lombok.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static java.lang.Integer.parseInt;
-
 
 public class DemoRunner implements GameRunner {
    private static final Logger log = LoggerFactory.getLogger(DemoRunner.class);
+
+   @Getter
+   private WorldTime time;
    private static DemoRunner INSTANCE;
 
    private Screen screen;
@@ -107,6 +108,7 @@ public class DemoRunner implements GameRunner {
 
       this.context = context;
       this.screen = context.getScreen();
+      this.time = new WorldTime(context);
 
       configureScreen();
       configureCamera();
@@ -117,5 +119,10 @@ public class DemoRunner implements GameRunner {
       guiManager.showStartMenu();
 
       screen.show();
+   }
+
+   @Override
+   public void update(float dt) {
+      time.update(dt);
    }
 }

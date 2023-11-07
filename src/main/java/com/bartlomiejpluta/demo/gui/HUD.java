@@ -13,6 +13,7 @@ import com.bartlomiejpluta.demo.event.EnemyDiedEvent;
 import com.bartlomiejpluta.demo.event.HitEvent;
 import com.bartlomiejpluta.demo.runner.DemoRunner;
 import com.bartlomiejpluta.demo.util.LimitedQueue;
+import com.bartlomiejpluta.demo.world.time.WorldTime;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
@@ -24,6 +25,7 @@ public class HUD extends BorderLayout {
    private static final float LOG_VISIBILITY_DURATION = 8000f;
    private static final float LOG_VISIBILITY_FADING_OUT = 1000f;
    private final Player player;
+   private final WorldTime time;
    private final Runtime runtime;
    private final LimitedQueue<String> logger = new LimitedQueue<>(MAX_LOG_SIZE);
 
@@ -42,6 +44,7 @@ public class HUD extends BorderLayout {
       super(context, gui, refs);
       this.player = DemoRunner.instance().getPlayer();
       this.runtime = Runtime.getRuntime();
+      this.time = DemoRunner.instance().getTime();
       context.addEventListener(HitEvent.TYPE, this::logHitEvent);
       context.addEventListener(EnemyDiedEvent.TYPE, this::logEnemyDiedEvent);
    }
@@ -72,15 +75,13 @@ public class HUD extends BorderLayout {
       } else {
          logVisibilityDuration = 0;
       }
-
-
    }
 
    @Override
    public void draw(Screen screen, GUI gui) {
       var coords = player.getCoordinates();
       var pos = player.getPosition();
-      debugTxt.setText(String.format("Mem: %.2f / %.2f [MB]\nCoords: %d : %d\nPos: %.2f : %.2f\nEntities: %d\n", runtime.totalMemory() / 1024f / 1024f, runtime.maxMemory() / 1024f / 1024f, coords.x(), coords.y(), pos.x(), pos.y(), player.getLayer().getEntities().size()));
+      debugTxt.setText(String.format("Clock: %02d:%02d\nTime: %.2f\nMem: %.2f / %.2f [MB]\nCoords: %d : %d\nPos: %.2f : %.2f\nEntities: %d\n", time.getHour(), time.getMinute(), time.getProgress(), runtime.totalMemory() / 1024f / 1024f, runtime.maxMemory() / 1024f / 1024f, coords.x(), coords.y(), pos.x(), pos.y(), player.getLayer().getEntities().size()));
 
       logLbl.setAlpha(Math.min(1f, logVisibilityDuration / LOG_VISIBILITY_FADING_OUT));
 

@@ -5,6 +5,48 @@
   "tileWidth": 32,
   "tileHeight": 32,
   "layers": [{
+    "name": "All Lights",
+    "objectLayer": {
+      "passageMap": ["ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW", "ALLOW"],
+      "objects": [{
+        "x": 6,
+        "y": 1,
+        "code": "/*  \n *  Following final parameters are available to use:\n *  here: MapPin - the composite object containing current map UID, \n *        layer\u0027s index and x,y coordinates of the current tile          \n *  x: int - the x coordinate of the current tile\n *  y: int - the y coordinate of the current tile \n *  layer: ObjectLayer - current object layer\n *  map: GameMap - current map          \n *  handler: HeroHomeHandler - current map handler\n *  runner: DemoRunner - the game runner of the project\n *  context: Context - the game context\n */\ntorch(here);"
+      }, {
+        "x": 5,
+        "y": 7,
+        "code": "/*  \n *  Following final parameters are available to use:\n *  here: MapPin - the composite object containing current map UID, \n *        layer\u0027s index and x,y coordinates of the current tile          \n *  x: int - the x coordinate of the current tile\n *  y: int - the y coordinate of the current tile \n *  layer: ObjectLayer - current object layer\n *  map: GameMap - current map          \n *  handler: HeroHomeHandler - current map handler\n *  runner: DemoRunner - the game runner of the project\n *  context: Context - the game context\n */\ntorch(here);"
+      }, {
+        "x": 13,
+        "y": 12,
+        "code": "/*  \n *  Following final parameters are available to use:\n *  here: MapPin - the composite object containing current map UID, \n *        layer\u0027s index and x,y coordinates of the current tile          \n *  x: int - the x coordinate of the current tile\n *  y: int - the y coordinate of the current tile \n *  layer: ObjectLayer - current object layer\n *  map: GameMap - current map          \n *  handler: HeroHomeHandler - current map handler\n *  runner: DemoRunner - the game runner of the project\n *  context: Context - the game context\n */\ntorch(here);"
+      }, {
+        "x": 17,
+        "y": 7,
+        "code": "/*  \n *  Following final parameters are available to use:\n *  here: MapPin - the composite object containing current map UID, \n *        layer\u0027s index and x,y coordinates of the current tile          \n *  x: int - the x coordinate of the current tile\n *  y: int - the y coordinate of the current tile \n *  layer: ObjectLayer - current object layer\n *  map: GameMap - current map          \n *  handler: HeroHomeHandler - current map handler\n *  runner: DemoRunner - the game runner of the project\n *  context: Context - the game context\n */\ntorch(here);"
+      }, {
+        "x": 15,
+        "y": 7,
+        "code": "/*  \n *  Following final parameters are available to use:\n *  here: MapPin - the composite object containing current map UID, \n *        layer\u0027s index and x,y coordinates of the current tile          \n *  x: int - the x coordinate of the current tile\n *  y: int - the y coordinate of the current tile \n *  layer: ObjectLayer - current object layer\n *  map: GameMap - current map          \n *  handler: HeroHomeHandler - current map handler\n *  runner: DemoRunner - the game runner of the project\n *  context: Context - the game context\n */\ntorch(here);"
+      }, {
+        "x": 10,
+        "y": 2,
+        "code": "/*  \n *  Following final parameters are available to use:\n *  here: MapPin - the composite object containing current map UID, \n *        layer\u0027s index and x,y coordinates of the current tile          \n *  x: int - the x coordinate of the current tile\n *  y: int - the y coordinate of the current tile \n *  layer: ObjectLayer - current object layer\n *  map: GameMap - current map          \n *  handler: HeroHomeHandler - current map handler\n *  runner: DemoRunner - the game runner of the project\n *  context: Context - the game context\n */\nlight(here);"
+      }, {
+        "x": 11,
+        "y": 2,
+        "code": "/*  \n *  Following final parameters are available to use:\n *  here: MapPin - the composite object containing current map UID, \n *        layer\u0027s index and x,y coordinates of the current tile          \n *  x: int - the x coordinate of the current tile\n *  y: int - the y coordinate of the current tile \n *  layer: ObjectLayer - current object layer\n *  map: GameMap - current map          \n *  handler: HeroHomeHandler - current map handler\n *  runner: DemoRunner - the game runner of the project\n *  context: Context - the game context\n */\ntorch(here);"
+      }, {
+        "x": 2,
+        "y": 1,
+        "code": "/*  \n *  Following final parameters are available to use:\n *  here: MapPin - the composite object containing current map UID, \n *        layer\u0027s index and x,y coordinates of the current tile          \n *  x: int - the x coordinate of the current tile\n *  y: int - the y coordinate of the current tile \n *  layer: ObjectLayer - current object layer\n *  map: GameMap - current map          \n *  handler: HeroHomeHandler - current map handler\n *  runner: DemoRunner - the game runner of the project\n *  context: Context - the game context\n */\nvar light \u003d light(here);\nlight.setPositionOffset(0, 15f);"
+      }, {
+        "x": 5,
+        "y": 1,
+        "code": "/*  \n *  Following final parameters are available to use:\n *  here: MapPin - the composite object containing current map UID, \n *        layer\u0027s index and x,y coordinates of the current tile          \n *  x: int - the x coordinate of the current tile\n *  y: int - the y coordinate of the current tile \n *  layer: ObjectLayer - current object layer\n *  map: GameMap - current map          \n *  handler: HeroHomeHandler - current map handler\n *  runner: DemoRunner - the game runner of the project\n *  context: Context - the game context\n */\nvar light \u003d light(here);\nlight.setPositionOffset(0, 15f);"
+      }]
+    }
+  }, {
     "name": "Floor",
     "tileLayer": {
       "tilesetUID": "eb5bbf17-efaa-4213-90c3-2785a32f3c37",

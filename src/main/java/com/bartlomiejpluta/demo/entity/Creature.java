@@ -1,6 +1,8 @@
 package com.bartlomiejpluta.demo.entity;
 
 import com.bartlomiejpluta.base.api.character.Character;
+import com.bartlomiejpluta.base.api.light.Light;
+import com.bartlomiejpluta.base.api.map.layer.object.ObjectLayer;
 import com.bartlomiejpluta.demo.world.item.Item;
 import com.bartlomiejpluta.demo.world.weapon.Ammunition;
 import com.bartlomiejpluta.demo.world.weapon.RangedWeapon;
@@ -38,6 +40,9 @@ public abstract class Creature extends NamedCharacter {
 
    @Getter
    private NamedCharacter lastAttacker;
+
+   @Getter
+   protected Light light;
 
    public Creature(@NonNull Character entity) {
       super(entity);
@@ -88,6 +93,39 @@ public abstract class Creature extends NamedCharacter {
       this.hp = Math.min(this.hp + hp, this.maxHp);
    }
 
+   public void setLight(Light light) {
+      this.light = light;
+
+      if(getLayer() != null) {
+         var layer = getLayer().getMap().getLayer(0);
+         if(light != null) {
+            layer.addLight(light);
+         } else if (this.light != null){
+            layer.removeLight(this.light);
+         }
+      }
+
+      this.light = light;
+   }
+
+   @Override
+   public void onAdd(ObjectLayer layer) {
+      super.onAdd(layer);
+
+      if(light != null) {
+         layer.getMap().getLayer(0).addLight(light);
+      }
+   }
+
+   @Override
+   public void onRemove(ObjectLayer layer) {
+      super.onRemove(layer);
+
+      if(light != null) {
+         layer.getMap().getLayer(0).removeLight(light);
+      }
+   }
+
    @Override
    public void update(float dt) {
       super.update(dt);
@@ -99,6 +137,10 @@ public abstract class Creature extends NamedCharacter {
       if (hp <= 0 && alive && getLayer() != null) {
          alive = false;
          die();
+      }
+
+      if(light != null) {
+         light.setPosition(getPosition());
       }
    }
 

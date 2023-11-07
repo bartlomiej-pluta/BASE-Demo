@@ -34,6 +34,11 @@ public class Player extends Creature {
       setAnimationSpeed(1f);
       setBlocking(true);
 
+      var light = context.createLight();
+      light.setAttenuation(4f, 0, 0.001f);
+      light.setIntensity(1f, 1f, 1f);
+      setLight(light);
+
       Arrays.fill(equipment, null);
    }
 
