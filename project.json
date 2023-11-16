@@ -44,36 +44,6 @@
     "name": "FSM 5",
     "rows": 16,
     "columns": 16
-  }, {
-    "uid": "e62eb9ae-5b27-4062-a20e-3076732d450e",
-    "source": "e62eb9ae-5b27-4062-a20e-3076732d450e.png",
-    "name": "Forresta 1",
-    "rows": 16,
-    "columns": 8
-  }, {
-    "uid": "ed448c5f-ab4e-4531-97c6-8fc6c29b3b78",
-    "source": "ed448c5f-ab4e-4531-97c6-8fc6c29b3b78.png",
-    "name": "Forresta 2",
-    "rows": 16,
-    "columns": 16
-  }, {
-    "uid": "70e304dd-c2da-4b5a-8288-a75cc54962ca",
-    "source": "70e304dd-c2da-4b5a-8288-a75cc54962ca.png",
-    "name": "Forresta 3",
-    "rows": 16,
-    "columns": 16
-  }, {
-    "uid": "028377eb-6272-4c70-aa58-2a4b01af52ef",
-    "source": "028377eb-6272-4c70-aa58-2a4b01af52ef.png",
-    "name": "Forresta 4",
-    "rows": 16,
-    "columns": 16
-  }, {
-    "uid": "413e09cf-ba41-4fe8-ac47-9697b5ad0245",
-    "source": "413e09cf-ba41-4fe8-ac47-9697b5ad0245.png",
-    "name": "Candacis Spring",
-    "rows": 35,
-    "columns": 16
   }],
   "characterSets": [{
     "uid": "0dcbaf26-d634-4ca8-9691-7a8ff966f702",
@@ -287,13 +257,6 @@
     "rows": 3,
     "columns": 8,
     "layout": "LAYOUT_2X2"
-  }, {
-    "uid": "fb57775d-988d-42c4-85bf-9f415c1f9086",
-    "source": "fb57775d-988d-42c4-85bf-9f415c1f9086.png",
-    "name": "Forresta",
-    "rows": 4,
-    "columns": 8,
-    "layout": "LAYOUT_2X3"
   }, {
     "uid": "04ac5ad8-4100-4016-97b3-a51a728ca49d",
     "source": "04ac5ad8-4100-4016-97b3-a51a728ca49d.png",
