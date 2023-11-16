@@ -44,6 +44,12 @@
     "name": "FSM 5",
     "rows": 16,
     "columns": 16
+  }, {
+    "uid": "413e09cf-ba41-4fe8-ac47-9697b5ad0245",
+    "source": "413e09cf-ba41-4fe8-ac47-9697b5ad0245.png",
+    "name": "Forrest",
+    "rows": 35,
+    "columns": 16
   }],
   "characterSets": [{
     "uid": "0dcbaf26-d634-4ca8-9691-7a8ff966f702",
