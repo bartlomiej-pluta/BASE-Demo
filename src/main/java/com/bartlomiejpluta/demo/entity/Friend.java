@@ -5,8 +5,10 @@ import com.bartlomiejpluta.base.api.ai.AI;
 import com.bartlomiejpluta.base.api.ai.NPC;
 import com.bartlomiejpluta.base.api.character.Character;
 import com.bartlomiejpluta.base.api.context.ContextHolder;
+import com.bartlomiejpluta.base.lib.ai.FollowPathAI;
 import com.bartlomiejpluta.base.lib.ai.NoopAI;
 import com.bartlomiejpluta.base.lib.ai.RandomMovementAI;
+import com.bartlomiejpluta.base.util.path.Path;
 import com.bartlomiejpluta.base.util.random.DiceRoller;
 import com.bartlomiejpluta.demo.world.item.Item;
 import lombok.Getter;
@@ -71,6 +73,20 @@ public class Friend extends Creature implements NPC {
 
    public Friend interaction(Function<Friend, CompletableFuture<Object>> interaction) {
       this.interaction = interaction;
+      return this;
+   }
+
+   public Friend followPath(@NonNull Path<Friend> path) {
+      var ai = new FollowPathAI<>(this);
+      ai.setPath(path);
+      this.strategy = ai;
+      return this;
+   }
+
+   public Friend followPath(@NonNull Function<Friend, Path<Friend>> pathSupplier) {
+      var ai = new FollowPathAI<>(this);
+      ai.setPath(pathSupplier.apply(this));
+      this.strategy = ai;
       return this;
    }
 

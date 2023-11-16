@@ -204,6 +204,12 @@
     "name": "Heart Emoji",
     "rows": 6,
     "columns": 4
+  }, {
+    "uid": "78563669-8a6c-4024-82c8-7e4da5b76edd",
+    "source": "78563669-8a6c-4024-82c8-7e4da5b76edd.png",
+    "name": "Zzz",
+    "rows": 7,
+    "columns": 4
   }],
   "sounds": [{
     "uid": "1311327d-4b74-4252-94da-23ee4129e357",

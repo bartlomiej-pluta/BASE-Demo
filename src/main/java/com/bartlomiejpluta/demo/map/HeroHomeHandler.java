@@ -1,25 +1,51 @@
 package com.bartlomiejpluta.demo.map;
 
+import A.animations;
+import A.maps;
 import com.bartlomiejpluta.base.api.context.Context;
 import com.bartlomiejpluta.base.api.map.model.GameMap;
+import com.bartlomiejpluta.base.util.path.CharacterPath;
+import com.bartlomiejpluta.base.util.pathfinder.AstarPathFinder;
+import com.bartlomiejpluta.base.util.pathfinder.PathFinder;
 import com.bartlomiejpluta.demo.entity.Friend;
 
 import java.util.concurrent.CompletableFuture;
 
-import static com.bartlomiejpluta.base.lib.animation.AnimationRunner.simple;
+import static com.bartlomiejpluta.base.api.move.Direction.LEFT;
 
 public class HeroHomeHandler extends BaseMapHandler {
+   private final PathFinder finder = new AstarPathFinder(100);
+
    @Override
-   public void onOpen(Context context, GameMap map) {
+   public void onCreate(Context context, GameMap map) {
+      super.onCreate(context, map);
       map.setAmbientColor(0.05f, 0.01f, 0.01f);
-      dialog(player, "Ahhh, another beautiful day for an adventure... Let's go!");
+   }
+
+   protected CharacterPath<Friend> grandmaPath(Friend grandma) {
+      return new CharacterPath<Friend>()
+         .run(() -> controls = false)
+         .run(() -> player.runEmoji(A.animations.zzz.$, r -> r.repeat(5)))
+         .insertPath(finder.findPath(grandma.getLayer(), grandma, maps.hero_home.main.grandma_waking.toCoordinates()))
+         .wait(2f)
+         .turn(LEFT)
+         .wait(1f)
+         .suspend(() -> morningDialogWithGrandma(grandma))
+         .wait(1f)
+         .run(() -> controls = true)
+         .insertPath(finder.findPath(grandma.getLayer(), maps.hero_home.main.grandma_waking.toCoordinates(), maps.hero_home.main.grandma_origin.toCoordinates()))
+         .run(() -> grandma.randomMovementAI(4f, grandma.getCoordinates(), 4));
+   }
+
+   private CompletableFuture<Object> morningDialogWithGrandma(Friend grandma) {
+      return dialog(grandma, "Hello Honey, wake up, it's another beautiful day!")
+         .thenCompose(n -> dialog(player, "Ahhh, good morning Grandma!"))
+         .thenCompose(n -> dialog(grandma, "Have a wonderful day, Luna!"))
+         .thenCompose(n -> dialog(player, "Thank you Grandma, have a nice day too!"));
    }
 
    protected CompletableFuture<Object> triggerGrandmaDialog(Friend grandma) {
-      return dialog(player, "Good morning Grandma, how are you doing?")
-         .thenCompose(n -> dialog(grandma, "Hello Honey... I'm fine thank you. Have a sit, I will bring you a breakfast in a moment."))
-         .thenCompose(n -> dialog(player, "Thank you Grandma."))
-         .thenCompose(n -> dialog(grandma, "What are you going to do today, Luna?"))
+      return dialog(grandma, "What are you going to do today, Luna?")
          .thenCompose(n -> dialogChoice(player,
             "I'm going to fix your roof, Grandma",
             "I'd like to look for some hidden treasure around your house",
@@ -46,8 +72,8 @@ public class HeroHomeHandler extends BaseMapHandler {
    protected CompletableFuture<Object> triggerNekoDialog(Friend neko) {
       return dialog(player, "Ohhh, here you are Kitty...")
          .thenCompose(n -> CompletableFuture.allOf(
-            simple(A.animations.heart_emoji.$).scale(0.4f).animationSpeed(1.7f).offset(0, -30).run(context, player),
-            simple(A.animations.heart_emoji.$).scale(0.4f).animationSpeed(1.7f).offset(0, -15).delay(100).run(context, neko)
+            player.runEmoji(animations.heart_emoji.$),
+            neko.runEmoji(animations.heart_emoji.$, r -> r.offset(0, -15).delay(100))
          ))
          .thenCompose(n -> dialog(neko, "Meow, meow..."))
          .thenCompose(n -> dialog(neko, "Purr, purr..."));

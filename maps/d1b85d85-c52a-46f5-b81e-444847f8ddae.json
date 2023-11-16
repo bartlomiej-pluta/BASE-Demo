@@ -85,10 +85,6 @@
         "y": 12,
         "code": "/*  \n *  Following final parameters are available to use:\n *  x: int - the x coordinate of tile the object has been created on\n *  y: int - the y coordinate of tile the object has been created on \n *  layer: ObjectLayer - current object layer\n *  map: GameMap - current map\n */\nwarp(here, A.maps.hero_house.main.home);"
       }, {
-        "x": 11,
-        "y": 7,
-        "code": "/*  \n *  Following final parameters are available to use:\n *  here: MapPin - the composite object containing current map UID, \n *        layer\u0027s index and x,y coordinates of the current tile          \n *  x: int - the x coordinate of the current tile\n *  y: int - the y coordinate of the current tile \n *  layer: ObjectLayer - current object layer\n *  map: GameMap - current map\n */\nfriend(here, \"grandma\")\n\t.randomMovementAI(4f, here.toCoordinates(), 5)\n\t.interaction(this::triggerGrandmaDialog);"
-      }, {
         "x": 5,
         "y": 4,
         "code": "/*  \n *  Following final parameters are available to use:\n *  here: MapPin - the composite object containing current map UID, \n *        layer\u0027s index and x,y coordinates of the current tile          \n *  x: int - the x coordinate of the current tile\n *  y: int - the y coordinate of the current tile \n *  layer: ObjectLayer - current object layer\n *  map: GameMap - current map\n */\nfriend(here, \"neko\")\n\t.randomMovementAI(4f)\n\t.interaction(this::triggerNekoDialog);"
@@ -100,6 +96,10 @@
         "x": 18,
         "y": 12,
         "code": "/*  \n *  Following final parameters are available to use:\n *  here: MapPin - the composite object containing current map UID, \n *        layer\u0027s index and x,y coordinates of the current tile          \n *  x: int - the x coordinate of the current tile\n *  y: int - the y coordinate of the current tile \n *  layer: ObjectLayer - current object layer\n *  map: GameMap - current map          \n *  handler: HeroHomeHandler - current map handler\n *  runner: DemoRunner - the game runner of the project\n *  context: Context - the game context\n */\nchest(here, \"enforced_chest_left\")\n\t.addItem(new MeleeWeapon(\"wooden_sword\"))\n\t.addItem(new Medicament(\"small_life_potion\", 4))\n\t.shuffle();"
+      }, {
+        "x": 13,
+        "y": 15,
+        "code": "/*  \n *  Following final parameters are available to use:\n *  here: MapPin - the composite object containing current map UID, \n *        layer\u0027s index and x,y coordinates of the current tile          \n *  x: int - the x coordinate of the current tile\n *  y: int - the y coordinate of the current tile \n *  layer: ObjectLayer - current object layer\n *  map: GameMap - current map\n */\nfriend(here, \"grandma\")\n\t.followPath(this::grandmaPath)\n\t.interaction(this::triggerGrandmaDialog);"
       }],
       "labels": [{
         "label": "entry",
@@ -109,6 +109,14 @@
         "label": "Start",
         "x": 10,
         "y": 14
+      }, {
+        "label": "Grandma Waking",
+        "x": 11,
+        "y": 14
+      }, {
+        "label": "Grandma Origin",
+        "x": 11,
+        "y": 7
       }]
     }
   }, {

@@ -41,6 +41,8 @@ public abstract class BaseMapHandler implements MapHandler {
 
    protected boolean dayNightCycle = false;
 
+   protected boolean controls = true;
+
    @Override
    public void onCreate(Context context, GameMap map) {
       this.context = context;
@@ -71,6 +73,10 @@ public abstract class BaseMapHandler implements MapHandler {
 
       if (input.isKeyPressed(Key.KEY_ENTER)) {
          player.interact();
+      }
+
+      if (!controls) {
+         return;
       }
 
       InputUtil.handleBasicControl(player, input);
